@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="-1570.4000000000001" y="-0.44977511244377816"/>
         </scene>
-        <!--View Controller-->
+        <!--Log In-->
         <scene sceneID="EEq-pf-Mp8">
             <objects>
-                <viewController id="H61-Bc-GoE" sceneMemberID="viewController">
+                <viewController title="Log In" id="H61-Bc-GoE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AFP-Fo-szJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,10 +209,10 @@
             </objects>
             <point key="canvasLocation" x="-778" y="-373"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up-->
         <scene sceneID="RJO-M2-fxm">
             <objects>
-                <viewController id="P9B-4F-FLw" sceneMemberID="viewController">
+                <viewController title="Sign Up" id="P9B-4F-FLw" customClass="SignUpViewContoller" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jc6-v6-A67">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,10 +255,10 @@
             </objects>
             <point key="canvasLocation" x="-778" y="406"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Studify-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController title="Studify" id="49e-Tb-3d3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -281,6 +281,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="miZ-8n-61f"/>
+        <segue reference="qpj-ZE-GxI"/>
     </inferredMetricsTieBreakers>
 </document>
