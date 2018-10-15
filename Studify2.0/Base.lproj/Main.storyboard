@@ -103,18 +103,35 @@
         <!--Account-->
         <scene sceneID="8z9-2r-jHf">
             <objects>
-                <viewController id="ex2-5b-ZN1" sceneMemberID="viewController">
+                <viewController id="ex2-5b-ZN1" customClass="AccountViewContoller" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t5g-PK-Zwp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kx0-9P-ylJ">
+                                <rect key="frame" x="101" y="105" width="172" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="aKV-mc-0Ma"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="s8r-Yj-xTz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Account" image="second" id="D9G-sC-6jM"/>
+                    <connections>
+                        <outlet property="logOutButton" destination="kx0-9P-ylJ" id="Y5S-m5-Wbx"/>
+                        <segue destination="kfJ-sj-h1u" kind="show" identifier="logOutToWelcomeScreen" id="NJf-Ub-Ww4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4R-ta-QYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1481" y="359"/>
+            <point key="canvasLocation" x="1480.8" y="358.4707646176912"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BW8-La-z1t">
@@ -222,6 +239,7 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="bK8-bK-dhI" id="eU7-0b-Src"/>
+                        <outlet property="logInButton" destination="mUd-IE-Nb5" id="dr6-l5-QqL"/>
                         <outlet property="passwordField" destination="cUm-xN-84a" id="v4t-eA-9UF"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="logInToHome" id="IKN-jq-d9N"/>
                     </connections>
@@ -271,6 +289,7 @@
                                 <rect key="frame" x="16" y="223" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ho3-Up-7Uc">
@@ -338,5 +357,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>
+        <segue reference="NJf-Ub-Ww4"/>
     </inferredMetricsTieBreakers>
 </document>

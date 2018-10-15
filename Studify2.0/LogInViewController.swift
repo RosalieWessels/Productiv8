@@ -12,11 +12,18 @@ import Firebase
 import FirebaseAuth
 
 class LogInViewContoller : UIViewController, UITextViewDelegate {
-    
+    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var logInButton: UIButton!
     
     @IBAction func LogInPressed(_ sender: Any) {
+        logInButton.isEnabled = false
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        
         handleSignIn()
     }
     
@@ -31,6 +38,7 @@ class LogInViewContoller : UIViewController, UITextViewDelegate {
     }
     
     @objc func handleSignIn(){
+        activityIndicator.startAnimating()
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else{return}
         
@@ -38,7 +46,8 @@ class LogInViewContoller : UIViewController, UITextViewDelegate {
             if error == nil && user != nil{
                 print("login succesfull")
                 self.performSegue(withIdentifier: "logInToHome", sender: self)
-                
+                self.activityIndicator.stopAnimating()
+                self.logInButton.isEnabled = true
             } else {
                 print("Error logging in: \(error!.localizedDescription)")
             }

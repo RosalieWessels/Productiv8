@@ -12,11 +12,18 @@ import Firebase
 import FirebaseAuth
 
 class SignUpViewContoller : UIViewController, UITextViewDelegate {
+    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBAction func SignupButtonPressed(_ sender: Any) {
+        signUpButton.isEnabled = false
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        
         handleSignUp()
     }
     
@@ -32,6 +39,7 @@ class SignUpViewContoller : UIViewController, UITextViewDelegate {
     }
     
     @objc func handleSignUp() {
+        activityIndicator.startAnimating()
         guard let username = usernameField.text else {return}
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
@@ -48,7 +56,9 @@ class SignUpViewContoller : UIViewController, UITextViewDelegate {
                         let user = Auth.auth().currentUser?.displayName
                         let email = Auth.auth().currentUser?.email
                         print("Username: \(user), email: \(email)")
+                        self.activityIndicator.stopAnimating()
                         self.performSegue(withIdentifier: "signUpToHome", sender: self)
+                        self.signUpButton.isEnabled = true
                     }
                 }
                 
