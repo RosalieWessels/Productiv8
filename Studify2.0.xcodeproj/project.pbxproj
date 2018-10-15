@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */; };
 		89AFE65C217272FF00D8F504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */; };
+		89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFE65D2172769E00D8F504 /* LogInViewController.swift */; };
 		89CFC1B52172525200DCFF7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B42172525200DCFF7B /* AppDelegate.swift */; };
 		89CFC1B72172525200DCFF7B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B62172525200DCFF7B /* FirstViewController.swift */; };
 		89CFC1B92172525200DCFF7B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B82172525200DCFF7B /* SecondViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		89AFE65D2172769E00D8F504 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		89CFC1B12172525200DCFF7B /* Studify2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studify2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CFC1B42172525200DCFF7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89CFC1B62172525200DCFF7B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
+				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
 				89CFC1CA217268E900DCFF7B /* SignUpViewController.swift */,
 				89CFC1B62172525200DCFF7B /* FirstViewController.swift */,
 				89CFC1B82172525200DCFF7B /* SecondViewController.swift */,
@@ -175,12 +178,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +238,7 @@
 				89CFC1B92172525200DCFF7B /* SecondViewController.swift in Sources */,
 				89CFC1B52172525200DCFF7B /* AppDelegate.swift in Sources */,
 				89CFC1CB217268E900DCFF7B /* SignUpViewController.swift in Sources */,
+				89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */,
 				89CFC1B72172525200DCFF7B /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,10 +386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Studify2.0/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RosalieWessels.Studify2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -396,10 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Studify2.0/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RosalieWessels.Studify2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
