@@ -17,7 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="E0Z-tp-wkS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ts2-ff-9JL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Competition" image="first" id="oPF-Oz-pJd"/>
@@ -48,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="cfb-er-3JN"/>
@@ -85,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
@@ -109,9 +109,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kx0-9P-ylJ">
-                                <rect key="frame" x="101" y="105" width="172" height="108"/>
+                                <rect key="frame" x="101" y="497" width="172" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -119,19 +119,83 @@
                                     <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="aKV-mc-0Ma"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF4-vP-dWP">
+                                <rect key="frame" x="107" y="71" width="160" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------------------------------------" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXS-P3-8IT">
+                                <rect key="frame" x="19" y="161" width="337" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------------------------------------" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JpE-bQ-5Qp">
+                                <rect key="frame" x="19" y="209" width="337" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cw3-cg-ajf">
+                                <rect key="frame" x="320" y="75" width="39" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="SettingsIcon"/>
+                                <connections>
+                                    <segue destination="Tcz-YD-yai" kind="show" id="WIP-XK-cMh"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="s8r-Yj-xTz"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Account" image="second" id="D9G-sC-6jM"/>
                     <connections>
+                        <outlet property="emailLabel" destination="JpE-bQ-5Qp" id="eXb-0h-a08"/>
                         <outlet property="logOutButton" destination="kx0-9P-ylJ" id="Y5S-m5-Wbx"/>
+                        <outlet property="usernameLabel" destination="BXS-P3-8IT" id="Ff1-Hx-Czq"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="logOutToWelcomeScreen" id="NJf-Ub-Ww4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4R-ta-QYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1480.8" y="358.4707646176912"/>
+        </scene>
+        <!--Account Settings View Controller-->
+        <scene sceneID="Wwf-dW-Qcc">
+            <objects>
+                <viewController id="Tcz-YD-yai" customClass="AccountSettingsViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fB9-mp-3nB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co1-rh-2o7">
+                                <rect key="frame" x="49" y="510" width="276" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <state key="normal" title="Delete User Account">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="aiC-GL-xXf"/>
+                                    <action selector="deleteUserAccountClicked:" destination="Tcz-YD-yai" eventType="touchUpInside" id="col-aZ-2Kr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Xfe-87-y49"/>
+                    </view>
+                    <connections>
+                        <outlet property="deleteUserAccountButton" destination="Co1-rh-2o7" id="eGH-3F-cEJ"/>
+                        <segue destination="kfJ-sj-h1u" kind="show" identifier="userAccountSettingsToWelcomeScreen" id="Jw0-3F-1HV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mR-P0-lYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2308" y="358"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BW8-La-z1t">
@@ -351,12 +415,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SettingsIcon" width="720" height="720"/>
         <image name="Snowboarding" width="1154" height="1500"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IKN-jq-d9N"/>
-        <segue reference="NJf-Ub-Ww4"/>
+        <segue reference="miZ-8n-61f"/>
+        <segue reference="Jw0-3F-1HV"/>
     </inferredMetricsTieBreakers>
 </document>

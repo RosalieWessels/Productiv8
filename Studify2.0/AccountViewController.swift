@@ -16,6 +16,9 @@ class AccountViewContoller : UIViewController, UITextViewDelegate {
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    
     
     
     @IBAction func LogOutPressed(_ sender: Any) {
@@ -39,6 +42,14 @@ class AccountViewContoller : UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if let username = Auth.auth().currentUser?.displayName {
+            usernameLabel.text = ("Username: \(username)")
+        }
+        
+        if let email = Auth.auth().currentUser?.email {
+            emailLabel.adjustsFontSizeToFitWidth = true
+            emailLabel.text = ("Email: \(email)")
+        }
     }
     
     override func didReceiveMemoryWarning() {
