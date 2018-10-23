@@ -57,6 +57,11 @@ class SignUpViewContoller : UIViewController, UITextViewDelegate {
                         let email = Auth.auth().currentUser?.email
                         print("Username: \(user), email: \(email)")
                         self.activityIndicator.stopAnimating()
+                        
+                        Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
+                            //Email Verification
+                        })
+                        
                         self.performSegue(withIdentifier: "signUpToHome", sender: self)
                         self.signUpButton.isEnabled = true
                     }

@@ -46,7 +46,14 @@ class AccountSettingsViewController: UIViewController {
                 print(error)
             } else {
                 print("Account Deletion Succesfull")
-                self.performSegue(withIdentifier: "userAccountSettingsToWelcomeScreen", sender: self)
+                let alert = UIAlertController(title: "Account is Deleted", message: "Your account is succesfully deleted", preferredStyle: .alert)
+                let continueAction = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+                    self.userAccountisDeleted()
+                }
+                alert.addAction(continueAction)
+                
+                self.present(alert, animated: true, completion: nil)
+                
                 // Account deleted.
             }
         }
@@ -54,5 +61,8 @@ class AccountSettingsViewController: UIViewController {
     
     func userAccountNotDeleted(){
         print("User account not deleted")
+    }
+    func userAccountisDeleted(){
+        self.performSegue(withIdentifier: "userAccountSettingsToWelcomeScreen", sender: self)
     }
 }
