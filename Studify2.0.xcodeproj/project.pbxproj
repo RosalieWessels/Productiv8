@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */; };
 		89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89450998217BB55D000AA49F /* AccountSettingsViewController.swift */; };
+		8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */; };
+		8945099F217EC4BF000AA49F /* HomeworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */; };
 		89AFE65C217272FF00D8F504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */; };
 		89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFE65D2172769E00D8F504 /* LogInViewController.swift */; };
 		89AFE6602174142700D8F504 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFE65F2174142700D8F504 /* AccountViewController.swift */; };
 		89CFC1B52172525200DCFF7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B42172525200DCFF7B /* AppDelegate.swift */; };
-		89CFC1B72172525200DCFF7B /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B62172525200DCFF7B /* FirstViewController.swift */; };
+		89CFC1B72172525200DCFF7B /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */; };
 		89CFC1B92172525200DCFF7B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1B82172525200DCFF7B /* SecondViewController.swift */; };
 		89CFC1BC2172525200DCFF7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BA2172525200DCFF7B /* Main.storyboard */; };
 		89CFC1BE2172525400DCFF7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BD2172525400DCFF7B /* Assets.xcassets */; };
@@ -24,12 +26,14 @@
 /* Begin PBXFileReference section */
 		11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		89450998217BB55D000AA49F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTableViewCell.swift; sourceTree = "<group>"; };
+		8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeworkTableViewCell.xib; sourceTree = "<group>"; };
 		89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89AFE65D2172769E00D8F504 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		89AFE65F2174142700D8F504 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		89CFC1B12172525200DCFF7B /* Studify2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studify2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CFC1B42172525200DCFF7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		89CFC1B62172525200DCFF7B /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		89CFC1B82172525200DCFF7B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		89CFC1BB2172525200DCFF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89CFC1BD2172525400DCFF7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,10 +97,12 @@
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
 				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
 				89CFC1CA217268E900DCFF7B /* SignUpViewController.swift */,
-				89CFC1B62172525200DCFF7B /* FirstViewController.swift */,
+				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
 				89CFC1B82172525200DCFF7B /* SecondViewController.swift */,
 				89AFE65F2174142700D8F504 /* AccountViewController.swift */,
 				89CFC1BA2172525200DCFF7B /* Main.storyboard */,
+				8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */,
+				8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */,
 				89450998217BB55D000AA49F /* AccountSettingsViewController.swift */,
 				89CFC1BD2172525400DCFF7B /* Assets.xcassets */,
 				89CFC1BF2172525400DCFF7B /* LaunchScreen.storyboard */,
@@ -167,6 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8945099F217EC4BF000AA49F /* HomeworkTableViewCell.xib in Resources */,
 				89CFC1C12172525400DCFF7B /* LaunchScreen.storyboard in Resources */,
 				89AFE65C217272FF00D8F504 /* GoogleService-Info.plist in Resources */,
 				89CFC1BE2172525400DCFF7B /* Assets.xcassets in Resources */,
@@ -246,8 +253,9 @@
 				89AFE6602174142700D8F504 /* AccountViewController.swift in Sources */,
 				89CFC1CB217268E900DCFF7B /* SignUpViewController.swift in Sources */,
 				89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */,
+				8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */,
 				89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */,
-				89CFC1B72172525200DCFF7B /* FirstViewController.swift in Sources */,
+				89CFC1B72172525200DCFF7B /* HomeworkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
