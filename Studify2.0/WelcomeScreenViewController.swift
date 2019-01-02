@@ -25,7 +25,6 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
-//        GIDSignIn.sharedInstance().signIn()
         
         if Auth.auth().currentUser != nil {
             performSegueToHomeworkScreen()
