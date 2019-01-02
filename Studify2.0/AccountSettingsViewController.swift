@@ -12,7 +12,10 @@ import Firebase
 import FirebaseAuth
 
 class AccountSettingsViewController: UIViewController {
+    
     @IBOutlet weak var deleteUserAccountButton: UIButton!
+    @IBOutlet weak var accountSettingsView: UIView!
+    
     @IBAction func deleteUserAccountClicked(_ sender: Any) {
         let alert = UIAlertController(title: "Delete User Account", message: "Are you sure you want to delete your account? Once it is deleted it cannot come back.", preferredStyle: .alert)
         
@@ -32,6 +35,7 @@ class AccountSettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        accountSettingsView.layer.cornerRadius = 10
     }
     
     override func didReceiveMemoryWarning() {

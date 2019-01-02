@@ -7,13 +7,25 @@
 //
 
 import UIKit
+import Foundation
 
 class HomeworkTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ColorImageView: UIImageView!
-    @IBOutlet weak var HomeworkLabelView: UILabel!
-    @IBOutlet weak var TeacherLabelView: UILabel!
-    @IBOutlet weak var DateLabelView: UILabel!
+    
+    @IBOutlet weak var colorImageView: UIImageView!
+    @IBOutlet weak var homeworkButtonView: UIButton!
+    @IBOutlet weak var teacherLabelView: UILabel!
+    @IBOutlet weak var dateLabelView: UILabel!
+    @IBOutlet weak var homeworkLabelView: UILabel!
+    
+    @IBAction func homeworkButtonViewPressed(_ sender: Any) {
+        //let segway = HomeworkViewController()
+        //segway.expandHomework()
+        
+        
+    }
+    
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import NVActivityIndicatorView
 
 class SignUpViewContoller : UIViewController, UITextViewDelegate {
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
@@ -39,7 +40,12 @@ class SignUpViewContoller : UIViewController, UITextViewDelegate {
     }
     
     @objc func handleSignUp() {
-        activityIndicator.startAnimating()
+        //activityIndicator.startAnimating()
+        
+        let loadingPacman = NVActivityIndicatorView(frame: CGRect(x: ((UIScreen.main.bounds.width/2)-25), y: ((UIScreen.main.bounds.height/2)-25), width: 50, height: 50), type: NVActivityIndicatorType(rawValue: 26), color: UIColor.white)
+        self.view.addSubview(loadingPacman)
+        loadingPacman.startAnimating()
+        
         guard let username = usernameField.text else {return}
         guard let email = emailField.text else {return}
         guard let password = passwordField.text else {return}
@@ -56,7 +62,9 @@ class SignUpViewContoller : UIViewController, UITextViewDelegate {
                         let user = Auth.auth().currentUser?.displayName
                         let email = Auth.auth().currentUser?.email
                         print("Username: \(user), email: \(email)")
-                        self.activityIndicator.stopAnimating()
+                        
+                        loadingPacman.stopAnimating()
+                        //self.activityIndicator.stopAnimating()
                         
                         Auth.auth().currentUser?.sendEmailVerification(completion: { (error) in
                             //Email Verification

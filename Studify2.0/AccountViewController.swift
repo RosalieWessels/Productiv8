@@ -10,11 +10,15 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import GoogleSignIn
+import GoogleToolboxForMac
 
 
 class AccountViewContoller : UIViewController, UITextViewDelegate {
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
+    
+    @IBOutlet weak var accountView: UIView!
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -31,17 +35,20 @@ class AccountViewContoller : UIViewController, UITextViewDelegate {
         activityIndicator.startAnimating()
         
         try! Auth.auth().signOut()
+        try GIDSignIn.sharedInstance().signOut()
         if Auth.auth().currentUser == nil{
             print("Logout successful")
             performSegue(withIdentifier: "logOutToWelcomeScreen", sender: self)
             activityIndicator.stopAnimating()
             logOutButton.isEnabled = true
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        accountView.layer.cornerRadius = 10
         if let username = Auth.auth().currentUser?.displayName {
             usernameLabel.text = ("Username: \(username)")
         }
