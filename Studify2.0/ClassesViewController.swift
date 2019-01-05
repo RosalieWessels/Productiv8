@@ -39,32 +39,38 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
             guard let courseList = courses else {
-                print("Error listing courses: \(error?.localizedDescription)")
+                print("Error listing courses: \(String(describing: error?.localizedDescription))")
                 return
             }
-            for course in (courseList.courses as! [GTLRClassroom_Course]!) {
-                print("Name", course.name!)
-                
-                //TODO: Sort the Classes on Period Number for in the TableView
-                
-                appDelegate.listTeacher(courseId: course.identifier!) { (teachers, error) in
-                    guard let teachersList = teachers else {
-                        print("Error listing teachers: \(error?.localizedDescription)")
-                        return
-                    }
-                    for teacher in (teachersList.teachers as! [GTLRClassroom_Teacher]!){
-                        print("teacher", teacher.profile?.name?.fullName!)
-                        var cleanedPeriod = "--"
-                        if course.section != nil{
-                            cleanedPeriod = self.cleanPeriod(period: course.section!)
+            if let list = courseList.courses {
+                for course in list {
+                    print("Name", course.name!)
+                    
+                    //TODO: Sort the Classes on Period Number for in the TableView
+                    //TODO: A way to make sure the correct teachers shows up??
+                    
+                    appDelegate.listTeacher(courseId: course.identifier!) { (teachers, error) in
+                        guard let teachersList = teachers else {
+                            print("Error listing teachers: \(String(describing: error?.localizedDescription))")
+                            return
                         }
-                        self.classesArray += [classesTableViewCellData(className: course.name!, teacherName: teacher.profile?.name?.fullName!, periodNumber: cleanedPeriod)]
-                        break
+                        if let leraren = teachersList.teachers {
+                            for teacher in leraren {
+                                print("teacher", teacher.profile!.name!.fullName!)
+                                var cleanedPeriod = "--"
+                                if course.section != nil{
+                                    cleanedPeriod = self.cleanPeriod(period: course.section!)
+                                }
+                                self.classesArray += [classesTableViewCellData(className: course.name!, teacherName: teacher.profile?.name?.fullName!, periodNumber: cleanedPeriod)]
+                                break
+                            }
+                        }
                     }
+                    
+                    print(course)
                 }
-                
-                print(course)
             }
+            
         }
     }
     
@@ -83,6 +89,9 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         if period.lowercased().hasSuffix("th period"){
             return String(period.dropLast(9))
+        }
+        if period.lowercased().starts(with: "per. "){
+            return String(period.dropFirst(5))
         }
         return period
     }

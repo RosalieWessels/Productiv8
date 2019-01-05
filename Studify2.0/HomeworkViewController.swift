@@ -37,7 +37,59 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTableView.register(HomeworkTableViewCell.self, forCellReuseIdentifier: "HomeworkTableViewCell")
         
-        homeworkArray = [homeworkTableViewCellData(homeworkName: "HMH Math Lesson 3-2", className: "Math", dateName: "10/11", colorImage: #imageLiteral(resourceName: "GreenImage")), homeworkTableViewCellData(homeworkName: "Paragraph Outline", className: "History", dateName: "10/8", colorImage: #imageLiteral(resourceName: "OrangeImage")), homeworkTableViewCellData(homeworkName: "Chinese characters", className: "Chinese", dateName: "10/3", colorImage: #imageLiteral(resourceName: "RedImage"))]
+        homeworkArray = [homeworkTableViewCellData]()
+        
+        //TODO: Change the course ID
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.listHomework(courseId: "15157388313") { (homeworkResponse, error) in
+            guard let homeworkList = homeworkResponse else {
+                print("Error listing homework: \(error?.localizedDescription)")
+                return
+            }
+            if let huiswerk = homeworkList.courseWork {
+                for work in huiswerk {
+                    print("homework", work)
+                    
+                    if let dueDateDay = work.dueDate?.day {
+                        let dueDateDayInt = Int(dueDateDay)
+                        
+                        if let dueDateMonth = work.dueDate?.month {
+                            
+                            var dateComponents = DateComponents()
+                            dateComponents.year = Int(work.dueDate!.year!)
+                            dateComponents.month = Int(dueDateMonth)
+                            dateComponents.day = dueDateDayInt
+                            dateComponents.hour = 23
+                            dateComponents.minute = 59
+                            dateComponents.second = 59
+                            
+                            // Create date from components
+                            let userCalendar = Calendar.current // user calendar
+                            if let dueDate = userCalendar.date(from: dateComponents) {
+                                print(dueDate)
+                                
+                                let currentDateTime = Date()
+                                
+                                if dueDate >= currentDateTime {
+                                    
+                                    let dateformatter = DateFormatter()
+                                    dateformatter.dateFormat = "MM/dd/yy"
+                                    let dueDateString = dateformatter.string(from: dueDate)
+                                    
+                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: work.courseId, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+            DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
