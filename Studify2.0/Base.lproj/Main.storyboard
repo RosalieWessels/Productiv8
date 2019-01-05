@@ -13,7 +13,7 @@
         <!--Competition-->
         <scene sceneID="pMd-o4-qVO">
             <objects>
-                <viewController id="A7T-5r-Ofv" sceneMemberID="viewController">
+                <viewController id="A7T-5r-Ofv" customClass="CompetitionViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0Z-tp-wkS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,11 +22,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5Y-dR-WNW">
+                                <rect key="frame" x="16" y="95" width="343" height="508"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msA-RE-eJ2">
+                                        <rect key="frame" x="46" y="333" width="250" height="108"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        <state key="normal" title="Open Leaderboard">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="zH4-Nq-o5R"/>
+                                            <action selector="openLeaderboardGameCenter:" destination="A7T-5r-Ofv" eventType="touchUpInside" id="NK4-Eh-pmn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ts2-ff-9JL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Competition" image="CompetitionIcon" id="oPF-Oz-pJd"/>
+                    <connections>
+                        <outlet property="competitionView" destination="Q5Y-dR-WNW" id="4jw-zF-7zJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zps-Va-toR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,6 +178,9 @@
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Classes" image="ClassesIcon" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="classesTableView" destination="TCH-07-lrC" id="fDh-Ks-ISJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>

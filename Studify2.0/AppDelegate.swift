@@ -8,23 +8,26 @@
 
 import UIKit
 import Firebase
+import GoogleAPIClientForREST
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     
+    // Service object for access to Classroom API
+    private var service = GTLRClassroomService()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        
-        
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().scopes = [kGTLRAuthScopeClassroomCourses,                            kGTLRAuthScopeClassroomCoursesReadonly, kGTLRAuthScopeClassroomCourseworkMe, kGTLRAuthScopeClassroomCourseworkMeReadonly,
+            kGTLRAuthScopeClassroomCourseworkStudents, kGTLRAuthScopeClassroomCourseworkStudentsReadonly, kGTLRAuthScopeClassroomGuardianlinksMeReadonly, kGTLRAuthScopeClassroomGuardianlinksStudents, kGTLRAuthScopeClassroomGuardianlinksStudentsReadonly, kGTLRAuthScopeClassroomProfileEmails, kGTLRAuthScopeClassroomProfilePhotos, kGTLRAuthScopeClassroomPushNotifications, kGTLRAuthScopeClassroomRosters, kGTLRAuthScopeClassroomRostersReadonly, kGTLRAuthScopeClassroomStudentSubmissionsMeReadonly, kGTLRAuthScopeClassroomStudentSubmissionsStudentsReadonly]
         GIDSignIn.sharedInstance().delegate = self
 
         return true
@@ -37,6 +40,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
                                                      annotation: [:])
     }
     
+    func listCourses(onCompleted: @escaping (GTLRClassroom_ListCoursesResponse?, Error?) -> ()) {
+        // Check if we are authorized to make Classroom API calls
+        if self.service.authorizer != nil {
+            let query = GTLRClassroomQuery_CoursesList.query()
+            query.pageSize = 10
+            query.courseStates = ["ACTIVE"]
+            
+            self.service.executeQuery(query) { (ticket, results, error) in
+                onCompleted(results as? GTLRClassroom_ListCoursesResponse, error)
+            }
+        }
+    }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // ...
         if let error = error {
@@ -47,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         print("User Signed into Google")
         
         guard let authentication = user.authentication else { return }
+        
+        // Set the OAuth authorizer for the Classroom API
+        service.authorizer = authentication.fetcherAuthorizer()
+        
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         // ...

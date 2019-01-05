@@ -12,4 +12,5 @@ target 'Studify2.0' do
   pod 'GoogleSignIn' 
   pod 'NVActivityIndicatorView'
   pod 'SwiftyButton'
+  pod 'GoogleAPIClientForREST/Classroom'
 end
