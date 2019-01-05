@@ -53,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    func listTeacher(courseId : String, onCompleted: @escaping (GTLRClassroom_ListTeachersResponse?, Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let teacherQuery = GTLRClassroomQuery_CoursesTeachersList.query(withCourseId: courseId)
+            teacherQuery.pageSize = 10
+            
+            self.service.executeQuery(teacherQuery) { (ticket, results, error) in
+                onCompleted(results as? GTLRClassroom_ListTeachersResponse, error)
+            }
+        }
+    }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         // ...
         if let error = error {

@@ -39,16 +39,52 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
             guard let courseList = courses else {
-                print("Error listing files: \(error?.localizedDescription)")
+                print("Error listing courses: \(error?.localizedDescription)")
                 return
             }
             for course in (courseList.courses as! [GTLRClassroom_Course]!) {
                 print("Name", course.name!)
-                self.classesArray += [classesTableViewCellData(className: course.name!, teacherName: "", periodNumber: course.section)]
-
+                
+                //TODO: Sort the Classes on Period Number for in the TableView
+                
+                appDelegate.listTeacher(courseId: course.identifier!) { (teachers, error) in
+                    guard let teachersList = teachers else {
+                        print("Error listing teachers: \(error?.localizedDescription)")
+                        return
+                    }
+                    for teacher in (teachersList.teachers as! [GTLRClassroom_Teacher]!){
+                        print("teacher", teacher.profile?.name?.fullName!)
+                        var cleanedPeriod = "--"
+                        if course.section != nil{
+                            cleanedPeriod = self.cleanPeriod(period: course.section!)
+                        }
+                        self.classesArray += [classesTableViewCellData(className: course.name!, teacherName: teacher.profile?.name?.fullName!, periodNumber: cleanedPeriod)]
+                        break
+                    }
+                }
+                
                 print(course)
             }
         }
+    }
+    
+    func cleanPeriod (period : String) -> String {
+        if period.lowercased().starts(with: "period "){
+            return String(period.dropFirst(7))
+        }
+        if period.lowercased().hasSuffix("st period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("nd period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("rd period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("th period"){
+            return String(period.dropLast(9))
+        }
+        return period
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
