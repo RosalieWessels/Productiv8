@@ -47,7 +47,7 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
                     print("Name", course.name!)
                     
                     //TODO: Sort the Classes on Period Number for in the TableView
-                    //TODO: A way to make sure the correct teachers shows up??
+                    //TODO: A way to make sure the correct teachers show up??
                     
                     appDelegate.listTeacher(courseId: course.identifier!) { (teachers, error) in
                         guard let teachersList = teachers else {
@@ -69,6 +69,7 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
                     
                     print(course)
                 }
+                DispatchQueue.main.async { self.classesTableView.reloadData() }
             }
             
         }
