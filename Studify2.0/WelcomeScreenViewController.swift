@@ -25,13 +25,13 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
+        // See https://firebase.google.com/docs/auth/ios/google-signin
+        // Call signIn to sign in automatically (and fetch the Authorizer)
+        // GIDSignIn.sharedInstance().signIn()
         
         if Auth.auth().currentUser != nil {
             performSegueToHomeworkScreen()
-            
         }
-        
-        
     }
     
     override func didReceiveMemoryWarning() {

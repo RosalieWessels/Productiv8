@@ -65,11 +65,11 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 break
                             }
                         }
+                        DispatchQueue.main.async { self.classesTableView.reloadData() }
                     }
-                    
                     print(course)
                 }
-                DispatchQueue.main.async { self.classesTableView.reloadData() }
+                
             }
             
         }

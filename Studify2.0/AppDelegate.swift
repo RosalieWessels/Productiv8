@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if self.service.authorizer != nil {
             let homeworkQuery = GTLRClassroomQuery_CoursesCourseWorkList.query(withCourseId: courseId)
             homeworkQuery.pageSize = 10
+            // homeworkQuery.orderBy = "dueDate asc"
             
             self.service.executeQuery(homeworkQuery) { (ticket, results, error) in
                 onCompleted(results as? GTLRClassroom_ListCourseWorkResponse, error)

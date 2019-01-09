@@ -39,56 +39,89 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkArray = [homeworkTableViewCellData]()
         
-        //TODO: Change the course ID
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.listHomework(courseId: "15157388313") { (homeworkResponse, error) in
-            guard let homeworkList = homeworkResponse else {
-                print("Error listing homework: \(error?.localizedDescription)")
+        appDelegate.listCourses() { (courses, error) in
+            guard let courseList = courses else {
+                print("Error listing courses: \(String(describing: error?.localizedDescription))")
                 return
             }
-            if let huiswerk = homeworkList.courseWork {
-                for work in huiswerk {
-                    print("homework", work)
+            if let list = courseList.courses {
+                for course in list {
+                    print("Name", course.name!)
                     
-                    if let dueDateDay = work.dueDate?.day {
-                        let dueDateDayInt = Int(dueDateDay)
-                        
-                        if let dueDateMonth = work.dueDate?.month {
-                            
-                            var dateComponents = DateComponents()
-                            dateComponents.year = Int(work.dueDate!.year!)
-                            dateComponents.month = Int(dueDateMonth)
-                            dateComponents.day = dueDateDayInt
-                            dateComponents.hour = 23
-                            dateComponents.minute = 59
-                            dateComponents.second = 59
-                            
-                            // Create date from components
-                            let userCalendar = Calendar.current // user calendar
-                            if let dueDate = userCalendar.date(from: dateComponents) {
-                                print(dueDate)
+
+                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
+                        guard let homeworkList = homeworkResponse else {
+                            print("Error listing homework: \(error?.localizedDescription)")
+                            return
+                        }
+                        if let huiswerk = homeworkList.courseWork {
+                            for work in huiswerk {
+                                print("homework", work)
                                 
-                                let currentDateTime = Date()
-                                
-                                if dueDate >= currentDateTime {
+                                if let dueDateDay = work.dueDate?.day {
+                                    let dueDateDayInt = Int(dueDateDay)
                                     
-                                    let dateformatter = DateFormatter()
-                                    dateformatter.dateFormat = "MM/dd/yy"
-                                    let dueDateString = dateformatter.string(from: dueDate)
-                                    
-                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: work.courseId, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
-                                    
+                                    if let dueDateMonth = work.dueDate?.month {
+                                        
+                                        var dateComponents = DateComponents()
+                                        dateComponents.year = Int(work.dueDate!.year!)
+                                        dateComponents.month = Int(dueDateMonth)
+                                        dateComponents.day = dueDateDayInt
+                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET
+                                        dateComponents.hour = Int(work.dueTime!.hours!)
+                                        dateComponents.minute = Int(work.dueTime!.minutes!)
+                                        dateComponents.second = 59
+                                        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
+                                        
+                                        // Create date from components
+                                        let userCalendar = Calendar.current // user calendar
+                                        if let dueDate = userCalendar.date(from: dateComponents) {
+                                            print(dueDate)
+                                            
+                                            let currentDateTime = Date()
+                                            
+                                            //TODO: Only display assignment when not done
+                                            if dueDate >= currentDateTime {
+                                                
+                                                let dateformatter = DateFormatter()
+                                                dateformatter.dateFormat = "MM/dd/yy"
+                                                let dueDateString = dateformatter.string(from: dueDate)
+                                                
+                                                let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
+                                                
+                                                let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
+                                                
+                                                if dueDate <= currentDateRed! {
+                                                    //Red
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"))]
+                                                }
+                                                
+                                                else if dueDate < currentDateOrange! {
+                                                    //Orange
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"))]
+                                                }
+                                                
+                                                else{
+                                                    //Green
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
+                        
+                        DispatchQueue.main.async { self.homeworkTableView.reloadData() }
                     }
+
+                    
                 }
-                
             }
             
-            DispatchQueue.main.async { self.homeworkTableView.reloadData() }
         }
-        
         
     }
     
