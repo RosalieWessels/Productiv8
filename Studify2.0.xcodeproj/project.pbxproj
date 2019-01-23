@@ -23,7 +23,6 @@
 		89CFC1BC2172525200DCFF7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BA2172525200DCFF7B /* Main.storyboard */; };
 		89CFC1BE2172525400DCFF7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BD2172525400DCFF7B /* Assets.xcassets */; };
 		89CFC1C12172525400DCFF7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BF2172525400DCFF7B /* LaunchScreen.storyboard */; };
-		89CFC1CB217268E900DCFF7B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFC1CA217268E900DCFF7B /* SignUpViewController.swift */; };
 		89E5C83821DF10D200DC212B /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E5C83721DF10D200DC212B /* CompetitionViewController.swift */; };
 		89EA20D3218F60140029D512 /* WelcomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		89CFC1BD2172525400DCFF7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89CFC1C02172525400DCFF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89CFC1C22172525400DCFF7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89CFC1CA217268E900DCFF7B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Studify2.0.entitlements; sourceTree = "<group>"; };
 		89D6BDE72199E65E009BB0AC /* Studify2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Studify2.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		89E5C83721DF10D200DC212B /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 				89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */,
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
 				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
-				89CFC1CA217268E900DCFF7B /* SignUpViewController.swift */,
 				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
 				89CFC1B82172525200DCFF7B /* ClassesViewController.swift */,
 				8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */,
@@ -290,7 +287,6 @@
 				89AFE6602174142700D8F504 /* AccountViewController.swift in Sources */,
 				89EA20D3218F60140029D512 /* WelcomeScreenViewController.swift in Sources */,
 				89E5C83821DF10D200DC212B /* CompetitionViewController.swift in Sources */,
-				89CFC1CB217268E900DCFF7B /* SignUpViewController.swift in Sources */,
 				89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */,
 				8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */,
 				89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */,
@@ -444,7 +440,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Studify2.0/Studify2.0.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JXATX5P8FC;
+				DEVELOPMENT_TEAM = B3V5M4HFYD;
 				INFOPLIST_FILE = Studify2.0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -467,7 +463,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Studify2.0/Studify2.0.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JXATX5P8FC;
+				DEVELOPMENT_TEAM = B3V5M4HFYD;
 				INFOPLIST_FILE = Studify2.0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
