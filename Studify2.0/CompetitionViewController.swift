@@ -23,44 +23,44 @@ class CompetitionViewController: UIViewController, GKGameCenterControllerDelegat
     
     var numberOfHomeworkAssignmentsCompleted = Int()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        competitionView.layer.cornerRadius = 10
-        
-        //CHANGE THIS LATER
-        numberOfHomeworkAssignmentsCompleted = 5
-        
-        authenticatePlayerGameCenter()
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
-    func authenticatePlayerGameCenter(){
-        let localPlayer = GKLocalPlayer.localPlayer()
-        
-        localPlayer.authenticateHandler = {
-            (view, error) in
-            
-            if view != nil{
-                self.present(view!, animated: true, completion: nil)
-            }
-            else{
-                print(GKLocalPlayer.localPlayer().isAuthenticated)
-            }
-            
-        }
-    }
-    
-    func saveNumberOfHomeworkAssignmentsCompleted( number : Int){
-        
-        if GKLocalPlayer.localPlayer().isAuthenticated {
-            
-        }
-        
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        competitionView.layer.cornerRadius = 10
+//
+//        //CHANGE THIS LATER
+//        numberOfHomeworkAssignmentsCompleted = 5
+//
+//        authenticatePlayerGameCenter()
+//
+//    }
+//
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//
+//    }
+//
+//    func authenticatePlayerGameCenter(){
+//        let localPlayer = GKLocalPlayer.localPlayer()
+//
+//        localPlayer.authenticateHandler = {
+//            (view, error) in
+//
+//            if view != nil{
+//                self.present(view!, animated: true, completion: nil)
+//            }
+//            else{
+//                print(GKLocalPlayer.localPlayer().isAuthenticated)
+//            }
+//
+//        }
+//    }
+//
+//    func saveNumberOfHomeworkAssignmentsCompleted( number : Int){
+//
+//        if GKLocalPlayer.localPlayer().isAuthenticated {
+//
+//        }
+//
+//    }
 }

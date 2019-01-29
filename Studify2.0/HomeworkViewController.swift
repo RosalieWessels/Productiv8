@@ -68,46 +68,53 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                         dateComponents.year = Int(work.dueDate!.year!)
                                         dateComponents.month = Int(dueDateMonth)
                                         dateComponents.day = dueDateDayInt
-                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET
-                                        dateComponents.hour = Int(work.dueTime!.hours!)
-                                        dateComponents.minute = Int(work.dueTime!.minutes!)
-                                        dateComponents.second = 59
-                                        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
-                                        
-                                        // Create date from components
-                                        let userCalendar = Calendar.current // user calendar
-                                        if let dueDate = userCalendar.date(from: dateComponents) {
-                                            print(dueDate)
+                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, FIXING RIGHT NOW
+                                        if case let dateComponents.hour = Int(work.dueTime!.hours!){
                                             
-                                            let currentDateTime = Date()
-                                            
-                                            //TODO: Only display assignment when not done
-                                            if dueDate >= currentDateTime {
+                                            if case let dateComponents.minute = Int(work.dueTime!.minutes!) {
                                                 
-                                                let dateformatter = DateFormatter()
-                                                dateformatter.dateFormat = "MM/dd/yy"
-                                                let dueDateString = dateformatter.string(from: dueDate)
+                                                dateComponents.second = 59
                                                 
-                                                let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
+                                                dateComponents.timeZone = TimeZone(abbreviation: "UTC")
                                                 
-                                                let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
-                                                
-                                                if dueDate <= currentDateRed! {
-                                                    //Red
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"))]
+                                                // Create date from components
+                                                let userCalendar = Calendar.current // user calendar
+                                                if let dueDate = userCalendar.date(from: dateComponents) {
+                                                    print(dueDate)
+                                                    
+                                                    let currentDateTime = Date()
+                                                    
+                                                    //TODO: Only display assignment when not done
+                                                    if dueDate >= currentDateTime {
+                                                        
+                                                        let dateformatter = DateFormatter()
+                                                        dateformatter.dateFormat = "MM/dd/yy"
+                                                        let dueDateString = dateformatter.string(from: dueDate)
+                                                        
+                                                        let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
+                                                        
+                                                        let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
+                                                        
+                                                        if dueDate <= currentDateRed! {
+                                                            //Red
+                                                            self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"))]
+                                                        }
+                                                            
+                                                        else if dueDate < currentDateOrange! {
+                                                            //Orange
+                                                            self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"))]
+                                                        }
+                                                            
+                                                        else{
+                                                            //Green
+                                                            self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
+                                                        }
+                                                    }
                                                 }
                                                 
-                                                else if dueDate < currentDateOrange! {
-                                                    //Orange
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"))]
-                                                }
-                                                
-                                                else{
-                                                    //Green
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
-                                                }
                                             }
                                         }
+                                        
                                     }
                                 }
                             }
