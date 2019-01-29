@@ -68,7 +68,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                         dateComponents.year = Int(work.dueDate!.year!)
                                         dateComponents.month = Int(dueDateMonth)
                                         dateComponents.day = dueDateDayInt
-                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, FIXING RIGHT NOW
+                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET
                                         if case let dateComponents.hour = Int(work.dueTime!.hours!){
                                             
                                             if case let dateComponents.minute = Int(work.dueTime!.minutes!) {
