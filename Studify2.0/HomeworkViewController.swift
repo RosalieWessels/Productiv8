@@ -87,6 +87,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                             
                                             let currentDateTime = Date()
                                             
+                                            
                                             //TODO: Only display assignment when not done. Now done assignments are also shown
                                             if dueDate >= currentDateTime {
                                                 
