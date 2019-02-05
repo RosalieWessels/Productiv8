@@ -121,31 +121,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //..
     }
     
-    func listHomework() -> GTLRClassroom_CourseWork {
-        listCourses() { (courses, error) in
-            guard let courseList = courses else {
-                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let list = courseList.courses {
-                for course in list {
-                    
-                    self.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
-                        guard let homeworkList = homeworkResponse else {
-                            print("Error listing homework: \(error?.localizedDescription)")
-                            return
-                        }
-                        if let huiswerk = homeworkList.courseWork {
-                            for work in huiswerk {
-                                return work
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
+//    func listHomework(onCompleted: @escaping (GTLRClassroom_CourseWork?, Error?) -> ()) {
+//        listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//                    
+//                    self.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
+//                        guard let homeworkList = homeworkResponse else {
+//                            print("Error listing homework: \(error?.localizedDescription)")
+//                            return
+//                        }
+//                        if let huiswerk = homeworkList.courseWork {
+//                                onCompleted(results as? GTLRClassroom_CourseWork, error)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            
+//        }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

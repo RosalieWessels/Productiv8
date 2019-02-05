@@ -25,6 +25,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     var homeworkArray = [homeworkTableViewCellData]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -157,10 +158,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         return 67
     }
     
+    var homeworkItem = ""
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        var homeworkItem = homeworkArray[indexPath.row].homeworkName
+        homeworkItem = homeworkArray[indexPath.row].homeworkName
         var className = homeworkArray[indexPath.row].className
         var dateLabel = homeworkArray[indexPath.row].dateName
         
