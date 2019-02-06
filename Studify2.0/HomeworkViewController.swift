@@ -25,9 +25,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     var homeworkArray = [homeworkTableViewCellData]()
     
+    var homeworkTitleFromTableviewCell = ""
+    var dueDateFromTableViewCell = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
         homeworkTableView.delegate = self
@@ -92,9 +95,15 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                             //TODO: Only display assignment when not done. Now done assignments are also shown
                                             if dueDate >= currentDateTime {
                                                 
+                                                
+                                                
                                                 let dateformatter = DateFormatter()
                                                 dateformatter.dateFormat = "MM/dd/yy"
                                                 let dueDateString = dateformatter.string(from: dueDate)
+                                                
+                                                //Setting this for the ExpandHomeworkViewController
+                                                self.dueDateFromTableViewCell = dueDateString
+
                                                 
                                                 let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
                                                 
@@ -134,6 +143,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return homeworkArray.count
@@ -163,7 +173,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        homeworkItem = homeworkArray[indexPath.row].homeworkName
+        homeworkTitleFromTableviewCell = homeworkArray[indexPath.row].homeworkName
+        
         var className = homeworkArray[indexPath.row].className
         var dateLabel = homeworkArray[indexPath.row].dateName
         
@@ -175,6 +186,17 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     func expandHomework(){
         self.performSegue(withIdentifier: "homeworktoExpandHomework", sender: self)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "homeworktoExpandHomework" {
+            
+            let destinationViewController = segue.destination as! ExpandHomeworkViewController
+            
+            destinationViewController.homeworkTitle = homeworkTitleFromTableviewCell
+            destinationViewController.dueDate = dueDateFromTableViewCell
+            
+        }
     }
     
 }

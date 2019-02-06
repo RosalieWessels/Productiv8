@@ -11,10 +11,14 @@ import UIKit
 
 class ExpandHomeworkViewController: UIViewController {
     
-    @IBOutlet weak var homeworkTitleLabel: UILabel!
+    
+    @IBOutlet weak var homeworkTitleTextView: UITextView!
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    var homeworkTitle = ""
+    var dueDate = ""
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -40,7 +44,21 @@ class ExpandHomeworkViewController: UIViewController {
                         }
                         if let huiswerk = homeworkList.courseWork {
                             
-                            var currentSelectedHomeworkName = homeworkController.homeworkItem
+                            for work in huiswerk {
+                                
+                                if work.title == self.homeworkTitle {
+                                    
+                                    self.homeworkTitleTextView.text = work.title
+                                    
+                                    self.classLabel.text = course.name
+                                    
+                                    self.dueDateLabel.text = self.dueDate
+                                    
+                                    self.descriptionTextView.text = work.descriptionProperty
+                                    
+                                }
+                                
+                            }
                             
                             
                         }
