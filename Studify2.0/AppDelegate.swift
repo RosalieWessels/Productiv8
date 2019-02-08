@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             homeworkQuery.pageSize = 10
             // homeworkQuery.orderBy = "dueDate asc"
             
+            
             self.service.executeQuery(homeworkQuery) { (ticket, results, error) in
                 onCompleted(results as? GTLRClassroom_ListCourseWorkResponse, error)
             }

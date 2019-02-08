@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class ExpandHomeworkViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class ExpandHomeworkViewController: UIViewController {
     
     var homeworkTitle = ""
     var dueDate = ""
+    var dueDateNotString = Date()
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -48,13 +50,53 @@ class ExpandHomeworkViewController: UIViewController {
                                 
                                 if work.title == self.homeworkTitle {
                                     
-                                    self.homeworkTitleTextView.text = work.title
-                                    
-                                    self.classLabel.text = course.name
-                                    
-                                    self.dueDateLabel.text = self.dueDate
-                                    
-                                    self.descriptionTextView.text = work.descriptionProperty
+                                    if let dueDateDay = work.dueDate?.day {
+                                        let dueDateDayInt = Int(truncating: dueDateDay)
+                                        
+                                        if let dueDateMonth = work.dueDate?.month {
+                                            
+                                            var dateComponents = DateComponents()
+                                            dateComponents.year = 2019
+                                            dateComponents.month = Int(truncating: dueDateMonth)
+                                            dateComponents.day = dueDateDayInt
+                                            dateComponents.hour = 12
+                                            dateComponents.minute = 0
+                                            dateComponents.second = 0
+                                            dateComponents.timeZone = TimeZone(abbreviation: "UTC")
+                                            
+                                            if let year = work.dueDate?.year {
+                                                dateComponents.year = Int(truncating: year)
+                                            }
+                                            
+                                            if let hour = work.dueTime?.hours {
+                                                dateComponents.hour = Int(truncating: hour)
+                                            }
+                                            
+                                            if let minute = work.dueTime?.minutes {
+                                                dateComponents.minute = Int(truncating: minute)
+                                            }
+                                            
+                                            let userCalendar = Calendar.current
+                                            if let dueDateDate = userCalendar.date(from: dateComponents) {
+                                                
+                                                if dueDateDate == self.dueDateNotString {
+                                                    
+                                                    self.homeworkTitleTextView.text = work.title
+                                                    
+                                                    self.classLabel.text = course.name
+                                                    
+                                                    self.dueDateLabel.text = self.dueDate
+                                                    
+                                                    self.descriptionTextView.text = work.descriptionProperty
+                                                    
+                                                }
+                                                
+                                              
+                                        
+                                                
+                                            }
+                                        }
+                                    }
                                     
                                 }
                                 

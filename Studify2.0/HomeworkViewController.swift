@@ -27,6 +27,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     var homeworkTitleFromTableviewCell = ""
     var dueDateFromTableViewCell = ""
+    var dueDateNotString = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +104,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 
                                                 //Setting this for the ExpandHomeworkViewController
                                                 self.dueDateFromTableViewCell = dueDateString
+                                                self.dueDateNotString = dueDate
 
                                                 
                                                 let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
@@ -195,6 +197,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             
             destinationViewController.homeworkTitle = homeworkTitleFromTableviewCell
             destinationViewController.dueDate = dueDateFromTableViewCell
+            destinationViewController.dueDateNotString = dueDateNotString
             
         }
     }
