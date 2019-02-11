@@ -20,7 +20,7 @@ class ExpandHomeworkViewController: UIViewController {
     
     var homeworkTitle = ""
     var dueDate = ""
-    var dueDateNotString = Date()
+    var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -29,7 +29,6 @@ class ExpandHomeworkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let homeworkController = HomeworkViewController()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
             guard let courseList = courses else {
@@ -48,61 +47,20 @@ class ExpandHomeworkViewController: UIViewController {
                             
                             for work in huiswerk {
                                 
-                                if work.title == self.homeworkTitle {
+                                let homeworkIdentifier = self.HomeworkTitleAndIdentifier[self.homeworkTitle]
+                                
+                                if homeworkIdentifier == work.identifier {
                                     
-                                    if let dueDateDay = work.dueDate?.day {
-                                        let dueDateDayInt = Int(truncating: dueDateDay)
-                                        
-                                        if let dueDateMonth = work.dueDate?.month {
-                                            
-                                            var dateComponents = DateComponents()
-                                            dateComponents.year = 2019
-                                            dateComponents.month = Int(truncating: dueDateMonth)
-                                            dateComponents.day = dueDateDayInt
-                                            dateComponents.hour = 12
-                                            dateComponents.minute = 0
-                                            dateComponents.second = 0
-                                            dateComponents.timeZone = TimeZone(abbreviation: "UTC")
-                                            
-                                            if let year = work.dueDate?.year {
-                                                dateComponents.year = Int(truncating: year)
-                                            }
-                                            
-                                            if let hour = work.dueTime?.hours {
-                                                dateComponents.hour = Int(truncating: hour)
-                                            }
-                                            
-                                            if let minute = work.dueTime?.minutes {
-                                                dateComponents.minute = Int(truncating: minute)
-                                            }
-                                            
-                                            let userCalendar = Calendar.current
-                                            if let dueDateDate = userCalendar.date(from: dateComponents) {
-                                                
-                                                if dueDateDate == self.dueDateNotString {
-                                                    
-                                                    self.homeworkTitleTextView.text = work.title
-                                                    
-                                                    self.classLabel.text = course.name
-                                                    
-                                                    self.dueDateLabel.text = self.dueDate
-                                                    
-                                                    self.descriptionTextView.text = work.descriptionProperty
-                                                    
-                                                }
-                                                
-                                              
-                                        
-                                                
-                                            }
-                                        }
-                                    }
+                                    self.homeworkTitleTextView.text = work.title
                                     
+                                    self.classLabel.text = course.name
+                                    
+                                    self.dueDateLabel.text = self.dueDate
+                                    
+                                    self.descriptionTextView.text = work.descriptionProperty
                                 }
                                 
                             }
-                            
-                            
                         }
                         
                         //Reload tableView spot

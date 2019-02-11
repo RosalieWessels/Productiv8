@@ -18,7 +18,10 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.title = "Welcome To Studify"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

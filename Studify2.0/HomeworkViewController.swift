@@ -27,12 +27,14 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     var homeworkTitleFromTableviewCell = ""
     var dueDateFromTableViewCell = ""
-    var dueDateNotString = Date()
+    var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.navigationItem.hidesBackButton = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         homeworkTableView.delegate = self
         homeworkTableView.dataSource = self
@@ -104,7 +106,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 
                                                 //Setting this for the ExpandHomeworkViewController
                                                 self.dueDateFromTableViewCell = dueDateString
-                                                self.dueDateNotString = dueDate
+                                                let homeworkName : String = work.title!
+                                                let homeworkIdentifier : String = work.identifier!
+                                                
+                                                self.HomeworkTitleAndIdentifier[homeworkName] = homeworkIdentifier
 
                                                 
                                                 let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
@@ -177,9 +182,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTitleFromTableviewCell = homeworkArray[indexPath.row].homeworkName
         
-        var className = homeworkArray[indexPath.row].className
-        var dateLabel = homeworkArray[indexPath.row].dateName
-        
         self.performSegue(withIdentifier: "homeworktoExpandHomework", sender: self)
         homeworkTableView.deselectRow(at: indexPath, animated: true)
         
@@ -197,7 +199,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             
             destinationViewController.homeworkTitle = homeworkTitleFromTableviewCell
             destinationViewController.dueDate = dueDateFromTableViewCell
-            destinationViewController.dueDateNotString = dueDateNotString
+            destinationViewController.HomeworkTitleAndIdentifier = HomeworkTitleAndIdentifier
             
         }
     }
