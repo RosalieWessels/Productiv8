@@ -17,6 +17,7 @@ struct homeworkTableViewCellData {
     let className : String!
     let dateName : String!
     let colorImage : UIImage!
+    let homeworkIdentifier : String!
 }
 
 class HomeworkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -28,6 +29,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var homeworkTitleFromTableviewCell = ""
     var dueDateFromTableViewCell = ""
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
+    var homeworkIdentifierFromTableViewCell = ""
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.hidesBackButton = true
@@ -118,17 +120,17 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 
                                                 if dueDate <= currentDateRed! {
                                                     //Red
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"))]
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"), homeworkIdentifier: work.identifier)]
                                                 }
                                                     
                                                 else if dueDate < currentDateOrange! {
                                                     //Orange
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"))]
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"), homeworkIdentifier: work.identifier)]
                                                 }
                                                     
                                                 else{
                                                     //Green
-                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"))]
+                                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
                                                 }
                                             }
                                         }
@@ -162,7 +164,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         cell.backgroundColor = UIColor.clear
-        
+        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier
         cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
         cell.teacherLabelView.text = homeworkArray[indexPath.row].className
         cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
@@ -181,6 +183,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         homeworkTitleFromTableviewCell = homeworkArray[indexPath.row].homeworkName
+        homeworkIdentifierFromTableViewCell = homeworkArray[indexPath.row].homeworkIdentifier
         
         self.performSegue(withIdentifier: "homeworktoExpandHomework", sender: self)
         homeworkTableView.deselectRow(at: indexPath, animated: true)
@@ -200,6 +203,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             destinationViewController.homeworkTitle = homeworkTitleFromTableviewCell
             destinationViewController.dueDate = dueDateFromTableViewCell
             destinationViewController.HomeworkTitleAndIdentifier = HomeworkTitleAndIdentifier
+            destinationViewController.homeworkIdentifier = homeworkIdentifierFromTableViewCell
             
         }
     }

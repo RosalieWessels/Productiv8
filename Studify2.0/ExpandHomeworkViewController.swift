@@ -21,6 +21,7 @@ class ExpandHomeworkViewController: UIViewController {
     var homeworkTitle = ""
     var dueDate = ""
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
+    var homeworkIdentifier = ""
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         
@@ -47,9 +48,14 @@ class ExpandHomeworkViewController: UIViewController {
                             
                             for work in huiswerk {
                                 
-                                let homeworkIdentifier = self.HomeworkTitleAndIdentifier[self.homeworkTitle]
+//                                let homeworkIdentifierFromDictionary = self.HomeworkTitleAndIdentifier[self.homeworkTitle]
+//
+//                                if homeworkIdentifierFromDictionary == work.identifier {
+//
+//
+//                                }
                                 
-                                if homeworkIdentifier == work.identifier {
+                                if self.homeworkIdentifier == work.identifier {
                                     
                                     self.homeworkTitleTextView.text = work.title
                                     
@@ -58,6 +64,7 @@ class ExpandHomeworkViewController: UIViewController {
                                     self.dueDateLabel.text = self.dueDate
                                     
                                     self.descriptionTextView.text = work.descriptionProperty
+                                    
                                 }
                                 
                             }
