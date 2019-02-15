@@ -109,6 +109,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                     if let submissonStateOfHomework = submissionState.studentSubmissions {
                                                         for submission in submissonStateOfHomework {
                                                             if let stateOfHomework = submission.state {
+                                                                
                                                                 if stateOfHomework != "TURNED_IN" {
                                                                     
                                                                     let dateformatter = DateFormatter()
@@ -148,7 +149,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                     }
                                                 }
                                                 
-                                                //USUAL SPOT
+                                                //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
                                                 
                                             }
                                         }

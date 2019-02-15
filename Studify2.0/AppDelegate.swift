@@ -77,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    //func turnInHomeworkAssignment(courseId: Stirng, courseWorkId : String, studentSubmissionId : String, onCompleted : @escaping())
+    
     func listTeacher(courseId : String, onCompleted: @escaping (GTLRClassroom_ListTeachersResponse?, Error?) -> ()) {
         if self.service.authorizer != nil {
             let teacherQuery = GTLRClassroomQuery_CoursesTeachersList.query(withCourseId: courseId)
