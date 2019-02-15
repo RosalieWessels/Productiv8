@@ -66,6 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    func listHomeworkState(courseId : String, courseWorkId : String, onCompleted: @escaping(GTLRClassroom_ListStudentSubmissionsResponse?, Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let submissonStateQuery = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsList.query(withCourseId: courseId, courseWorkId: courseWorkId)
+            submissonStateQuery.pageSize = 10
+            
+            self.service.executeQuery(submissonStateQuery) { (ticket, results, error) in
+                onCompleted(results as? GTLRClassroom_ListStudentSubmissionsResponse, error)
+            }
+        }
+    }
+    
     func listTeacher(courseId : String, onCompleted: @escaping (GTLRClassroom_ListTeachersResponse?, Error?) -> ()) {
         if self.service.authorizer != nil {
             let teacherQuery = GTLRClassroomQuery_CoursesTeachersList.query(withCourseId: courseId)
@@ -135,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         //GIDSignIn.sharedInstance().signInSilently()
-        
+        //GIDSignIn.sharedInstance().currentUser
         
     }
 
