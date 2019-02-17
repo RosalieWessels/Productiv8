@@ -23,6 +23,7 @@ class AccountViewContoller : UIViewController, UITextViewDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
+    @IBOutlet weak var accountLabel2: UILabel!
     
     
     @IBAction func LogOutPressed(_ sender: Any) {
@@ -48,6 +49,7 @@ class AccountViewContoller : UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        accountLabel2.adjustsFontSizeToFitWidth = true
         accountView.layer.cornerRadius = 10
         if let username = Auth.auth().currentUser?.displayName {
             usernameLabel.text = ("Username: \(username)")
