@@ -59,12 +59,14 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
 
                     appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
                         guard let homeworkList = homeworkResponse else {
-                            print("Error listing homework: \(error?.localizedDescription)")
+                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
                             return
                         }
                         if let huiswerk = homeworkList.courseWork {
                             for work in huiswerk {
-                                
+                                if work.dueDate == nil {
+                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
+                                }
                                 if let dueDateDay = work.dueDate?.day {
                                     let dueDateDayInt = Int(truncating: dueDateDay)
                                     
@@ -96,61 +98,53 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                             
                                             let currentDateTime = Date()
                                             
-                                            
-                                            //TODO: Only display assignment when not done. Now done assignments are also shown
-                                            if dueDate >= currentDateTime {
-                    
-                                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
-                                                    guard let submissionState = studentSubmissionResponse else {
-                                                        print("Error listing submissionState: \(error?.localizedDescription)")
-                                                        return
-                                                        
-                                                    }
-                                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
-                                                        for submission in submissonStateOfHomework {
-                                                            if let stateOfHomework = submission.state {
+                                            appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
+                                                guard let submissionState = studentSubmissionResponse else {
+                                                    print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
+                                                    return
+                                                    
+                                                }
+                                                if let submissonStateOfHomework = submissionState.studentSubmissions {
+                                                    for submission in submissonStateOfHomework {
+                                                        print("\(submission.state)")
+                                                        if submission.state != nil {
+                                                            print ("Hello")
+                                                            let dateformatter = DateFormatter()
+                                                            dateformatter.dateFormat = "MM/dd/yy"
+                                                            let dueDateString = dateformatter.string(from: dueDate)
+                                                            
+                                                            //Setting this for the ExpandHomeworkViewController
+                                                            self.dueDateFromTableViewCell = dueDateString
+                                                            let homeworkName : String = work.title!
+                                                            let homeworkIdentifier : String = work.identifier!
+                                                            
+                                                            self.HomeworkTitleAndIdentifier[homeworkName] = homeworkIdentifier
+                                                            
+                                                            
+                                                            let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
+                                                            
+                                                            let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
+                                                            
+                                                            if dueDate <= currentDateRed! {
+                                                                //Red
+                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"), homeworkIdentifier: work.identifier)]
+                                                            }
                                                                 
-                                                                if stateOfHomework != "TURNED_IN" {
-                                                                    
-                                                                    let dateformatter = DateFormatter()
-                                                                    dateformatter.dateFormat = "MM/dd/yy"
-                                                                    let dueDateString = dateformatter.string(from: dueDate)
-                                                                    
-                                                                    //Setting this for the ExpandHomeworkViewController
-                                                                    self.dueDateFromTableViewCell = dueDateString
-                                                                    let homeworkName : String = work.title!
-                                                                    let homeworkIdentifier : String = work.identifier!
-                                                                    
-                                                                    self.HomeworkTitleAndIdentifier[homeworkName] = homeworkIdentifier
-                                                                    
-                                                                    
-                                                                    let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
-                                                                    
-                                                                    let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
-                                                                    
-                                                                    if dueDate <= currentDateRed! {
-                                                                        //Red
-                                                                        self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"), homeworkIdentifier: work.identifier)]
-                                                                    }
-                                                                        
-                                                                    else if dueDate < currentDateOrange! {
-                                                                        //Orange
-                                                                        self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"), homeworkIdentifier: work.identifier)]
-                                                                    }
-                                                                        
-                                                                    else{
-                                                                        //Green
-                                                                        self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
-                                                                    }
-                                                                    
-                                                                }
+                                                            else if dueDate < currentDateOrange! {
+                                                                //Orange
+                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"), homeworkIdentifier: work.identifier)]
+                                                            }
+                                                                
+                                                            else{
+                                                                //Green
+                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
                                                             }
                                                         }
                                                     }
                                                 }
                                                 
                                                 //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
-                                                
+                                                DispatchQueue.main.async { self.homeworkTableView.reloadData()}
                                             }
                                         }
                                         

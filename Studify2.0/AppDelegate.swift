@@ -69,6 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func listHomeworkState(courseId : String, courseWorkId : String, onCompleted: @escaping(GTLRClassroom_ListStudentSubmissionsResponse?, Error?) -> ()) {
         if self.service.authorizer != nil {
             let submissonStateQuery = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsList.query(withCourseId: courseId, courseWorkId: courseWorkId)
+            // filter by
+            submissonStateQuery.states = ["CREATED", "NEW", "RETURNED", "SUBMISSION_STATE_UNSPECIFIED", "RECLAIMED_BY_STUDENT"]
+            
             submissonStateQuery.pageSize = 10
             
             self.service.executeQuery(submissonStateQuery) { (ticket, results, error) in
@@ -77,7 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
-    //func turnInHomeworkAssignment(courseId: Stirng, courseWorkId : String, studentSubmissionId : String, onCompleted : @escaping())
+    func turnInHomeworkAssignment(courseId: String, courseWorkId : String, studentSubmissionId : String, onCompleted : @escaping(Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let turnInObject = GTLRClassroom_TurnInStudentSubmissionRequest.init()
+            let turnInAssignment = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsTurnIn.query(withObject: turnInObject, courseId: courseId, courseWorkId: courseWorkId, identifier: studentSubmissionId)
+            
+            self.service.executeQuery(turnInAssignment) { (ticket, results, error) in
+                onCompleted(error)
+            }
+        }
+    }
     
     func listTeacher(courseId : String, onCompleted: @escaping (GTLRClassroom_ListTeachersResponse?, Error?) -> ()) {
         if self.service.authorizer != nil {
