@@ -108,30 +108,46 @@
 		89CFC1B32172525200DCFF7B /* Studify2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */,
-				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
-				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
-				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
-				89CFC1B82172525200DCFF7B /* ClassesViewController.swift */,
-				8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */,
-				8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */,
-				89AFE65F2174142700D8F504 /* AccountViewController.swift */,
-				89CFC1BA2172525200DCFF7B /* Main.storyboard */,
-				89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */,
-				89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */,
-				89E5C83721DF10D200DC212B /* CompetitionViewController.swift */,
-				89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */,
-				89A845142184EA57004482E6 /* ExpandHomeworkViewController.swift */,
-				8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */,
-				8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */,
-				89450998217BB55D000AA49F /* AccountSettingsViewController.swift */,
+				89FBD0D8221B55CD00B5D8EE /* Code Files */,
+				89FBD0D9221B562200B5D8EE /* Design Files */,
 				89CFC1BD2172525400DCFF7B /* Assets.xcassets */,
-				89CFC1BF2172525400DCFF7B /* LaunchScreen.storyboard */,
+				89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */,
 				89CFC1C22172525400DCFF7B /* Info.plist */,
 				89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */,
 				89D6BDE72199E65E009BB0AC /* Studify2.0-Bridging-Header.h */,
 			);
 			path = Studify2.0;
+			sourceTree = "<group>";
+		};
+		89FBD0D8221B55CD00B5D8EE /* Code Files */ = {
+			isa = PBXGroup;
+			children = (
+				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
+				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
+				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
+				89CFC1B82172525200DCFF7B /* ClassesViewController.swift */,
+				89AFE65F2174142700D8F504 /* AccountViewController.swift */,
+				89E5C83721DF10D200DC212B /* CompetitionViewController.swift */,
+				89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */,
+				89A845142184EA57004482E6 /* ExpandHomeworkViewController.swift */,
+				89450998217BB55D000AA49F /* AccountSettingsViewController.swift */,
+			);
+			name = "Code Files";
+			sourceTree = "<group>";
+		};
+		89FBD0D9221B562200B5D8EE /* Design Files */ = {
+			isa = PBXGroup;
+			children = (
+				8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */,
+				8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */,
+				89CFC1BA2172525200DCFF7B /* Main.storyboard */,
+				89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */,
+				89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */,
+				8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */,
+				8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */,
+				89CFC1BF2172525400DCFF7B /* LaunchScreen.storyboard */,
+			);
+			name = "Design Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
