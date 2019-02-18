@@ -33,6 +33,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.hidesBackButton = true
+        
+        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddHomeworkIcon"), style: .plain, target: self, action: #selector(inputHomework))
     }
     
     override func viewDidLoad() {
@@ -64,6 +66,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         if let huiswerk = homeworkList.courseWork {
                             for work in huiswerk {
+                                print("associated with developer \(work.associatedWithDeveloper)")
                                 if work.dueDate == nil {
                                     self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
                                 }
@@ -108,7 +111,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                     for submission in submissonStateOfHomework {
                                                         print("\(submission.state)")
                                                         if submission.state != nil {
-                                                            print ("Hello")
                                                             let dateformatter = DateFormatter()
                                                             dateformatter.dateFormat = "MM/dd/yy"
                                                             let dueDateString = dateformatter.string(from: dueDate)
@@ -206,6 +208,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     func expandHomework(){
         self.performSegue(withIdentifier: "homeworktoExpandHomework", sender: self)
         
+    }
+    
+    @objc func inputHomework(){
+        self.performSegue(withIdentifier: "homeworkScreenToInputHomework", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

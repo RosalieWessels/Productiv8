@@ -9,7 +9,11 @@
 import UIKit
 
 class CompetitionTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var namePlace: UILabel!
+    @IBOutlet weak var numberOfAssignmentsCompleted: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

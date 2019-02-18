@@ -25,9 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
+        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().scopes = [kGTLRAuthScopeClassroomCourses,                            kGTLRAuthScopeClassroomCoursesReadonly, kGTLRAuthScopeClassroomCourseworkMe, kGTLRAuthScopeClassroomCourseworkMeReadonly,
-            kGTLRAuthScopeClassroomCourseworkStudents, kGTLRAuthScopeClassroomCourseworkStudentsReadonly, kGTLRAuthScopeClassroomGuardianlinksMeReadonly, kGTLRAuthScopeClassroomGuardianlinksStudents, kGTLRAuthScopeClassroomGuardianlinksStudentsReadonly, kGTLRAuthScopeClassroomProfileEmails, kGTLRAuthScopeClassroomProfilePhotos, kGTLRAuthScopeClassroomPushNotifications, kGTLRAuthScopeClassroomRosters, kGTLRAuthScopeClassroomRostersReadonly, kGTLRAuthScopeClassroomStudentSubmissionsMeReadonly, kGTLRAuthScopeClassroomStudentSubmissionsStudentsReadonly]
+        GIDSignIn.sharedInstance().scopes = [
+            kGTLRAuthScopeClassroomCourses,
+         // kGTLRAuthScopeClassroomCoursesReadonly,
+            kGTLRAuthScopeClassroomCourseworkMe,
+         // kGTLRAuthScopeClassroomCourseworkMeReadonly,
+            kGTLRAuthScopeClassroomCourseworkStudents,
+         // kGTLRAuthScopeClassroomCourseworkStudentsReadonly,
+            kGTLRAuthScopeClassroomGuardianlinksMeReadonly,
+            kGTLRAuthScopeClassroomGuardianlinksStudents,
+            kGTLRAuthScopeClassroomGuardianlinksStudentsReadonly,
+            kGTLRAuthScopeClassroomProfileEmails,
+            kGTLRAuthScopeClassroomProfilePhotos,
+            kGTLRAuthScopeClassroomPushNotifications,
+            kGTLRAuthScopeClassroomRosters,
+         // kGTLRAuthScopeClassroomRostersReadonly,
+         // kGTLRAuthScopeClassroomStudentSubmissionsMeReadonly,
+         // kGTLRAuthScopeClassroomStudentSubmissionsStudentsReadonly,
+        ]
         GIDSignIn.sharedInstance().delegate = self
 
         return true
@@ -86,6 +103,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let turnInAssignment = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsTurnIn.query(withObject: turnInObject, courseId: courseId, courseWorkId: courseWorkId, identifier: studentSubmissionId)
             
             self.service.executeQuery(turnInAssignment) { (ticket, results, error) in
+                onCompleted(error)
+            }
+        }
+    }
+    
+    func courseworkCreate(courseId: String, onCompleted : @escaping(Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let work = GTLRClassroom_CourseWork.init()
+            work.title = "Titel 3"
+            work.descriptionProperty = "Beschrijving"
+            work.assigneeMode = "ALL_STUDENTS"
+            work.state = "PUBLISHED"
+            work.workType = "ASSIGNMENT"
+            let dueDate = GTLRClassroom_Date.init()
+            dueDate.day = 28
+            dueDate.month = 2
+            dueDate.year = 2019
+            work.dueDate = dueDate
+            let dueTime = GTLRClassroom_TimeOfDay.init()
+            dueTime.hours = 12
+            dueTime.minutes = 0
+            work.dueTime = dueTime
+            let create = GTLRClassroomQuery_CoursesCourseWorkCreate.query(withObject: work, courseId: courseId)
+
+            self.service.executeQuery(create) { (ticket, results, error) in
                 onCompleted(error)
             }
         }
