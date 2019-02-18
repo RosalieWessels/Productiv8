@@ -25,9 +25,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
+        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().scopes = [kGTLRAuthScopeClassroomCourses,                            kGTLRAuthScopeClassroomCoursesReadonly, kGTLRAuthScopeClassroomCourseworkMe, kGTLRAuthScopeClassroomCourseworkMeReadonly,
-            kGTLRAuthScopeClassroomCourseworkStudents, kGTLRAuthScopeClassroomCourseworkStudentsReadonly, kGTLRAuthScopeClassroomGuardianlinksMeReadonly, kGTLRAuthScopeClassroomGuardianlinksStudents, kGTLRAuthScopeClassroomGuardianlinksStudentsReadonly, kGTLRAuthScopeClassroomProfileEmails, kGTLRAuthScopeClassroomProfilePhotos, kGTLRAuthScopeClassroomPushNotifications, kGTLRAuthScopeClassroomRosters, kGTLRAuthScopeClassroomRostersReadonly, kGTLRAuthScopeClassroomStudentSubmissionsMeReadonly, kGTLRAuthScopeClassroomStudentSubmissionsStudentsReadonly]
+        GIDSignIn.sharedInstance().scopes = [
+            kGTLRAuthScopeClassroomCourses,
+         // kGTLRAuthScopeClassroomCoursesReadonly,
+            kGTLRAuthScopeClassroomCourseworkMe,
+         // kGTLRAuthScopeClassroomCourseworkMeReadonly,
+            kGTLRAuthScopeClassroomCourseworkStudents,
+         // kGTLRAuthScopeClassroomCourseworkStudentsReadonly,
+            kGTLRAuthScopeClassroomGuardianlinksMeReadonly,
+            kGTLRAuthScopeClassroomGuardianlinksStudents,
+            kGTLRAuthScopeClassroomGuardianlinksStudentsReadonly,
+            kGTLRAuthScopeClassroomProfileEmails,
+            kGTLRAuthScopeClassroomProfilePhotos,
+            kGTLRAuthScopeClassroomPushNotifications,
+            kGTLRAuthScopeClassroomRosters,
+         // kGTLRAuthScopeClassroomRostersReadonly,
+         // kGTLRAuthScopeClassroomStudentSubmissionsMeReadonly,
+         // kGTLRAuthScopeClassroomStudentSubmissionsStudentsReadonly,
+        ]
         GIDSignIn.sharedInstance().delegate = self
 
         return true
@@ -59,8 +76,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             homeworkQuery.pageSize = 10
             // homeworkQuery.orderBy = "dueDate asc"
             
+            
             self.service.executeQuery(homeworkQuery) { (ticket, results, error) in
                 onCompleted(results as? GTLRClassroom_ListCourseWorkResponse, error)
+            }
+        }
+    }
+    
+    func listHomeworkState(courseId : String, courseWorkId : String, onCompleted: @escaping(GTLRClassroom_ListStudentSubmissionsResponse?, Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let submissonStateQuery = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsList.query(withCourseId: courseId, courseWorkId: courseWorkId)
+            // filter by
+            submissonStateQuery.states = ["CREATED", "NEW", "RETURNED", "SUBMISSION_STATE_UNSPECIFIED", "RECLAIMED_BY_STUDENT"]
+            
+            submissonStateQuery.pageSize = 10
+            
+            self.service.executeQuery(submissonStateQuery) { (ticket, results, error) in
+                onCompleted(results as? GTLRClassroom_ListStudentSubmissionsResponse, error)
+            }
+        }
+    }
+    
+    func turnInHomeworkAssignment(courseId: String, courseWorkId : String, studentSubmissionId : String, onCompleted : @escaping(Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let turnInObject = GTLRClassroom_TurnInStudentSubmissionRequest.init()
+            let turnInAssignment = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsTurnIn.query(withObject: turnInObject, courseId: courseId, courseWorkId: courseWorkId, identifier: studentSubmissionId)
+            
+            self.service.executeQuery(turnInAssignment) { (ticket, results, error) in
+                onCompleted(error)
+            }
+        }
+    }
+    
+    func courseworkCreate(courseId: String, onCompleted : @escaping(Error?) -> ()) {
+        if self.service.authorizer != nil {
+            let work = GTLRClassroom_CourseWork.init()
+            work.title = "Titel 3"
+            work.descriptionProperty = "Beschrijving"
+            work.assigneeMode = "ALL_STUDENTS"
+            work.state = "PUBLISHED"
+            work.workType = "ASSIGNMENT"
+            let dueDate = GTLRClassroom_Date.init()
+            dueDate.day = 28
+            dueDate.month = 2
+            dueDate.year = 2019
+            work.dueDate = dueDate
+            let dueTime = GTLRClassroom_TimeOfDay.init()
+            dueTime.hours = 12
+            dueTime.minutes = 0
+            work.dueTime = dueTime
+            let create = GTLRClassroomQuery_CoursesCourseWorkCreate.query(withObject: work, courseId: courseId)
+
+            self.service.executeQuery(create) { (ticket, results, error) in
+                onCompleted(error)
             }
         }
     }
@@ -133,6 +201,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        //GIDSignIn.sharedInstance().signInSilently()
+        //GIDSignIn.sharedInstance().currentUser
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -142,7 +213,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
+
+
+
 

@@ -25,6 +25,8 @@
 		89CFC1C12172525400DCFF7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CFC1BF2172525400DCFF7B /* LaunchScreen.storyboard */; };
 		89E5C83821DF10D200DC212B /* CompetitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E5C83721DF10D200DC212B /* CompetitionViewController.swift */; };
 		89EA20D3218F60140029D512 /* WelcomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */; };
+		89FBD0D4221A1EEB00B5D8EE /* CompetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */; };
+		89FBD0D5221A1EEB00B5D8EE /* CompetitionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		89D6BDE72199E65E009BB0AC /* Studify2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Studify2.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		89E5C83721DF10D200DC212B /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
 		89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenViewController.swift; sourceTree = "<group>"; };
+		89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableViewCell.swift; sourceTree = "<group>"; };
+		89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompetitionTableViewCell.xib; sourceTree = "<group>"; };
 		EED2E54C4C269098CB9306E3 /* Pods-Studify2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.release.xcconfig"; sourceTree = "<group>"; };
 		F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studify2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +117,8 @@
 				8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */,
 				89AFE65F2174142700D8F504 /* AccountViewController.swift */,
 				89CFC1BA2172525200DCFF7B /* Main.storyboard */,
+				89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */,
+				89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */,
 				89E5C83721DF10D200DC212B /* CompetitionViewController.swift */,
 				89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */,
 				89A845142184EA57004482E6 /* ExpandHomeworkViewController.swift */,
@@ -199,6 +205,7 @@
 				8945099F217EC4BF000AA49F /* HomeworkTableViewCell.xib in Resources */,
 				89CFC1C12172525400DCFF7B /* LaunchScreen.storyboard in Resources */,
 				89AFE65C217272FF00D8F504 /* GoogleService-Info.plist in Resources */,
+				89FBD0D5221A1EEB00B5D8EE /* CompetitionTableViewCell.xib in Resources */,
 				89CFC1BE2172525400DCFF7B /* Assets.xcassets in Resources */,
 				89CFC1BC2172525200DCFF7B /* Main.storyboard in Resources */,
 			);
@@ -287,6 +294,7 @@
 				89E5C83821DF10D200DC212B /* CompetitionViewController.swift in Sources */,
 				89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */,
 				8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */,
+				89FBD0D4221A1EEB00B5D8EE /* CompetitionTableViewCell.swift in Sources */,
 				89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */,
 				8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */,
 				89A845152184EA57004482E6 /* ExpandHomeworkViewController.swift in Sources */,
