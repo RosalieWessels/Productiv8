@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import TCPickerView
+import Firebase
+import FirebaseDatabase
 
 struct competitionTableViewCellData {
     
@@ -23,9 +25,13 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var competitionTableView: UITableView!
     @IBOutlet weak var classesLabel: UILabel!
     
+    //var db : Firestore!
+    
+    private let theme = TCPickerViewStudifyTheme()
+    
     @IBAction func changeClassButtonPressed(_ sender: Any) {
         var classesPicker : TCPickerViewInput = TCPickerView()
-        classesPicker.title = "Pick a class to see its leaderboard"
+        classesPicker.title = "Pick a class"
         
         var classes : [String] = []
         
@@ -43,6 +49,11 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                 classesPicker.values = valuesOfPicker
                 classesPicker.delegate = self as? TCPickerViewOutput
                 classesPicker.selection = .single
+//                var headerBackgroundColor: UIColor { get }
+//                var doneBackgroundColor: UIColor { get }
+//                var closeBackgroundColor: UIColor { get }
+                classesPicker.theme = self.theme
+                
                 classesPicker.completion = { (selectedIndexes) in
                     for selectedClass in selectedIndexes {
                         let classForLeaderboard = valuesOfPicker[selectedClass].title
@@ -74,6 +85,21 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         competitionData = [competitionTableViewCellData]()
         
         competitionData = [competitionTableViewCellData(numberPlace: "#1", userName: "Rosalie", numberOfAssignmentsCompleted: "20"), competitionTableViewCellData(numberPlace: "#2", userName: "Mahika", numberOfAssignmentsCompleted: "20")]
+        
+//        let competitionDatabase = db.collection("competitionDatabase")
+//
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//                    competitionDatabase.document(course.identifier!)
+//                }
+//            }
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,4 +136,70 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
+}
+
+public final class TCPickerViewStudifyTheme: TCPickerViewThemeType {
+    
+    public let textColor: UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    public let grayColor: UIColor = UIColor(red: 169/255, green: 169/255, blue: 169/255, alpha: 1)
+    public let darkGrayColor: UIColor = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 1)
+    
+    public var doneText: String {
+        return "Done"
+    }
+    
+    public var closeText: String {
+        return "Cancel"
+    }
+    
+    public var backgroundColor: UIColor {
+        return self.textColor
+    }
+    
+    public var titleColor: UIColor {
+        return self.textColor
+    }
+    
+    public var doneTextColor: UIColor {
+        return self.textColor
+    }
+    
+    public var closeTextColor: UIColor {
+        return self.textColor
+    }
+    
+    public var headerBackgroundColor: UIColor {
+        return self.darkGrayColor
+    }
+    
+    public var doneBackgroundColor: UIColor {
+        return self.darkGrayColor
+    }
+    
+    public var closeBackgroundColor: UIColor {
+        return self.grayColor
+    }
+    
+    public var separatorColor: UIColor {
+        return self.textColor
+    }
+    
+    public var buttonsFont: UIFont {
+        return UIFont.systemFont(ofSize: 15)
+    }
+    
+    public var titleFont: UIFont{
+        return UIFont.boldSystemFont(ofSize: 17)
+    }
+    
+    public var rowHeight: CGFloat {
+        return 50
+    }
+    
+    public var cornerRadius: CGFloat {
+        return 8.0
+    }
+    
+    
+    public required init() {}
 }
