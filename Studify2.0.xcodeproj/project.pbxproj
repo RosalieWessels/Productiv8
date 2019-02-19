@@ -10,6 +10,7 @@
 		0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */; };
 		8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */; };
 		8910D2A721DEFD4300677137 /* ClassesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */; };
+		892CE6C3221C8A43004B4601 /* AddHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */; };
 		89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89450998217BB55D000AA49F /* AccountSettingsViewController.swift */; };
 		8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */; };
 		8945099F217EC4BF000AA49F /* HomeworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */; };
@@ -33,6 +34,7 @@
 		11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesTableViewCell.swift; sourceTree = "<group>"; };
 		8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassesTableViewCell.xib; sourceTree = "<group>"; };
+		892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHomeworkViewController.swift; sourceTree = "<group>"; };
 		89450998217BB55D000AA49F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTableViewCell.swift; sourceTree = "<group>"; };
 		8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeworkTableViewCell.xib; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		89FBD0D8221B55CD00B5D8EE /* Code Files */ = {
 			isa = PBXGroup;
 			children = (
+				892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */,
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
 				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
 				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
@@ -315,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892CE6C3221C8A43004B4601 /* AddHomeworkViewController.swift in Sources */,
 				89CFC1B92172525200DCFF7B /* ClassesViewController.swift in Sources */,
 				89CFC1B52172525200DCFF7B /* AppDelegate.swift in Sources */,
 				89AFE6602174142700D8F504 /* AccountViewController.swift in Sources */,
@@ -476,7 +480,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Studify2.0/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RosalieWessels.Studify2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Studify2.0/Studify2.0-Bridging-Header.h";
@@ -496,7 +503,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Studify2.0/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RosalieWessels.Studify2-0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Studify2.0/Studify2.0-Bridging-Header.h";

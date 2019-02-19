@@ -35,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-A2-rLf">
-                                <rect key="frame" x="242" y="66" width="117" height="43"/>
+                                <rect key="frame" x="242" y="66" width="117" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="Change Class"/>
@@ -131,7 +131,7 @@
         <!--Input Homework To GC-->
         <scene sceneID="ugB-eQ-Ecg">
             <objects>
-                <viewController title="Input Homework To GC" id="Yt8-ti-1ec" sceneMemberID="viewController">
+                <viewController title="Input Homework To GC" id="Yt8-ti-1ec" customClass="AddHomeworkViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oj9-GX-c5P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,16 +143,83 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sof-2N-Cmy">
                                 <rect key="frame" x="16" y="77" width="343" height="570"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Homework" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-SV-W1H">
+                                        <rect key="frame" x="8" y="24" width="327" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Only For Teachers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbA-n6-D7T">
+                                        <rect key="frame" x="8" y="59" width="327" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWE-tc-Xcq">
+                                        <rect key="frame" x="8" y="97" width="327" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7a-fa-Iyi">
+                                        <rect key="frame" x="47" y="134" width="251" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Choose a Google Classroom Class"/>
+                                        <connections>
+                                            <action selector="chooseClass:" destination="Yt8-ti-1ec" eventType="touchUpInside" id="zJo-z9-XE0"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*You must own this class*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhb-Ee-Kig">
+                                        <rect key="frame" x="8" y="163" width="327" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yq0-G0-vqv">
+                                        <rect key="frame" x="8" y="189" width="327" height="175"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="b8y-Pi-jb8">
+                                        <rect key="frame" x="8" y="372" width="327" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="572294914.57709801">
+                                            <!--2019-02-19 18:48:34 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aby-OJ-Exx">
+                                        <rect key="frame" x="8" y="514" width="327" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Add Assignment"/>
+                                        <connections>
+                                            <action selector="addHomeworkButtonPressed:" destination="Yt8-ti-1ec" eventType="touchUpInside" id="bau-NK-Rcc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="AcN-3a-pT6"/>
                     </view>
+                    <connections>
+                        <outlet property="chooseClassResultsLabel" destination="qhb-Ee-Kig" id="KUR-Dx-0Fa"/>
+                        <outlet property="datePicker" destination="b8y-Pi-jb8" id="sbK-TR-UYi"/>
+                        <outlet property="descriptionTextField" destination="yq0-G0-vqv" id="mqb-g9-05l"/>
+                        <outlet property="titleTextField" destination="PWE-tc-Xcq" id="G1v-8Y-qxk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQE-bg-kmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1469" y="-991"/>
+            <point key="canvasLocation" x="1468" y="-991.75412293853083"/>
         </scene>
         <!--Homework-->
         <scene sceneID="hNz-n2-bh7">
@@ -171,6 +238,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Un2-D9-Nb6">
+                                <rect key="frame" x="16" y="74" width="51" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="AddHomeworkIcon"/>
+                                <connections>
+                                    <action selector="addHomeworkButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="cwH-lk-Gsm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -184,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-322"/>
+            <point key="canvasLocation" x="749.60000000000002" y="-322.48875562218893"/>
         </scene>
         <!--Classes-->
         <scene sceneID="wg7-f3-ORb">
@@ -442,6 +517,7 @@
     </scenes>
     <resources>
         <image name="AccountIcon" width="28" height="28"/>
+        <image name="AddHomeworkIcon" width="128" height="128"/>
         <image name="ClassesIcon" width="28" height="28"/>
         <image name="CompetitionIcon" width="28" height="28"/>
         <image name="HomeworkIcon" width="28" height="28"/>
@@ -451,6 +527,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>
-        <segue reference="NJf-Ub-Ww4"/>
+        <segue reference="Jw0-3F-1HV"/>
     </inferredMetricsTieBreakers>
 </document>

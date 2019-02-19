@@ -126,15 +126,13 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                                                     "score": 860000,
                                                     "courseId": course.identifier!
                                                     ])
-                                            }
-                                            
+                                            } 
                                         }
                                     }
                                 }
-                                
-                                }
                             }
                         }
+                    }
                 }
             }
         }

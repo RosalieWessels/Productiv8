@@ -24,6 +24,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var homeworkTableView: UITableView!
     
+    @IBAction func addHomeworkButton(_ sender: Any) {
+        performSegue(withIdentifier: "homeworkScreenToInputHomework", sender: self)
+    }
+    
     var homeworkArray = [homeworkTableViewCellData]()
     
     var homeworkTitleFromTableviewCell = ""
