@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import TCPickerView
+import GoogleSignIn
 import Firebase
 import FirebaseDatabase
 
@@ -25,7 +26,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var competitionTableView: UITableView!
     @IBOutlet weak var classesLabel: UILabel!
     
-    //var db : Firestore!
+    var db : Firestore!
     
     private let theme = TCPickerViewStudifyTheme()
     
@@ -49,9 +50,6 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                 classesPicker.values = valuesOfPicker
                 classesPicker.delegate = self as? TCPickerViewOutput
                 classesPicker.selection = .single
-//                var headerBackgroundColor: UIColor { get }
-//                var doneBackgroundColor: UIColor { get }
-//                var closeBackgroundColor: UIColor { get }
                 classesPicker.theme = self.theme
                 
                 classesPicker.completion = { (selectedIndexes) in
@@ -86,20 +84,60 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         
         competitionData = [competitionTableViewCellData(numberPlace: "#1", userName: "Rosalie", numberOfAssignmentsCompleted: "20"), competitionTableViewCellData(numberPlace: "#2", userName: "Mahika", numberOfAssignmentsCompleted: "20")]
         
-//        let competitionDatabase = db.collection("competitionDatabase")
-//
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.listCourses() { (courses, error) in
-//            guard let courseList = courses else {
-//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-//                return
-//            }
-//            if let list = courseList.courses {
-//                for course in list {
-//                    competitionDatabase.document(course.identifier!)
-//                }
-//            }
-//        }
+        let settings = FirestoreSettings()
+        
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        
+        let competitionDatabase = db.collection("competitionDatabase")
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.listCourses() { (courses, error) in
+            guard let courseList = courses else {
+                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let list = courseList.courses {
+                for course in list {
+                    
+                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
+                        guard let homeworkList = homeworkResponse else {
+                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
+                            return
+                        }
+                        if let huiswerk = homeworkList.courseWork {
+                            
+                            for work in huiswerk {
+                                
+                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
+                                    guard let submissionState = studentSubmissionResponse else {
+                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
+                                        return
+                                        
+                                    }
+                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
+                                        for submission in submissonStateOfHomework {
+                                            if let userName = Auth.auth().currentUser?.displayName {
+                                                competitionDatabase.document(course.identifier!).setData([
+                                                    "courseWorkId": work.identifier!,
+                                                    "time": "",
+                                                    "userName": userName,
+                                                    "userId": submission.identifier!,
+                                                    "score": 860000,
+                                                    "courseId": course.identifier!
+                                                    ])
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                                
+                                }
+                            }
+                        }
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
