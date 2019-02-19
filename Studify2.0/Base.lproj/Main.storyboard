@@ -27,12 +27,29 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vc-5h-kxa">
+                                <rect key="frame" x="16" y="105" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaG-A2-rLf">
+                                <rect key="frame" x="242" y="66" width="117" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Change Class"/>
+                                <connections>
+                                    <action selector="changeClassButtonPressed:" destination="A7T-5r-Ofv" eventType="touchUpInside" id="t1d-nn-9Nb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.050261162221431732" green="0.58336955308914185" blue="0.97368985414505005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ts2-ff-9JL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Competition" image="CompetitionIcon" id="oPF-Oz-pJd"/>
                     <connections>
+                        <outlet property="classesLabel" destination="1vc-5h-kxa" id="gnv-Ub-eYi"/>
                         <outlet property="competitionTableView" destination="qFg-Ny-ukN" id="Cvc-WH-CZn"/>
                     </connections>
                 </viewController>

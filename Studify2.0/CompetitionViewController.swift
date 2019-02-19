@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import TCPickerView
 
 struct competitionTableViewCellData {
     
@@ -20,6 +21,40 @@ struct competitionTableViewCellData {
 class CompetitionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var competitionTableView: UITableView!
+    @IBOutlet weak var classesLabel: UILabel!
+    
+    @IBAction func changeClassButtonPressed(_ sender: Any) {
+        var classesPicker : TCPickerViewInput = TCPickerView()
+        classesPicker.title = "Pick a class to see its leaderboard"
+        
+        var classes : [String] = []
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.listCourses() { (courses, error) in
+            guard let courseList = courses else {
+                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let list = courseList.courses {
+                for course in list {
+                    classes.append(course.name!)
+                }
+                let valuesOfPicker = classes.map { TCPickerView.Value(title: $0)}
+                classesPicker.values = valuesOfPicker
+                classesPicker.delegate = self as? TCPickerViewOutput
+                classesPicker.selection = .single
+                classesPicker.completion = { (selectedIndexes) in
+                    for selectedClass in selectedIndexes {
+                        let classForLeaderboard = valuesOfPicker[selectedClass].title
+                        print(valuesOfPicker[selectedClass].title)
+                        self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
+                    }
+                }
+                classesPicker.show()
+            }
+            
+        }
+    }
     
     var competitionData = [competitionTableViewCellData]()
     
@@ -27,6 +62,8 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        classesLabel.adjustsFontSizeToFitWidth = true
         
         competitionTableView.delegate = self
         competitionTableView.dataSource = self

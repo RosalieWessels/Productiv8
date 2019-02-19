@@ -34,7 +34,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.hidesBackButton = true
         
-        self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddHomeworkIcon"), style: .plain, target: self, action: #selector(inputHomework))
+        //self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddHomeworkIcon"), style: .plain, target: self, action: #selector(inputHomework))
     }
     
     override func viewDidLoad() {
@@ -210,7 +210,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    @objc func inputHomework(){
+    func inputHomework(){
         self.performSegue(withIdentifier: "homeworkScreenToInputHomework", sender: self)
     }
     
