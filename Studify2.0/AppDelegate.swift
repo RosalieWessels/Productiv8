@@ -108,22 +108,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
-    func courseworkCreate(courseId: String, onCompleted : @escaping(Error?) -> ()) {
+    func courseworkCreate(workTitle : String, workDescription : String, workDueDateDay : Int, workDueDateMonth : Int, workDueDateHour : Int, workDueDateMinute : Int, courseId: String, onCompleted : @escaping(Error?) -> ()) {
         if self.service.authorizer != nil {
             let work = GTLRClassroom_CourseWork.init()
-            work.title = "Titel 3"
-            work.descriptionProperty = "Beschrijving"
+            work.title = workTitle
+            work.descriptionProperty = workDescription
             work.assigneeMode = "ALL_STUDENTS"
             work.state = "PUBLISHED"
             work.workType = "ASSIGNMENT"
             let dueDate = GTLRClassroom_Date.init()
-            dueDate.day = 28
-            dueDate.month = 2
+            dueDate.day = workDueDateDay as NSNumber
+            dueDate.month = workDueDateMonth as NSNumber
             dueDate.year = 2019
             work.dueDate = dueDate
             let dueTime = GTLRClassroom_TimeOfDay.init()
-            dueTime.hours = 12
-            dueTime.minutes = 0
+            dueTime.hours = workDueDateHour as NSNumber
+            dueTime.minutes = workDueDateMinute as NSNumber
             work.dueTime = dueTime
             let create = GTLRClassroomQuery_CoursesCourseWorkCreate.query(withObject: work, courseId: courseId)
 

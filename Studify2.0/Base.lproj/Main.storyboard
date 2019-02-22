@@ -194,6 +194,9 @@
                                         <date key="date" timeIntervalSinceReferenceDate="572294914.57709801">
                                             <!--2019-02-19 18:48:34 +0000-->
                                         </date>
+                                        <connections>
+                                            <action selector="dueDateChanged:" destination="Yt8-ti-1ec" eventType="valueChanged" id="8do-Js-a70"/>
+                                        </connections>
                                     </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aby-OJ-Exx">
                                         <rect key="frame" x="8" y="514" width="327" height="41"/>
@@ -215,11 +218,12 @@
                         <outlet property="datePicker" destination="b8y-Pi-jb8" id="sbK-TR-UYi"/>
                         <outlet property="descriptionTextField" destination="yq0-G0-vqv" id="mqb-g9-05l"/>
                         <outlet property="titleTextField" destination="PWE-tc-Xcq" id="G1v-8Y-qxk"/>
+                        <segue destination="9pv-A4-QxB" kind="show" identifier="addHomeworkToHomeworkScreen" id="LG7-qO-L8G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQE-bg-kmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1468" y="-991.75412293853083"/>
+            <point key="canvasLocation" x="1481" y="-993"/>
         </scene>
         <!--Homework-->
         <scene sceneID="hNz-n2-bh7">
@@ -526,7 +530,9 @@
         <image name="StudifyBackground" width="165.6441650390625" height="294.18405151367188"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2xn-ga-gcy"/>
         <segue reference="IKN-jq-d9N"/>
         <segue reference="Jw0-3F-1HV"/>
+        <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>
 </document>

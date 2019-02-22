@@ -124,8 +124,8 @@
 		89FBD0D8221B55CD00B5D8EE /* Code Files */ = {
 			isa = PBXGroup;
 			children = (
-				892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */,
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
+				892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */,
 				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
 				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
 				89CFC1B82172525200DCFF7B /* ClassesViewController.swift */,
