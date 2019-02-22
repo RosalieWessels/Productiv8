@@ -32,7 +32,27 @@ class ExpandHomeworkViewController: UIViewController {
         appDelegate.turnInHomeworkAssignment(courseId: courseID, courseWorkId : courseWorkID, studentSubmissionId : studentSubmissionID) { (error) in
             if error != nil {
                 print ("Error turning in Homework: \(String(describing: error?.localizedDescription))")
+                let alert = UIAlertController(title: "An error occured", message: "An error occured while trying to turn in your assignment.", preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Go To Homework Screen", style: .default) { (UIAlertAction) in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+                alert.addAction(closeAction)
+                
+                self.present(alert, animated: true, completion: nil)
                 return
+            }
+            if error == nil {
+                let alert = UIAlertController(title: "Your assignment was turned in!", message: "Your assignment was successfully turned in!", preferredStyle: .alert)
+                
+                let closeAction = UIAlertAction(title: "Go To Homework Screen", style: .default) { (UIAlertAction) in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+                alert.addAction(closeAction)
+                
+                self.present(alert, animated: true, completion: nil)
             }
             
         }
