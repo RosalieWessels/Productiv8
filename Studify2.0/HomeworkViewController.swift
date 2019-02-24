@@ -36,9 +36,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var homeworkIdentifierFromTableViewCell = ""
     
     override func viewWillAppear(_ animated: Bool) {
+        homeworkArray.removeAll()
+        DispatchQueue.main.async { self.homeworkTableView.reloadData() }
         self.tabBarController?.navigationItem.hidesBackButton = true
-        
-        //self.tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "AddHomeworkIcon"), style: .plain, target: self, action: #selector(inputHomework))
+        getHomework()
     }
     
     override func viewDidLoad() {
@@ -52,8 +53,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTableView.register(HomeworkTableViewCell.self, forCellReuseIdentifier: "HomeworkTableViewCell")
         
-        homeworkArray = [homeworkTableViewCellData]()
+        //homeworkArray = [homeworkTableViewCellData]()
         
+        
+    }
+    
+    func getHomework() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
             guard let courseList = courses else {
@@ -62,7 +67,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             }
             if let list = courseList.courses {
                 for course in list {
-
+                    
                     appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
                         guard let homeworkList = homeworkResponse else {
                             print("Error listing homework: \(String(describing: error?.localizedDescription))")
@@ -70,11 +75,11 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         if let huiswerk = homeworkList.courseWork {
                             for work in huiswerk {
+                                print(work)
                                 print("associated with developer \(work.associatedWithDeveloper)")
                                 if work.dueDate == nil {
                                     self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
-                                }
-                                if let dueDateDay = work.dueDate?.day {
+                                } else if let dueDateDay = work.dueDate?.day {
                                     let dueDateDayInt = Int(truncating: dueDateDay)
                                     
                                     if let dueDateMonth = work.dueDate?.month {
@@ -112,8 +117,9 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                     
                                                 }
                                                 if let submissonStateOfHomework = submissionState.studentSubmissions {
+                                                    print(submissonStateOfHomework)
                                                     for submission in submissonStateOfHomework {
-                                                        print("\(submission.state)")
+                                                        print("\(submission.state), \(work.identifier!)")
                                                         if submission.state != nil {
                                                             let dateformatter = DateFormatter()
                                                             dateformatter.dateFormat = "MM/dd/yy"
@@ -146,6 +152,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                                 self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
                                                             }
                                                         }
+                                                        break
                                                     }
                                                 }
                                                 
@@ -162,15 +169,13 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         DispatchQueue.main.async { self.homeworkTableView.reloadData() }
                     }
-
+                    
                     
                 }
             }
             
         }
-        
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -232,4 +237,5 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 }
+
 
