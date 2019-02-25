@@ -233,6 +233,7 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
         present(alert, animated: true, completion: nil)
         
         partNotFilledInString = "Can't create assignment without"
+        everythingFilledIn = true
     }
     
     func errorDidOccurWhileCreatingAssignment() {

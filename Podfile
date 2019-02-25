@@ -11,7 +11,7 @@ target 'Studify2.0' do
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'GoogleSignIn' 
-  #pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView'
   #pod 'SwiftyButton'
   pod 'GoogleAPIClientForREST/Classroom'
   #pod 'PickerView'

@@ -28,6 +28,14 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     
     var db : Firestore!
     
+    var score = 0
+    var courseID = ""
+    var courseName = ""
+    
+    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    var timeAndPersonDictionary = [String : Date]()
+    
     private let theme = TCPickerViewStudifyTheme()
     
     @IBAction func changeClassButtonPressed(_ sender: Any) {
@@ -56,7 +64,12 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                     for selectedClass in selectedIndexes {
                         let classForLeaderboard = valuesOfPicker[selectedClass].title
                         print(valuesOfPicker[selectedClass].title)
+                        self.courseName = classForLeaderboard
                         self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
+                        if self.courseName != "" {
+                            self.fetchTimeAndUserFromFirebase()
+                            print(self.timeAndPersonDictionary)
+                        }
                     }
                 }
                 classesPicker.show()
@@ -89,53 +102,6 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         
-        let competitionDatabase = db.collection("competitionDatabase")
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.listCourses() { (courses, error) in
-            guard let courseList = courses else {
-                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let list = courseList.courses {
-                for course in list {
-                    
-                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
-                        guard let homeworkList = homeworkResponse else {
-                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
-                            return
-                        }
-                        if let huiswerk = homeworkList.courseWork {
-                            
-                            for work in huiswerk {
-                                
-                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
-                                    guard let submissionState = studentSubmissionResponse else {
-                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
-                                        return
-                                        
-                                    }
-                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
-                                        for submission in submissonStateOfHomework {
-                                            if let userName = Auth.auth().currentUser?.displayName {
-                                                competitionDatabase.document(course.identifier!).setData([
-                                                    "courseWorkId": work.identifier!,
-                                                    "time": "",
-                                                    "userName": userName,
-                                                    "userId": submission.identifier!,
-                                                    "score": 860000,
-                                                    "courseId": course.identifier!
-                                                    ])
-                                            } 
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -170,8 +136,47 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         
         
     }
+
     
-    
+    func fetchTimeAndUserFromFirebase() {
+        
+        self.activityIndicator.center = self.view.center
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        self.view.addSubview(activityIndicator)
+        self.activityIndicator.startAnimating()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.listCourses() { (courses, error) in
+            guard let courseList = courses else {
+                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let list = courseList.courses {
+                for course in list {
+                    if course.name! == self.courseName {
+                        self.db.collection("competitionDatabase").whereField("courseId", isEqualTo: course.identifier!)
+                            .getDocuments() { (querySnapshot, error) in
+                                if let error = error {
+                                    print("Error getting documents: \(error)")
+                                } else {
+                                    for document in querySnapshot!.documents {
+                                        print("\(document.documentID) => \(document.data())")
+                                        //ADD CODE TO THOSE DOCUMENTS
+                                        let time = document.get("time") as! Date
+                                        let userName = document.get("userName") as! String
+                                        
+                                        self.timeAndPersonDictionary["\(userName)"] = time
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.activityIndicator.stopAnimating()
+    }
 }
 
 public final class TCPickerViewStudifyTheme: TCPickerViewThemeType {
