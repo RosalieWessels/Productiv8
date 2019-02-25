@@ -12,6 +12,7 @@ import TCPickerView
 import GoogleSignIn
 import Firebase
 import FirebaseDatabase
+import FirebaseFirestore
 
 struct competitionTableViewCellData {
     
@@ -140,11 +141,11 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     
     func fetchTimeAndUserFromFirebase() {
         
-        self.activityIndicator.center = self.view.center
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-        self.view.addSubview(activityIndicator)
-        self.activityIndicator.startAnimating()
+//        self.activityIndicator.center = self.view.center
+//        self.activityIndicator.hidesWhenStopped = true
+//        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+//        self.view.addSubview(activityIndicator)
+//        self.activityIndicator.startAnimating()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
@@ -163,19 +164,70 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                                     for document in querySnapshot!.documents {
                                         print("\(document.documentID) => \(document.data())")
                                         //ADD CODE TO THOSE DOCUMENTS
-                                        let time = document.get("time") as! Date
-                                        let userName = document.get("userName") as! String
-                                        
-                                        self.timeAndPersonDictionary["\(userName)"] = time
+                                        if let time = document.get("time") as? Date? {
+                                            if let userName = document.get("userName") as? [String] {
+                                                self.timeAndPersonDictionary["\(userName)"] = time
+                                            }
+                                        }
                                     }
                                 }
+                            }
                         }
+                    }
+                }
+            }
+        
+//        self.activityIndicator.stopAnimating()
+    }
+    
+    func makeScores() {
+        let competitionDatabase = db.collection("competitionDatabase")
+        
+        
+        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if let courseId = document.get("courseId") as? String {
+                        for (userName, time) in self.timeAndPersonDictionary {
+                            competitionDatabase.document(courseId).setData([
+                                "\(userName)Score" : time
+                                ])
+                        }
+//                        competitionDatabase.getDocuments(courseId) { (querySnapshot. error) in
+//                            if let error = error {
+//                                print(error)
+//                            } else {
+//
+//                            }
+//
+//                        }
                     }
                 }
             }
         }
         
-        self.activityIndicator.stopAnimating()
+        competitionDatabase.document("")
+        
+        
+        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if let score = document.get("score") as? [Int] {
+                        
+                    }
+                }
+            }
+        }
+        
+        if let userName = Auth.auth().currentUser?.displayName {
+            competitionDatabase.document().setData([
+                "courseWorkId": ""
+                ])
+        }
     }
 }
 
