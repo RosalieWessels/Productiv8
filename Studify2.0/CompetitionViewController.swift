@@ -33,9 +33,17 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     var courseID = ""
     var courseName = ""
     
+    var fastestTime = Date()
+    var fastestPerson = ""
+    var numberTwoTime = Date()
+    var numberTwoPerson = ""
+    var numberThreeTime = Date()
+    var numberThreePerson = ""
+    
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
     var timeAndPersonDictionary = [String : Date]()
+    var sortedTimeAndPersonDictionary = [String : Date]()
     
     private let theme = TCPickerViewStudifyTheme()
     
@@ -69,7 +77,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                         self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
                         if self.courseName != "" {
                             self.fetchTimeAndUserFromFirebase()
-                            print(self.timeAndPersonDictionary)
+                            self.compareTimes()
                         }
                     }
                 }
@@ -164,7 +172,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                                     for document in querySnapshot!.documents {
                                         print("\(document.documentID) => \(document.data())")
                                         //ADD CODE TO THOSE DOCUMENTS
-                                        if let time = document.get("time") as? Date? {
+                                        if let time = document.get("time") as? Date {
                                             if let userName = document.get("userName") as? [String] {
                                                 self.timeAndPersonDictionary["\(userName)"] = time
                                             }
@@ -180,54 +188,74 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
 //        self.activityIndicator.stopAnimating()
     }
     
-    func makeScores() {
-        let competitionDatabase = db.collection("competitionDatabase")
-        
-        
-        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    if let courseId = document.get("courseId") as? String {
-                        for (userName, time) in self.timeAndPersonDictionary {
-                            competitionDatabase.document(courseId).setData([
-                                "\(userName)Score" : time
-                                ])
-                        }
-//                        competitionDatabase.getDocuments(courseId) { (querySnapshot. error) in
-//                            if let error = error {
-//                                print(error)
-//                            } else {
+//    func makeScores() {
+//        let competitionDatabase = db.collection("competitionDatabase")
 //
-//                            }
 //
+//        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    if let courseId = document.get("courseId") as? String {
+//                        for (userName, time) in self.timeAndPersonDictionary {
+//                            competitionDatabase.document(courseId).setData([
+//                                "\(userName)Score" : time
+//                                ])
 //                        }
-                    }
+////                        competitionDatabase.getDocuments(courseId) { (querySnapshot. error) in
+////                            if let error = error {
+////                                print(error)
+////                            } else {
+////
+////                            }
+////
+////                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        competitionDatabase.document("")
+//
+//
+//        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    if let score = document.get("score") as? [Int] {
+//
+//                    }
+//                }
+//            }
+//        }
+//
+//        if let userName = Auth.auth().currentUser?.displayName {
+//            competitionDatabase.document().setData([
+//                "courseWorkId": ""
+//                ])
+//        }
+//    }
+    
+    func compareTimes(){
+        let sortedDates = Array(timeAndPersonDictionary.values).sorted(by: { $0.compare($1) == .orderedAscending })
+        for (person, time) in timeAndPersonDictionary {
+            for sortedTime in sortedDates {
+                if time == sortedTime {
+                    sortedTimeAndPersonDictionary["\(person)"] = time
                 }
             }
         }
         
-        competitionDatabase.document("")
+    }
+    
+    func makeScores() {
+        fastestPerson = Array(sortedTimeAndPersonDictionary.keys)[0]
+        numberTwoPerson = Array(sortedTimeAndPersonDictionary.keys)[1]
+        numberThreePerson = Array(sortedTimeAndPersonDictionary.keys)[2]
         
         
-        db.collection("competitionDatabase").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    if let score = document.get("score") as? [Int] {
-                        
-                    }
-                }
-            }
-        }
-        
-        if let userName = Auth.auth().currentUser?.displayName {
-            competitionDatabase.document().setData([
-                "courseWorkId": ""
-                ])
-        }
     }
 }
 
