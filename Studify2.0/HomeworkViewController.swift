@@ -11,6 +11,7 @@ import Foundation
 import FirebaseAuth
 import Firebase
 import FirebaseDatabase
+import UIEmptyState
 
 struct homeworkTableViewCellData {
     let homeworkName : String!
@@ -20,7 +21,7 @@ struct homeworkTableViewCellData {
     let homeworkIdentifier : String!
 }
 
-class HomeworkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeworkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIEmptyStateDelegate, UIEmptyStateDataSource {
     
     @IBOutlet weak var homeworkTableView: UITableView!
     
@@ -35,6 +36,46 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
     var homeworkIdentifierFromTableViewCell = ""
     
+    var emptyStateTitle: NSAttributedString {
+        let attrs = [NSAttributedStringKey.foregroundColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.00),
+                     NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)]
+        return NSAttributedString(string: "Seems like there is no homework!", attributes: attrs)
+    }
+    
+    
+    var emptyStateImage: UIImage? {
+        return #imageLiteral(resourceName: "BooksWithoutWhite")
+    }
+    
+    var emptyStateImageSize: CGSize? {
+        return CGSize(width: 240, height: 240)
+    }
+    
+    var emptyStateButtonTitle: NSAttributedString? {
+        let attrs = [NSAttributedStringKey.foregroundColor: UIColor.white,
+                     NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)]
+        return NSAttributedString(string: "Check for Homework", attributes: attrs)
+    }
+    
+    var emptyStateButtonSize: CGSize? {
+        return CGSize(width: 200, height: 40)
+    }
+    
+    func emptyStateViewWillShow(view: UIView) {
+        guard let emptyView = view as? UIEmptyStateView else { return }
+        // Some custom button stuff
+        emptyView.button.layer.cornerRadius = 5
+        emptyView.button.layer.borderWidth = 1
+        emptyView.button.layer.borderColor = UIColor.white.cgColor
+        emptyView.button.layer.backgroundColor = UIColor.clear.cgColor
+    }
+    
+    func emptyStatebuttonWasTapped(button: UIButton) {
+        homeworkArray.removeAll()
+        DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+        getHomework()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         homeworkArray.removeAll()
         DispatchQueue.main.async { self.homeworkTableView.reloadData() }
@@ -42,6 +83,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         getHomework()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reloadEmptyStateForTableView(homeworkTableView)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +95,9 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTableView.layer.cornerRadius = 10
         homeworkTableView.layer.masksToBounds = true
+        
+        self.emptyStateDataSource = self
+        self.emptyStateDelegate = self
         
         homeworkTableView.register(HomeworkTableViewCell.self, forCellReuseIdentifier: "HomeworkTableViewCell")
         
@@ -158,6 +206,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 
                                                 //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
                                                 DispatchQueue.main.async { self.homeworkTableView.reloadData()}
+                                                DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
                                             }
                                         }
                                         
@@ -168,6 +217,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         
                         DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+                        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
                     }
                     
                     

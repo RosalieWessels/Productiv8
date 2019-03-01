@@ -14,6 +14,6 @@ target 'Studify2.0' do
   #pod 'NVActivityIndicatorView'
   #pod 'SwiftyButton'
   pod 'GoogleAPIClientForREST/Classroom'
-  #pod 'PickerView'
   pod 'TCPickerView'
+  pod 'UIEmptyState'
 end
