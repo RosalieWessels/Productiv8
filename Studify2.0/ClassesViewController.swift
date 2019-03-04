@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleAPIClientForREST
+import UIEmptyState
 
 struct classesTableViewCellData {
     let className : String!
@@ -15,11 +16,56 @@ struct classesTableViewCellData {
     let periodNumber : String!
 }
 
-class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIEmptyStateDataSource, UIEmptyStateDelegate{
     
     @IBOutlet weak var classesTableView: UITableView!
     
     var classesArray = [classesTableViewCellData]()
+    
+    var emptyStateTitle: NSAttributedString {
+        let attrs = [NSAttributedStringKey.foregroundColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.00),
+                     NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
+        return NSAttributedString(string: "Seems like you aren't signed up for any classes", attributes: attrs)
+    }
+    
+    var emptyStateImage: UIImage? {
+        return #imageLiteral(resourceName: "BooksWithoutWhite")
+    }
+    
+    var emptyStateImageSize: CGSize? {
+        return CGSize(width: 240, height: 240)
+    }
+    
+    var emptyStateButtonTitle: NSAttributedString? {
+        let attrs = [NSAttributedStringKey.foregroundColor: UIColor.white,
+                     NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)]
+        return NSAttributedString(string: "Check for Classes", attributes: attrs)
+    }
+    
+    var emptyStateButtonSize: CGSize? {
+        return CGSize(width: 200, height: 40)
+    }
+    
+    func emptyStateViewWillShow(view: UIView) {
+        guard let emptyView = view as? UIEmptyStateView else { return }
+        // Some custom button stuff
+        emptyView.button.layer.cornerRadius = 5
+        emptyView.button.layer.borderWidth = 1
+        emptyView.button.layer.borderColor = UIColor.white.cgColor
+        emptyView.button.layer.backgroundColor = UIColor.clear.cgColor
+    }
+    
+    func emptyStatebuttonWasTapped(button: UIButton) {
+        classesArray.removeAll()
+        DispatchQueue.main.async { self.classesTableView.reloadData()}
+        getClasses()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reloadEmptyStateForTableView(classesTableView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +82,36 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         classesArray = [classesTableViewCellData]()
         classesTableView.register(ClassesTableViewCell.self, forCellReuseIdentifier: "ClassesTableViewCell")
         
+        self.emptyStateDataSource = self
+        self.emptyStateDelegate = self
+        
+        getClasses()
+        
+        
+    }
+    
+    func cleanPeriod (period : String) -> String {
+        if period.lowercased().starts(with: "period "){
+            return String(period.dropFirst(7))
+        }
+        if period.lowercased().hasSuffix("st period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("nd period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("rd period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().hasSuffix("th period"){
+            return String(period.dropLast(9))
+        }
+        if period.lowercased().starts(with: "per. "){
+            return String(period.dropFirst(5))
+        }
+        return period
+    }
+    func getClasses() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
             guard let courseList = courses else {
@@ -66,6 +142,7 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
                             }
                         }
                         DispatchQueue.main.async { self.classesTableView.reloadData() }
+                        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.classesTableView) }
                     }
                     print(course)
                 }
@@ -74,29 +151,6 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         }
     }
-    
-    func cleanPeriod (period : String) -> String {
-        if period.lowercased().starts(with: "period "){
-            return String(period.dropFirst(7))
-        }
-        if period.lowercased().hasSuffix("st period"){
-            return String(period.dropLast(9))
-        }
-        if period.lowercased().hasSuffix("nd period"){
-            return String(period.dropLast(9))
-        }
-        if period.lowercased().hasSuffix("rd period"){
-            return String(period.dropLast(9))
-        }
-        if period.lowercased().hasSuffix("th period"){
-            return String(period.dropLast(9))
-        }
-        if period.lowercased().starts(with: "per. "){
-            return String(period.dropFirst(5))
-        }
-        return period
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return classesArray.count

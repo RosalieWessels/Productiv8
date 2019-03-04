@@ -238,7 +238,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         
         cell.backgroundColor = UIColor.clear
-        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier
+        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
         cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
         cell.teacherLabelView.text = homeworkArray[indexPath.row].className
         cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
