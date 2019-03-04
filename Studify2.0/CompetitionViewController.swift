@@ -13,6 +13,7 @@ import GoogleSignIn
 import Firebase
 import FirebaseDatabase
 import FirebaseFirestore
+import UIEmptyState
 
 struct competitionTableViewCellData {
     
@@ -22,7 +23,7 @@ struct competitionTableViewCellData {
     
 }
 
-class CompetitionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CompetitionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIEmptyStateDataSource, UIEmptyStateDelegate {
     
     @IBOutlet weak var competitionTableView: UITableView!
     @IBOutlet weak var classesLabel: UILabel!
@@ -40,6 +41,8 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     var numberTwoPerson = ""
     var numberThreeTime = Date()
     var numberThreePerson = ""
+    
+    var emptyStateTitleToChange = "Select a class to see its leaderboard"
     
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -82,6 +85,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                             print(self.sortedTimeAndPersonDictionary)
                             self.makeScores()
                             self.useDataforTableview()
+                            self.emptyStateTitleToChange = "We are unable to get the competition data"
                         }
                     }
                 }
@@ -94,6 +98,22 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     var competitionData = [competitionTableViewCellData]()
     
     var numberOfHomeworkAssignmentsCompleted = Int()
+    
+    var emptyStateTitle: NSAttributedString {
+        let attrs = [NSAttributedStringKey.foregroundColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.00),
+                     NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)]
+        return NSAttributedString(string: "\(emptyStateTitleToChange)", attributes: attrs)
+    }
+    
+    
+    var emptyStateImage: UIImage? {
+        return #imageLiteral(resourceName: "BooksWithoutWhite")
+    }
+    
+    var emptyStateImageSize: CGSize? {
+        return CGSize(width: 240, height: 240)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,12 +128,19 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         
         competitionData = [competitionTableViewCellData]()
         
+        self.emptyStateDataSource = self
+        self.emptyStateDelegate = self
         
         let settings = FirestoreSettings()
         
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.reloadEmptyStateForTableView(competitionTableView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -308,6 +335,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                 print("Document does not exist")
             }
         }
+        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.competitionTableView) }
     }
     
 }
