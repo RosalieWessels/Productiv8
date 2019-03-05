@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if self.service.authorizer != nil {
             let submissonStateQuery = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsList.query(withCourseId: courseId, courseWorkId: courseWorkId)
             // filter by
-            submissonStateQuery.states = ["CREATED", "NEW", "RETURNED", "SUBMISSION_STATE_UNSPECIFIED", "RECLAIMED_BY_STUDENT"]
+            submissonStateQuery.states = ["CREATED", "NEW"] //Got rid of "RETURNED" because old assignments that the teacher returned so that you could see your grades were showing up, ,"RECLAIMED_BY_STUDENT", "SUBMISSION_STATE_UNSPECIFIED"
             
             submissonStateQuery.pageSize = 10
             
