@@ -106,6 +106,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
     func getHomework() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in

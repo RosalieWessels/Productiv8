@@ -204,6 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //GIDSignIn.sharedInstance().signInSilently()
         //GIDSignIn.sharedInstance().currentUser
         
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
