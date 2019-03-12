@@ -81,12 +81,14 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         DispatchQueue.main.async { self.homeworkTableView.reloadData() }
         self.tabBarController?.navigationItem.hidesBackButton = true
         getHomework()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.reloadEmptyStateForTableView(homeworkTableView)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
