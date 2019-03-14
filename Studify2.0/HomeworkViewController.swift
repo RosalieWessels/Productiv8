@@ -29,6 +29,9 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         performSegue(withIdentifier: "homeworkScreenToInputHomework", sender: self)
     }
     
+    @IBOutlet weak var addhomeworkButtonOutlet: UIButton!
+    
+    
     var homeworkArray = [homeworkTableViewCellData]()
     
     var homeworkTitleFromTableviewCell = ""
@@ -87,10 +90,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.reloadEmptyStateForTableView(homeworkTableView)
+        addConstraintsToAddHomeworkButton()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         homeworkTableView.delegate = self
         homeworkTableView.dataSource = self
@@ -105,6 +110,20 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         //homeworkArray = [homeworkTableViewCellData]()
         
+        
+    }
+    
+    func addConstraintsToAddHomeworkButton() {
+
+//        let height : CGFloat = self.calculateTopDistance()
+//        
+//        addhomeworkButtonOutlet.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            addhomeworkButtonOutlet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
+//            addhomeworkButtonOutlet.topAnchor.constraint(equalTo: view.topAnchor, constant: height + 10),
+//            addhomeworkButtonOutlet.widthAnchor.constraint(equalToConstant: 45),
+//            addhomeworkButtonOutlet.heightAnchor.constraint(equalToConstant: 75)
+//            ])
         
     }
     
@@ -230,6 +249,36 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func calculateTopDistance() -> CGFloat {
+        
+        /// Create view to measure
+        let measureView: UIView = UIView()
+        measureView.backgroundColor = .clear
+        view.addSubview(measureView)
+        
+        /// Add needed constraints
+        measureView.translatesAutoresizingMaskIntoConstraints = false
+        measureView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        measureView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        measureView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        if let nav = navigationController {
+            measureView.topAnchor.constraint(equalTo: nav.navigationBar.bottomAnchor).isActive = true
+        } else {
+            measureView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        }
+        
+        /// Force layout
+        view.layoutIfNeeded()
+        
+        /// Calculate distance
+        let distance = view.frame.size.height - measureView.frame.size.height
+        
+        /// Remove from superview
+        measureView.removeFromSuperview()
+        
+        return distance
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return homeworkArray.count
@@ -290,5 +339,3 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 }
-
-
