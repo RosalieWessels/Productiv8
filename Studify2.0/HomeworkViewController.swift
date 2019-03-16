@@ -12,7 +12,6 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabase
 import UIEmptyState
-import TinyConstraints
 
 struct homeworkTableViewCellData {
     let homeworkName : String!
@@ -299,6 +298,9 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
         
         return cell
+        
+//        let homeworkTableViewCellInstance = HomeworkTableViewCell()
+//        homeworkTableViewCellInstance.afterloadingXibFile()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

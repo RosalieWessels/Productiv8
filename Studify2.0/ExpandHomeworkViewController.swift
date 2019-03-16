@@ -13,16 +13,17 @@ import FirebaseFirestore
 
 class ExpandHomeworkViewController: UIViewController {
     
-    
-    @IBOutlet weak var homeworkTitleTextView: UITextView!
+
+    @IBOutlet weak var homeworkButtonAndLabel: UIButton!
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionButtonAndLabel: UIButton!
     
     var homeworkTitle = ""
     var dueDate = ""
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
     var homeworkIdentifier = ""
+    var descriptionForHomework = ""
     
     var courseID : String = ""
     var courseWorkID : String = ""
@@ -33,6 +34,31 @@ class ExpandHomeworkViewController: UIViewController {
     var db : Firestore!
     
     var score = 0
+    
+    @IBAction func homeworkButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Homework Title", message: "\(homeworkTitle)", preferredStyle: .alert)
+        
+        let closeAction = UIAlertAction(title: "Close", style: .default) { (UIAlertAction) in
+            print("User closed expand homework title")
+        }
+        
+        alert.addAction(closeAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func descriptionButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Description", message: "\(descriptionForHomework)", preferredStyle: .alert)
+        
+        let closeAction = UIAlertAction(title: "Close", style: .default) { (UIAlertAction) in
+            print("User closed expand description")
+        }
+        
+        alert.addAction(closeAction)
+        
+        
+        present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -77,6 +103,7 @@ class ExpandHomeworkViewController: UIViewController {
         
         let settings = FirestoreSettings()
         
+        
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         
@@ -118,11 +145,17 @@ class ExpandHomeworkViewController: UIViewController {
                                         }
                                     }
                                     
-                                    self.homeworkTitleTextView.text = work.title
                                     
-                                    self.classLabel.text = course.name
+                                    self.homeworkTitle = work.title!
                                     
-                                    self.descriptionTextView.text = work.descriptionProperty
+                                    if work.descriptionProperty != nil {
+                                        self.descriptionForHomework = work.descriptionProperty!
+                                    }
+                                    
+                                    self.homeworkButtonAndLabel.setTitle("\(self.homeworkTitle)", for: .normal)
+                                    self.descriptionButtonAndLabel.setTitle("\(self.descriptionForHomework)", for: .normal)
+                                    
+                                    self.classLabel.text = course.name!
                                     
                                     if work.dueDate == nil {
                                         self.dueDateLabel.text
@@ -145,6 +178,10 @@ class ExpandHomeworkViewController: UIViewController {
             }
             
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     override func didReceiveMemoryWarning() {

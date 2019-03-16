@@ -22,6 +22,8 @@ class HomeworkTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         homeworkIdentifierLabel.isHidden = true
+        teacherLabelView.adjustsFontSizeToFitWidth = true
+        dateLabelView.adjustsFontSizeToFitWidth = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,4 +32,15 @@ class HomeworkTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+//    func afterloadingXibFile(){
+//        print("\(homeworkLabelView.text!) characters : \(homeworkLabelView.text!.count)")
+//        if homeworkLabelView.text!.count < 25 {
+//            homeworkLabelView.adjustsFontSizeToFitWidth = true
+//
+//        }
+//        else {
+//            homeworkLabelView.adjustsFontSizeToFitWidth = false
+//        }
+//    }
+//
 }

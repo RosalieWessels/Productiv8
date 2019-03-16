@@ -16,5 +16,5 @@ target 'Studify2.0' do
   pod 'GoogleAPIClientForREST/Classroom'
   pod 'TCPickerView'
   pod 'UIEmptyState'
-  pod 'TinyConstraints'
+  #pod 'TinyConstraints'
 end
