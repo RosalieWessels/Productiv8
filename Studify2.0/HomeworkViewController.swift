@@ -50,8 +50,11 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         return #imageLiteral(resourceName: "BooksWithoutWhite")
     }
     
+    var emptyStateViewCanScroll: Bool {
+        return true
+    }
     var emptyStateImageSize: CGSize? {
-        return CGSize(width: 240, height: 240)
+        return CGSize(width: 200, height: 200)
     }
     
     var emptyStateButtonTitle: NSAttributedString? {
