@@ -147,6 +147,7 @@ class ExpandHomeworkViewController: UIViewController {
                                     
                                     
                                     self.homeworkTitle = work.title!
+                                    self.homeworkIdentifier = work.identifier!
                                     
                                     if work.descriptionProperty != nil {
                                         self.descriptionForHomework = work.descriptionProperty!
@@ -202,6 +203,7 @@ class ExpandHomeworkViewController: UIViewController {
         components.year = calendar.component(.year, from: date)
         
         timeAssignmentTurnedIn = calendar.date(from: components)!
+        print("timeTurnedin: \(timeAssignmentTurnedIn)")
     }
     
     func createDatabaseAndDocuments(){
@@ -227,26 +229,41 @@ class ExpandHomeworkViewController: UIViewController {
                             
                             for work in huiswerk {
                                 
-                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
-                                    guard let submissionState = studentSubmissionResponse else {
-                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
-                                        return
-                                        
-                                    }
-                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
-                                        for submission in submissonStateOfHomework {
-                                            if let userName = Auth.auth().currentUser?.displayName {
-                                                competitionDatabase.document().setData([
-                                                    "courseWorkId": work.identifier!,
-                                                    "time": self.timeAssignmentTurnedIn,
-                                                    "userName": userName,
-                                                    "userId": submission.identifier!,
-                                                    "courseId": course.identifier!
-                                                    ])
-                                            }
-                                        }
+                                if work.identifier! == self.homeworkIdentifier {
+                                    if let userName = Auth.auth().currentUser?.displayName {
+                                        competitionDatabase.document().setData([
+                                            "courseWorkId": work.identifier!,
+                                            "time": self.timeAssignmentTurnedIn,
+                                            "userName": userName,
+                                            "courseId": course.identifier!
+                                            ])
                                     }
                                 }
+                                
+                                
+//                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
+//                                    guard let submissionState = studentSubmissionResponse else {
+//                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
+//                                        return
+//
+//                                    }
+//                                    print("timeTurnedIn: \(self.timeAssignmentTurnedIn)")
+//                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
+//                                        print(submissonStateOfHomework)
+//                                        for submission in submissonStateOfHomework {
+//                                            if let userName = Auth.auth().currentUser?.displayName {
+//                                                competitionDatabase.document().setData([
+//                                                    "courseWorkId": work.identifier!,
+//                                                    "time": self.timeAssignmentTurnedIn,
+//                                                    "userName": userName,
+//                                                    "userId": submission.identifier!,
+//                                                    "courseId": course.identifier!
+//                                                    ])
+//                                            }
+//                                        }
+//                                    }
+//
+//                                }
                             }
                         }
                     }

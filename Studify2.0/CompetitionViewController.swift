@@ -199,12 +199,16 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                                 if let error = error {
                                     print("Error getting documents: \(error)")
                                 } else {
+                                    print("docs : \(querySnapshot!.documents)")
                                     for document in querySnapshot!.documents {
                                         print("\(document.documentID) => \(document.data())")
                                         //ADD CODE TO THOSE DOCUMENTS
                                         if let time = document.get("time") as? Date {
-                                            if let userName = document.get("userName") as? [String] {
+                                            print("time: \(time)")
+                                            if let userName = document.get("userName") as? String {
+                                                print("username : \(userName)")
                                                 self.timeAndPersonDictionary["\(userName)"] = time
+                                                print("time&PersonDict : \(self.timeAndPersonDictionary)")
                                             }
                                         }
                                     }
@@ -220,10 +224,12 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     
     func compareTimes(){
         let sortedDates = Array(timeAndPersonDictionary.values).sorted(by: { $0.compare($1) == .orderedAscending })
+        print(sortedDates)
         for (person, time) in timeAndPersonDictionary {
             for sortedTime in sortedDates {
                 if time == sortedTime {
                     sortedTimeAndPersonDictionary["\(person)"] = time
+                    print("sortedTime&PersonDict \(sortedTimeAndPersonDictionary)")
                 }
             }
         }
@@ -253,10 +259,10 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                             if let err = err {
                                 print("Error writing document: \(err)")
                             } else {
-                                print("Document successfully written!")
+                                print("Scores Document successfully written!")
                                 
                                 let competitionDatabaseCourseIdScores = self.db.collection("competitionDatabase").document("\(course.identifier!)Scores")
-                                
+                                print("dictionary: \(self.sortedTimeAndPersonDictionary)")
                                 for (name, time) in self.sortedTimeAndPersonDictionary {
                                     print("Got inside dictionary")
                                     self.timeTurnedIn = time

@@ -34,6 +34,7 @@ class AccountSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteUserAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view, typically from a nib.
         accountSettingsView.layer.cornerRadius = 10
     }
