@@ -53,8 +53,15 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var emptyStateViewCanScroll: Bool {
         return true
     }
+    
+    var emptyStateViewSpacing: CGFloat {
+        return 8
+    }
+    var emptyStateViewAdjustsToFitBars: Bool {
+        return true
+    }
     var emptyStateImageSize: CGSize? {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: 150, height: 150)
     }
     
     var emptyStateButtonTitle: NSAttributedString? {
@@ -292,13 +299,15 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = Bundle.main.loadNibNamed("HomeworkTableViewCell", owner: self, options: nil)?.first as! HomeworkTableViewCell
         
+//        if homeworkArray.count > indexPath.row {
+            cell.backgroundColor = UIColor.clear
+            cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
+            cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
+            cell.teacherLabelView.text = homeworkArray[indexPath.row].className
+            cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
+            cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
+//        }
         
-        cell.backgroundColor = UIColor.clear
-        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
-        cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
-        cell.teacherLabelView.text = homeworkArray[indexPath.row].className
-        cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
-        cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
         
         return cell
         

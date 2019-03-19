@@ -110,8 +110,18 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         return #imageLiteral(resourceName: "BooksWithoutWhite")
     }
     
+    var emptyStateViewCanScroll: Bool {
+        return true
+    }
+    
+    var emptyStateViewSpacing: CGFloat {
+        return 8
+    }
+    var emptyStateViewAdjustsToFitBars: Bool {
+        return true
+    }
     var emptyStateImageSize: CGSize? {
-        return CGSize(width: 240, height: 240)
+        return CGSize(width: 150, height: 150)
     }
     
     
