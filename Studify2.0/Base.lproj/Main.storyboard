@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -344,11 +344,12 @@
                         <outlet property="homeworkTableView" destination="jbg-jh-Ync" id="S2G-br-e1v"/>
                         <segue destination="X3y-Gc-f90" kind="show" identifier="homeworktoExpandHomework" id="Sfk-53-Ka9"/>
                         <segue destination="Yt8-ti-1ec" kind="show" identifier="homeworkScreenToInputHomework" id="2xn-ga-gcy"/>
+                        <segue destination="kfJ-sj-h1u" kind="show" identifier="homeworkScreenToWelcomeScreen" id="wyU-fs-8wX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-322.48875562218893"/>
+            <point key="canvasLocation" x="750" y="-294"/>
         </scene>
         <!--Classes-->
         <scene sceneID="wg7-f3-ORb">
@@ -686,11 +687,11 @@
         <image name="HomeworkIcon" width="28" height="28"/>
         <image name="ManHiking" width="2251" height="1500"/>
         <image name="SettingsIcon" width="720" height="720"/>
-        <image name="StudifyBackground" width="165.6441650390625" height="294.18405151367188"/>
+        <image name="StudifyBackground" width="750" height="1332"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IKN-jq-d9N"/>
-        <segue reference="Jw0-3F-1HV"/>
+        <segue reference="miZ-8n-61f"/>
+        <segue reference="wyU-fs-8wX"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -90,8 +90,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        homeworkArray.removeAll()
-        DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+        homeworkArray.removeAll(keepingCapacity: false)
+        self.homeworkTableView.reloadData()
         self.tabBarController?.navigationItem.hidesBackButton = true
         getHomework()
         
@@ -238,8 +238,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 }
                                                 
                                                 //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
-                                                DispatchQueue.main.async { self.homeworkTableView.reloadData()}
-                                                DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+                                                if self.homeworkArray.count > 0 {
+                                                    DispatchQueue.main.async { self.homeworkTableView.reloadData()}
+                                                    DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+                                                }
                                             }
                                         }
                                         
@@ -248,9 +250,11 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                             
                         }
+                        if self.homeworkArray.count > 0 {
+                            DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+                            DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+                        }
                         
-                        DispatchQueue.main.async { self.homeworkTableView.reloadData() }
-                        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
                     }
                     
                     
@@ -291,7 +295,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return homeworkArray.count
     }
     
@@ -299,20 +302,15 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = Bundle.main.loadNibNamed("HomeworkTableViewCell", owner: self, options: nil)?.first as! HomeworkTableViewCell
         
-//        if homeworkArray.count > indexPath.row {
-            cell.backgroundColor = UIColor.clear
-            cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
-            cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
-            cell.teacherLabelView.text = homeworkArray[indexPath.row].className
-            cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
-            cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
-//        }
+        cell.backgroundColor = UIColor.clear
+        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
+        cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
+        cell.teacherLabelView.text = homeworkArray[indexPath.row].className
+        cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
+        cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
         
         
         return cell
-        
-//        let homeworkTableViewCellInstance = HomeworkTableViewCell()
-//        homeworkTableViewCellInstance.afterloadingXibFile()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
