@@ -13,12 +13,24 @@ import Firebase
 import FirebaseDatabase
 import UIEmptyState
 
-struct homeworkTableViewCellData {
+struct homeworkTableViewCellData : Equatable {
     let homeworkName : String!
     let className : String!
     let dateName : String!
     let colorImage : UIImage!
     let homeworkIdentifier : String!
+    
+    init(homeworkName : String!, className : String!, dateName : String!, colorImage : UIImage!, homeworkIdentifier : String!) {
+        self.homeworkName = homeworkName
+        self.className = className
+        self.dateName = dateName
+        self.colorImage = colorImage
+        self.homeworkIdentifier = homeworkIdentifier
+    }
+    
+    static func == (lhs: homeworkTableViewCellData, rhs: homeworkTableViewCellData) -> Bool {
+        return lhs.homeworkName == rhs.homeworkName
+    }
 }
 
 class HomeworkViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIEmptyStateDelegate, UIEmptyStateDataSource {
@@ -272,14 +284,17 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         let cell = Bundle.main.loadNibNamed("HomeworkTableViewCell", owner: self, options: nil)?.first as! HomeworkTableViewCell
         
-        let noDuplicatesHomeworkArray = homeworkArray
+        let noDuplicatesHomeworkArray = unique(homeworks: homeworkArray)
         
         cell.backgroundColor = UIColor.clear
-        cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
-        cell.homeworkLabelView.text = homeworkArray[indexPath.row].homeworkName
-        cell.teacherLabelView.text = homeworkArray[indexPath.row].className
-        cell.dateLabelView.text = homeworkArray[indexPath.row].dateName
-        cell.colorImageView.image = homeworkArray[indexPath.row].colorImage
+        if indexPath.row >= 0 && indexPath.row < noDuplicatesHomeworkArray.count {
+            cell.homeworkIdentifierLabel.text = noDuplicatesHomeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
+            cell.homeworkLabelView.text = noDuplicatesHomeworkArray[indexPath.row].homeworkName
+            cell.teacherLabelView.text = noDuplicatesHomeworkArray[indexPath.row].className
+            cell.dateLabelView.text = noDuplicatesHomeworkArray[indexPath.row].dateName
+            cell.colorImageView.image = noDuplicatesHomeworkArray[indexPath.row].colorImage
+        }
+        
         
         
         return cell
@@ -324,13 +339,19 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-}
-
-public extension Array where Element: Hashable {
-    func uniqued() -> [Element] {
-        var seen = Set<Element>()
-        return filter{ seen.insert($0).inserted }
+    func unique(homeworks: [homeworkTableViewCellData]) -> [homeworkTableViewCellData] {
+        
+        var uniqueHomeworkArray = [homeworkTableViewCellData]()
+        
+        for homework in homeworks {
+            if !uniqueHomeworkArray.contains(homework) {
+                uniqueHomeworkArray.append(homework)
+            }
+        }
+        
+        return uniqueHomeworkArray
     }
+    
 }
 
 
