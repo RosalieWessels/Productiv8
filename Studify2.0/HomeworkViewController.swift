@@ -264,36 +264,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func calculateTopDistance() -> CGFloat {
-        
-        /// Create view to measure
-        let measureView: UIView = UIView()
-        measureView.backgroundColor = .clear
-        view.addSubview(measureView)
-        
-        /// Add needed constraints
-        measureView.translatesAutoresizingMaskIntoConstraints = false
-        measureView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        measureView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        measureView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        if let nav = navigationController {
-            measureView.topAnchor.constraint(equalTo: nav.navigationBar.bottomAnchor).isActive = true
-        } else {
-            measureView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        }
-        
-        /// Force layout
-        view.layoutIfNeeded()
-        
-        /// Calculate distance
-        let distance = view.frame.size.height - measureView.frame.size.height
-        
-        /// Remove from superview
-        measureView.removeFromSuperview()
-        
-        return distance
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeworkArray.count
     }
@@ -301,6 +271,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = Bundle.main.loadNibNamed("HomeworkTableViewCell", owner: self, options: nil)?.first as! HomeworkTableViewCell
+        
+        let noDuplicatesHomeworkArray = homeworkArray
         
         cell.backgroundColor = UIColor.clear
         cell.homeworkIdentifierLabel.text = homeworkArray[indexPath.row].homeworkIdentifier //Out of Range error??
@@ -353,3 +325,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 }
+
+public extension Array where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter{ seen.insert($0).inserted }
+    }
+}
+
+
