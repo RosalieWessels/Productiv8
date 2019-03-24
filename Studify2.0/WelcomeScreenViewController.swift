@@ -17,6 +17,8 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    var imagesArray = [String]()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
@@ -25,6 +27,16 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for n in 0 ... 6 {
+            imagesArray.append("Pexel\(n)")
+        }
+        
+        if let randomElement = imagesArray.randomElement() {
+            print(randomElement)
+            imageView.image = UIImage(named: randomElement)
+        }
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         GIDSignIn.sharedInstance().uiDelegate = self
