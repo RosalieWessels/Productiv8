@@ -29,7 +29,7 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for n in 0 ... 6 {
+        for n in 0 ... 15 {
             imagesArray.append("Pexel\(n)")
         }
         

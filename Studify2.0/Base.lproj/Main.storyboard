@@ -692,7 +692,8 @@
         <image name="StudifyBackground" width="165.6441650390625" height="294.18405151367188"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IKN-jq-d9N"/>
+        <segue reference="2xn-ga-gcy"/>
+        <segue reference="miZ-8n-61f"/>
         <segue reference="wyU-fs-8wX"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>

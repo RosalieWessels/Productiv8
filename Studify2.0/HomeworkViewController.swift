@@ -130,7 +130,11 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTableView.register(HomeworkTableViewCell.self, forCellReuseIdentifier: "HomeworkTableViewCell")
         
-        //homeworkArray = [homeworkTableViewCellData]()
+        if Auth.auth().currentUser != nil {
+            print("User is signed in")
+        } else {
+            performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: self)
+        }
         
         
     }
