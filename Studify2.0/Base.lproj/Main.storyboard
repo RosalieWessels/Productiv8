@@ -589,7 +589,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="H61-Bc-GoE" kind="show" id="jUB-XW-vCm"/>
+                                    <segue destination="H61-Bc-GoE" kind="show" identifier="welcomeScreenToLogInScreen" id="jUB-XW-vCm"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ManHiking" translatesAutoresizingMaskIntoConstraints="NO" id="7q5-7d-1Cc">
@@ -652,6 +652,7 @@
                         <viewLayoutGuide key="safeArea" id="zca-MD-2w9"/>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="RLx-PY-cSD" id="waD-vs-7sM"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="logInToHome" id="IKN-jq-d9N"/>
                     </connections>
                 </viewController>
@@ -691,7 +692,7 @@
         <image name="StudifyBackground" width="165.6441650390625" height="294.18405151367188"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="miZ-8n-61f"/>
+        <segue reference="IKN-jq-d9N"/>
         <segue reference="wyU-fs-8wX"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>

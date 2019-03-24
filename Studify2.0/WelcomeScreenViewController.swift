@@ -19,6 +19,7 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     var imagesArray = [String]()
+    var randomElementForImage = String()
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
@@ -35,6 +36,7 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         if let randomElement = imagesArray.randomElement() {
             print(randomElement)
             imageView.image = UIImage(named: randomElement)
+            randomElementForImage = randomElement
         }
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -46,6 +48,13 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         
         if Auth.auth().currentUser != nil {
             performSegueToHomeworkScreen()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "welcomeScreenToLogInScreen" {
+            let logInScreen = segue.destination as! LogInViewContoller
+            logInScreen.image = randomElementForImage
         }
     }
     
