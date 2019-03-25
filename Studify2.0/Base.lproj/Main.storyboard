@@ -594,6 +594,7 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ManHiking" translatesAutoresizingMaskIntoConstraints="NO" id="7q5-7d-1Cc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="601"/>
+                                <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -692,7 +693,6 @@
         <image name="StudifyBackground" width="165.6441650390625" height="294.18405151367188"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2xn-ga-gcy"/>
         <segue reference="miZ-8n-61f"/>
         <segue reference="wyU-fs-8wX"/>
         <segue reference="LG7-qO-L8G"/>
