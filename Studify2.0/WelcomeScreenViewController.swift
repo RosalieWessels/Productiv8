@@ -33,11 +33,11 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
             imagesArray.append("Pexel\(n)")
         }
         
-        if let randomElement = imagesArray.randomElement() {
-            print(randomElement)
-            imageView.image = UIImage(named: randomElement)
-            randomElementForImage = randomElement
-        }
+//        if let randomElement = imagesArray.randomElement() {
+//            print(randomElement)
+//            imageView.image = UIImage(named: randomElement)
+//            randomElementForImage = randomElement
+//        }
         
         // Do any additional setup after loading the view, typically from a nib.
         
