@@ -80,11 +80,11 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                         self.courseName = classForLeaderboard
                         self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
                         if self.courseName != "" {
-                            self.fetchTimeAndUserFromFirebase()
-                            self.compareTimes()
+//                            self.fetchTimeAndUserFromFirebase()
+//                            self.compareTimes()
                             print(self.sortedTimeAndPersonDictionary)
-                            self.makeScores()
-                            self.useDataforTableview()
+//                            self.makeScores()
+//                            self.useDataforTableview()
                             self.emptyStateTitleToChange = "We are unable to get the competition data"
                         }
                     }
@@ -187,172 +187,172 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     
-    func fetchTimeAndUserFromFirebase() {
-        
-//        self.activityIndicator.center = self.view.center
-//        self.activityIndicator.hidesWhenStopped = true
-//        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-//        self.view.addSubview(activityIndicator)
-//        self.activityIndicator.startAnimating()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.listCourses() { (courses, error) in
-            guard let courseList = courses else {
-                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let list = courseList.courses {
-                for course in list {
-                    if course.name! == self.courseName {
-                        self.db.collection("competitionDatabase").whereField("courseId", isEqualTo: course.identifier!)
-                            .getDocuments() { (querySnapshot, error) in
-                                if let error = error {
-                                    print("Error getting documents: \(error)")
-                                } else {
-                                    print("docs : \(querySnapshot!.documents)")
-                                    for document in querySnapshot!.documents {
-                                        print("\(document.documentID) => \(document.data())")
-                                        //ADD CODE TO THOSE DOCUMENTS
-                                        if let time = document.get("time") as? Date {
-                                            print("time: \(time)")
-                                            if let userName = document.get("userName") as? String {
-                                                print("username : \(userName)")
-                                                self.timeAndPersonDictionary["\(userName)"] = time
-                                                print("time&PersonDict : \(self.timeAndPersonDictionary)")
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        
-//        self.activityIndicator.stopAnimating()
-    }
-    
-    func compareTimes(){
-        let sortedDates = Array(timeAndPersonDictionary.values).sorted(by: { $0.compare($1) == .orderedAscending })
-        print(sortedDates)
-        for (person, time) in timeAndPersonDictionary {
-            for sortedTime in sortedDates {
-                if time == sortedTime {
-                    sortedTimeAndPersonDictionary["\(person)"] = time
-                    print("sortedTime&PersonDict \(sortedTimeAndPersonDictionary)")
-                }
-            }
-        }
-        
-    }
-    
-    func makeScores() {
-        
-        let competitionDatabase = db.collection("competitionDatabase")
-        
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.listCourses() { (courses, error) in
-            guard let courseList = courses else {
-                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let list = courseList.courses {
-                for course in list {
-                    if self.courseName == course.name {
-                        
-                        self.courseID = course.identifier!
-                        //Create document with course Identifier + Scores
-                        competitionDatabase.document("\(course.identifier!)Scores").setData([
-                            "Default" : 0 //Change in a way??
-                        ]) { err in
-                            if let err = err {
-                                print("Error writing document: \(err)")
-                            } else {
-                                print("Scores Document successfully written!")
-                                
-                                let competitionDatabaseCourseIdScores = self.db.collection("competitionDatabase").document("\(course.identifier!)Scores")
-                                print("dictionary: \(self.sortedTimeAndPersonDictionary)")
-                                for (name, time) in self.sortedTimeAndPersonDictionary {
-                                    print("Got inside dictionary")
-                                    self.timeTurnedIn = time
-                                    competitionDatabaseCourseIdScores.getDocument { (document, error) in
-                                        if let document = document, document.exists {
-                                            print("Got the Document")
-                                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                                            print("Document data: \(dataDescription)")
-                                            
-                                            if let score = document.get("\(name)Score") as? Int {
-                                                if name == Array(self.sortedTimeAndPersonDictionary.keys)[0] {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : score + 3
-                                                        ])
-                                                }
-                                                else if name == Array(self.sortedTimeAndPersonDictionary.keys)[1] {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : score + 2
-                                                        ])
-                                                }
-                                                else {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : score + 1
-                                                        ])
-                                                }
-                                            }
-                                            else {
-                                                if name == Array(self.sortedTimeAndPersonDictionary.keys)[0] {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : 3
-                                                        ])
-                                                }
-                                                else if name == Array(self.sortedTimeAndPersonDictionary.keys)[1] {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : 2
-                                                        ])
-                                                }
-                                                else {
-                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
-                                                        "\(name)" : 1
-                                                        ])
-                                                }
-                                            }
-                                            
-                                        } else {
-                                            print("Document does not exist")
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-    }
-    
-    func useDataforTableview() {
-        let competitionDatabaseCourseIdScores = self.db.collection("competitionDatabase").document("\(courseID)Scores")
-        
-        competitionDatabaseCourseIdScores.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                
-                let firestoreResults = document.data() as! [String : Int]
-                var place = 0
-                
-                for (name, score) in firestoreResults {
-                    place = place + 1
-                    self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(name)", numberOfAssignmentsCompleted: "\(score)")]
-                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.competitionTableView) }
-    }
+//    func fetchTimeAndUserFromFirebase() {
+//
+////        self.activityIndicator.center = self.view.center
+////        self.activityIndicator.hidesWhenStopped = true
+////        self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+////        self.view.addSubview(activityIndicator)
+////        self.activityIndicator.startAnimating()
+//
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//                    if course.name! == self.courseName {
+//                        self.db.collection("competitionDatabase").whereField("courseId", isEqualTo: course.identifier!)
+//                            .getDocuments() { (querySnapshot, error) in
+//                                if let error = error {
+//                                    print("Error getting documents: \(error)")
+//                                } else {
+//                                    print("docs : \(querySnapshot!.documents)")
+//                                    for document in querySnapshot!.documents {
+//                                        print("\(document.documentID) => \(document.data())")
+//                                        //ADD CODE TO THOSE DOCUMENTS
+//                                        if let time = document.get("time") as? Date {
+//                                            print("time: \(time)")
+//                                            if let userName = document.get("userName") as? String {
+//                                                print("username : \(userName)")
+//                                                self.timeAndPersonDictionary["\(userName)"] = time
+//                                                print("time&PersonDict : \(self.timeAndPersonDictionary)")
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+////        self.activityIndicator.stopAnimating()
+//    }
+//
+//    func compareTimes(){
+//        let sortedDates = Array(timeAndPersonDictionary.values).sorted(by: { $0.compare($1) == .orderedAscending })
+//        print(sortedDates)
+//        for (person, time) in timeAndPersonDictionary {
+//            for sortedTime in sortedDates {
+//                if time == sortedTime {
+//                    sortedTimeAndPersonDictionary["\(person)"] = time
+//                    print("sortedTime&PersonDict \(sortedTimeAndPersonDictionary)")
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    func makeScores() {
+//
+//        let competitionDatabase = db.collection("competitionDatabase")
+//
+//
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//                    if self.courseName == course.name {
+//
+//                        self.courseID = course.identifier!
+//                        //Create document with course Identifier + Scores
+//                        competitionDatabase.document("\(course.identifier!)Scores").setData([
+//                            "Default" : 0 //Change in a way??
+//                        ]) { err in
+//                            if let err = err {
+//                                print("Error writing document: \(err)")
+//                            } else {
+//                                print("Scores Document successfully written!")
+//
+//                                let competitionDatabaseCourseIdScores = self.db.collection("competitionDatabase").document("\(course.identifier!)Scores")
+//                                print("dictionary: \(self.sortedTimeAndPersonDictionary)")
+//                                for (name, time) in self.sortedTimeAndPersonDictionary {
+//                                    print("Got inside dictionary")
+//                                    self.timeTurnedIn = time
+//                                    competitionDatabaseCourseIdScores.getDocument { (document, error) in
+//                                        if let document = document, document.exists {
+//                                            print("Got the Document")
+//                                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                                            print("Document data: \(dataDescription)")
+//
+//                                            if let score = document.get("\(name)Score") as? Int {
+//                                                if name == Array(self.sortedTimeAndPersonDictionary.keys)[0] {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : score + 3
+//                                                        ])
+//                                                }
+//                                                else if name == Array(self.sortedTimeAndPersonDictionary.keys)[1] {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : score + 2
+//                                                        ])
+//                                                }
+//                                                else {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : score + 1
+//                                                        ])
+//                                                }
+//                                            }
+//                                            else {
+//                                                if name == Array(self.sortedTimeAndPersonDictionary.keys)[0] {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : 3
+//                                                        ])
+//                                                }
+//                                                else if name == Array(self.sortedTimeAndPersonDictionary.keys)[1] {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : 2
+//                                                        ])
+//                                                }
+//                                                else {
+//                                                    competitionDatabase.document("\(course.identifier!)Scores").updateData([
+//                                                        "\(name)" : 1
+//                                                        ])
+//                                                }
+//                                            }
+//
+//                                        } else {
+//                                            print("Document does not exist")
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//
+//    }
+//
+//    func useDataforTableview() {
+//        let competitionDatabaseCourseIdScores = self.db.collection("competitionDatabase").document("\(courseID)Scores")
+//
+//        competitionDatabaseCourseIdScores.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                print("Document data: \(dataDescription)")
+//
+//                let firestoreResults = document.data() as! [String : Int]
+//                var place = 0
+//
+//                for (name, score) in firestoreResults {
+//                    place = place + 1
+//                    self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(name)", numberOfAssignmentsCompleted: "\(score)")]
+//                }
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//        DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.competitionTableView) }
+//    }
     
 }
 
