@@ -108,35 +108,71 @@ class ExpandHomeworkViewController: UIViewController {
                 if let document = document, document.exists {
                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     print("Document data: \(dataDescription)")
-                    docRef.updateData([
-                        "\(\(username))": 0
-                    ]) { err in
-                        if let err = err {
-                            print("Error updating document: \(err)")
-                        } else {
-                            print("Document successfully updated")
+                    
+                    if let userScore = document.get("\(username)") as? Int {
+                        print(userScore)
+                    } else {
+                        docRef.updateData([
+                            "\(username)": 0
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
                         }
+
                     }
+                    
                 } else {
                     print("Document does not exist")
                     
-                    let newCityRef = db.collection("cities").document()
+                    print("Creating Document")
+                    let newDocument = self.db.collection("competitionDatabase").document("\(self.courseID)")
                     
-                    // later...
-                    newCityRef.setData([
-                        // ...
+                    newDocument.setData([
+                        "\(username)": 0
+                    ])
+                    
+                }
+            }
+        }
+    }
+    
+    func generateScores() {
+        if let username = Auth.auth().currentUser?.displayName {
+            let docRef = db.collection("competitionDatabase").document("\(homeworkIdentifier)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    if let userScore = document.get("studentsDone") as? Int {
+                        print(userScore)
+                    } else {
+                        docRef.updateData([
+                            "\(username)": 0
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                        
+                    }
+                    
+                } else {
+                    print("Document does not exist")
+                    
+                    print("Creating Document")
+                    let newDocument = self.db.collection("competitionDatabase").document("\(self.courseID)")
+                    
+                    newDocument.setData([
+                        "\(username)": 0
                         ])
                     
-                    
-                    db.collection("competitionDatabase").addDocument("\(courseID)")(data: [
-                        "\(username)": 0
-                    ]) { err in
-                        if let err = err {
-                            print("Error adding document: \(err)")
-                        } else {
-                            print("Document added with ID: \(ref!.documentID)")
-                        }
-                    }
                 }
             }
         }
