@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import TCPickerView
 import IQKeyboardManagerSwift
+import Firebase
+import FirebaseFirestore
+import GoogleSignIn
 
 class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFieldDelegate
 {
@@ -261,4 +264,6 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
         
         present(alert, animated: true, completion: nil)
     }
+    
+    
 }

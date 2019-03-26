@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseDatabase
+
 
 class ExpandHomeworkViewController: UIViewController {
     
@@ -18,6 +20,9 @@ class ExpandHomeworkViewController: UIViewController {
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var classLabel: UILabel!
     @IBOutlet weak var descriptionButtonAndLabel: UIButton!
+    
+    var db : Firestore!
+
     
     var homeworkTitle = ""
     var dueDate = ""
@@ -30,8 +35,6 @@ class ExpandHomeworkViewController: UIViewController {
     var studentSubmissionID : String = ""
     
     var timeAssignmentTurnedIn = Date()
-    
-    var db : Firestore!
     
     var score = 0
     
@@ -78,8 +81,8 @@ class ExpandHomeworkViewController: UIViewController {
             }
             if error == nil {
                 
-                self.getTimeAndScore()
-                self.createDatabaseAndDocuments()
+//                self.getTimeAndScore()
+//                self.createDatabaseAndDocuments()
                 
                 let alert = UIAlertController(title: "Your assignment was turned in!", message: "Your assignment was successfully turned in!", preferredStyle: .alert)
                 
@@ -95,6 +98,48 @@ class ExpandHomeworkViewController: UIViewController {
         }
         
         
+    }
+    
+    func createFirebaseClassDocument() {
+        if let username = Auth.auth().currentUser?.displayName {
+            let docRef = db.collection("competitionDatabase").document("\(courseID)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    docRef.updateData([
+                        "\(\(username))": 0
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
+                        }
+                    }
+                } else {
+                    print("Document does not exist")
+                    
+                    let newCityRef = db.collection("cities").document()
+                    
+                    // later...
+                    newCityRef.setData([
+                        // ...
+                        ])
+                    
+                    
+                    db.collection("competitionDatabase").addDocument("\(courseID)")(data: [
+                        "\(username)": 0
+                    ]) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added with ID: \(ref!.documentID)")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -190,87 +235,87 @@ class ExpandHomeworkViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getTimeAndScore() {
-        let date = Date()
-        let calendar = Calendar.current
-        var components = DateComponents()
-        
-        components.second = calendar.component(.second, from: date)
-        components.minute = calendar.component(.minute, from: date)
-        components.hour = calendar.component(.hour, from: date)
-        components.day = calendar.component(.day, from: date)
-        components.month = calendar.component(.month, from: date)
-        components.year = calendar.component(.year, from: date)
-        
-        timeAssignmentTurnedIn = calendar.date(from: components)!
-        print("timeTurnedin: \(timeAssignmentTurnedIn)")
-    }
-    
-    func createDatabaseAndDocuments(){
-        let competitionDatabase = db.collection("competitionDatabase")
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.listCourses() { (courses, error) in
-            guard let courseList = courses else {
-                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-                return
-            }
-            if let list = courseList.courses {
-                for course in list {
-                    
-                    
-                    
-                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
-                        guard let homeworkList = homeworkResponse else {
-                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
-                            return
-                        }
-                        if let huiswerk = homeworkList.courseWork {
-                            
-                            for work in huiswerk {
-                                
-                                if work.identifier! == self.homeworkIdentifier {
-                                    if let userName = Auth.auth().currentUser?.displayName {
-                                        competitionDatabase.document().setData([
-                                            "courseWorkId": work.identifier!,
-                                            "time": self.timeAssignmentTurnedIn,
-                                            "userName": userName,
-                                            "courseId": course.identifier!
-                                            ])
-                                    }
-                                }
-                                
-                                
-//                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
-//                                    guard let submissionState = studentSubmissionResponse else {
-//                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
-//                                        return
+//    func getTimeAndScore() {
+//        let date = Date()
+//        let calendar = Calendar.current
+//        var components = DateComponents()
 //
-//                                    }
-//                                    print("timeTurnedIn: \(self.timeAssignmentTurnedIn)")
-//                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
-//                                        print(submissonStateOfHomework)
-//                                        for submission in submissonStateOfHomework {
-//                                            if let userName = Auth.auth().currentUser?.displayName {
-//                                                competitionDatabase.document().setData([
-//                                                    "courseWorkId": work.identifier!,
-//                                                    "time": self.timeAssignmentTurnedIn,
-//                                                    "userName": userName,
-//                                                    "userId": submission.identifier!,
-//                                                    "courseId": course.identifier!
-//                                                    ])
-//                                            }
-//                                        }
-//                                    }
+//        components.second = calendar.component(.second, from: date)
+//        components.minute = calendar.component(.minute, from: date)
+//        components.hour = calendar.component(.hour, from: date)
+//        components.day = calendar.component(.day, from: date)
+//        components.month = calendar.component(.month, from: date)
+//        components.year = calendar.component(.year, from: date)
 //
+//        timeAssignmentTurnedIn = calendar.date(from: components)!
+//        print("timeTurnedin: \(timeAssignmentTurnedIn)")
+//    }
+//
+//    func createDatabaseAndDocuments(){
+//        let competitionDatabase = db.collection("competitionDatabase")
+//
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//
+//
+//
+//                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
+//                        guard let homeworkList = homeworkResponse else {
+//                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
+//                            return
+//                        }
+//                        if let huiswerk = homeworkList.courseWork {
+//
+//                            for work in huiswerk {
+//
+//                                if work.identifier! == self.homeworkIdentifier {
+//                                    if let userName = Auth.auth().currentUser?.displayName {
+//                                        competitionDatabase.document().setData([
+//                                            "courseWorkId": work.identifier!,
+//                                            "time": self.timeAssignmentTurnedIn,
+//                                            "userName": userName,
+//                                            "courseId": course.identifier!
+//                                            ])
+//                                    }
 //                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//
+//
+////                                appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
+////                                    guard let submissionState = studentSubmissionResponse else {
+////                                        print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
+////                                        return
+////
+////                                    }
+////                                    print("timeTurnedIn: \(self.timeAssignmentTurnedIn)")
+////                                    if let submissonStateOfHomework = submissionState.studentSubmissions {
+////                                        print(submissonStateOfHomework)
+////                                        for submission in submissonStateOfHomework {
+////                                            if let userName = Auth.auth().currentUser?.displayName {
+////                                                competitionDatabase.document().setData([
+////                                                    "courseWorkId": work.identifier!,
+////                                                    "time": self.timeAssignmentTurnedIn,
+////                                                    "userName": userName,
+////                                                    "userId": submission.identifier!,
+////                                                    "courseId": course.identifier!
+////                                                    ])
+////                                            }
+////                                        }
+////                                    }
+////
+////                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     
     
