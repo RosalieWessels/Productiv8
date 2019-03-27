@@ -30,6 +30,8 @@ class ExpandHomeworkViewController: UIViewController {
     var homeworkIdentifier = ""
     var descriptionForHomework = ""
     
+    var usersWhoAreDone = 0
+    var userPoints = 0
     var courseID : String = ""
     var courseWorkID : String = ""
     var studentSubmissionID : String = ""
@@ -83,6 +85,10 @@ class ExpandHomeworkViewController: UIViewController {
                 
 //                self.getTimeAndScore()
 //                self.createDatabaseAndDocuments()
+                self.createFirebaseClassDocument()
+                //self.generateScores()
+                //self.addScores()
+                //self.updateFirebase()
                 
                 let alert = UIAlertController(title: "Your assignment was turned in!", message: "Your assignment was successfully turned in!", preferredStyle: .alert)
                 
@@ -111,6 +117,7 @@ class ExpandHomeworkViewController: UIViewController {
                     
                     if let userScore = document.get("\(username)") as? Int {
                         print(userScore)
+                        self.generateScores()
                     } else {
                         docRef.updateData([
                             "\(username)": 0
@@ -119,6 +126,7 @@ class ExpandHomeworkViewController: UIViewController {
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
+                                self.generateScores()
                             }
                         }
 
@@ -133,10 +141,13 @@ class ExpandHomeworkViewController: UIViewController {
                     newDocument.setData([
                         "\(username)": 0
                     ])
+                    print("Document with CourseID created")
+                    self.generateScores()
                     
                 }
             }
         }
+        
     }
     
     func generateScores() {
@@ -148,16 +159,21 @@ class ExpandHomeworkViewController: UIViewController {
                     let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     print("Document data: \(dataDescription)")
                     
-                    if let userScore = document.get("studentsDone") as? Int {
-                        print(userScore)
+                    if let userDone = document.get("userDone") as? Int {
+                        print(userDone)
+                        self.usersWhoAreDone = userDone
+                        self.addScores()
+                        
                     } else {
                         docRef.updateData([
-                            "\(username)": 0
+                            "userDone": 1
                         ]) { err in
                             if let err = err {
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
+                                self.usersWhoAreDone = 1
+                                self.addScores()
                             }
                         }
                         
@@ -167,15 +183,74 @@ class ExpandHomeworkViewController: UIViewController {
                     print("Document does not exist")
                     
                     print("Creating Document")
-                    let newDocument = self.db.collection("competitionDatabase").document("\(self.courseID)")
+                    let newDocument = self.db.collection("competitionDatabase").document("\(self.homeworkIdentifier)")
                     
                     newDocument.setData([
-                        "\(username)": 0
+                        "userDone": 1
                         ])
+                    
+                    self.usersWhoAreDone = 1
+                    
+                    print("Document created with homeworkIdentifier")
+                    self.addScores()
                     
                 }
             }
         }
+    }
+    
+    func addScores() {
+        print("UsersWhoAreDone : \(usersWhoAreDone)")
+        if usersWhoAreDone == 1 {
+            userPoints = 3
+        }
+        else if usersWhoAreDone == 2 {
+            userPoints = 2
+        }
+        else if usersWhoAreDone >= 3 {
+            userPoints = 1
+        }
+        else {
+            userPoints = 0
+        }
+        print("userpoints : \(userPoints)")
+        updateFirebase()
+    }
+    
+    func updateFirebase() {
+        if let username = Auth.auth().currentUser?.displayName {
+            let docRef = db.collection("competitionDatabase").document("\(courseID)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    if let userScore = document.get("\(username)") as? Int {
+                        print("userScore: \(userScore)")
+                        let userScoreUpdated = userScore + self.userPoints
+                        print("userScoreUpdated: \(userScoreUpdated)")
+                        docRef.updateData([
+                            "\(username)": userScoreUpdated
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Score Document successfully updated")
+                            }
+                        }
+                        
+                    } else {
+                        print("error getting userScore in updateFirebase()")
+                    }
+                    
+                } else {
+                    print("Document does not exist... error")
+                    
+                }
+            }
+        }
+
     }
     
     override func viewDidLoad() {

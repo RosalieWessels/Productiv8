@@ -34,11 +34,11 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         }
         
         //Commented because it doesn't work on older swift version
-        if let randomElement = imagesArray.randomElement() {
-            print(randomElement)
-            imageView.image = UIImage(named: randomElement)
-            randomElementForImage = randomElement
-        }
+//        if let randomElement = imagesArray.randomElement() {
+//            print(randomElement)
+//            imageView.image = UIImage(named: randomElement)
+//            randomElementForImage = randomElement
+//        }
         
 //        let randomIndex = Int(arc4random_uniform(UInt32(imagesArray.count)))
 //        let randomItem = imagesArray[randomIndex]

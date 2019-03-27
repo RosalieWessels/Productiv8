@@ -172,7 +172,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         if let huiswerk = homeworkList.courseWork {
                             for work in huiswerk {
-                                print(work)
                                 print("associated with developer \(work.associatedWithDeveloper)")
                                 if work.dueDate == nil {
                                     self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
