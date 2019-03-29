@@ -77,16 +77,11 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                     for selectedClass in selectedIndexes {
                         let classForLeaderboard = valuesOfPicker[selectedClass].title
                         print(valuesOfPicker[selectedClass].title)
+                        DispatchQueue.main.async { self.competitionTableView.reloadData() }
                         self.courseName = classForLeaderboard
                         self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
                         if self.courseName != "" {
                             self.getDataFromFirebase()
-//                            self.fetchTimeAndUserFromFirebase()
-//                            self.compareTimes()
-                            print(self.sortedTimeAndPersonDictionary)
-//                            self.makeScores()
-//                            self.useDataforTableview()
-                            self.emptyStateTitleToChange = "We are unable to get the competition data"
                         }
                     }
                 }
@@ -188,7 +183,6 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getDataFromFirebase() {
-        let docRef = db.collection("competitionDatabase").document("\(courseID)")
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.listCourses() { (courses, error) in
@@ -200,31 +194,42 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                         for course in list {
                             if course.name! == self.courseName {
                                 self.courseID = course.identifier!
+                                let docRef = self.db.collection("competitionDatabase").document("\(self.courseID)")
+                                
+                                
+                                docRef.getDocument { (document, error) in
+                                    if let document = document, document.exists {
+                                        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                                        print("Document data: \(dataDescription)")
+                                        
+                                        let dictionary = document.data() as! [String : Int]
+                                        
+                                        let sortedByValueDictionary = dictionary.sorted { $0.1 < $1.1 }
+                                        var place = 0
+                                        for (name, score) in sortedByValueDictionary {
+                                            place = place + 1
+                                            self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(name)", numberOfAssignmentsCompleted: "\(score)")]
+                                            DispatchQueue.main.async { self.competitionTableView.reloadData() }
+                                            
+                                            self.reloadData()
+                                        }
+                                    } else {
+                                        print("Document does not exist")
+                                        
+                                    }
                                 }
                             }
                         }
                     }
-        
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                
-                let dictionary = document.data() as! [String : Int]
-                
-                let sortedByValueDictionary = dictionary.sorted { $0.1 < $1.1 }
-                var place = 0
-                for (name, score) in sortedByValueDictionary {
-                    place = place + 1
-                    self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(name)", numberOfAssignmentsCompleted: "\(score)")]
                 }
-            } else {
-                print("Document does not exist")
-                
-            }
-        }
     }
+    func reloadData() {
+        self.reloadEmptyStateForTableView(self.competitionTableView)
+        // Reload empty view as well
+        self.reloadEmptyStateForTableView(competitionTableView)
+        
+    }
+    
     
 //    func fetchTimeAndUserFromFirebase() {
 //

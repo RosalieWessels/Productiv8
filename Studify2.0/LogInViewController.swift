@@ -21,7 +21,13 @@ class LogInViewContoller : UIViewController, UITextViewDelegate {
     
    override func viewDidLoad() {
        super.viewDidLoad()
-        imageView.image = UIImage(named: image)
+        if image != "" {
+            imageView.image = UIImage(named: image)
+        }
+        else {
+            imageView.image = UIImage(named: "ManHiking")
+        }
+    
         //Do any additional setup after loading the view, typically from a nib.
     }
 
