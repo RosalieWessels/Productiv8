@@ -518,20 +518,30 @@
                                 <rect key="frame" x="16" y="77" width="343" height="570"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yy4-rE-TpP">
-                                        <rect key="frame" x="5" y="465" width="333" height="100"/>
+                                        <rect key="frame" x="5" y="411" width="333" height="154"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-8a-Wzy">
+                                                <rect key="frame" x="58" y="0.0" width="217" height="44"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <state key="normal" title="Provide Feedback">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="d5H-2c-svb"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuR-Tb-AtX">
-                                                <rect key="frame" x="47" y="0.0" width="239" height="44"/>
+                                                <rect key="frame" x="47" y="54" width="239" height="44"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                                 <state key="normal" title="Report a Bug/Crash">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="rgy-yI-cmf" kind="show" id="wIh-gb-b5O"/>
+                                                    <action selector="reportBugPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="KWz-Me-UHi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co1-rh-2o7">
-                                                <rect key="frame" x="32" y="54" width="269" height="46"/>
+                                                <rect key="frame" x="32" y="108" width="269" height="46"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                 <state key="normal" title="Delete User Account">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -564,16 +574,18 @@
                         <outlet property="accountSettingsView" destination="56q-rH-3Fc" id="uof-Y7-cD5"/>
                         <outlet property="deleteUserAccountButton" destination="Co1-rh-2o7" id="eGH-3F-cEJ"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="userAccountSettingsToWelcomeScreen" id="Jw0-3F-1HV"/>
+                        <segue destination="rgy-yI-cmf" kind="show" identifier="reportBug" id="odg-du-Nuq"/>
+                        <segue destination="rgy-yI-cmf" kind="show" identifier="provideFeedback" id="trr-gK-aKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mR-P0-lYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2308" y="357.57121439280365"/>
         </scene>
-        <!--View Controller-->
+        <!--Web View Controller-->
         <scene sceneID="qJs-0B-7oM">
             <objects>
-                <viewController id="rgy-yI-cmf" sceneMemberID="viewController">
+                <viewController id="rgy-yI-cmf" customClass="WebViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ty-7O-5ZF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -581,29 +593,31 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dHG-GB-t4I">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGc-iQ-y9e">
-                                <rect key="frame" x="78" y="399" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wT-NW-pwm">
+                                <rect key="frame" x="16" y="77" width="343" height="570"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="3wT-NW-pwm" firstAttribute="top" secondItem="jCd-M6-Cey" secondAttribute="top" constant="57" id="6G4-XT-sy6"/>
                             <constraint firstItem="dHG-GB-t4I" firstAttribute="trailing" secondItem="jCd-M6-Cey" secondAttribute="trailing" id="A6B-x7-fJy"/>
+                            <constraint firstItem="3wT-NW-pwm" firstAttribute="leading" secondItem="jCd-M6-Cey" secondAttribute="leading" constant="16" id="Dxe-Nf-i8E"/>
                             <constraint firstItem="dHG-GB-t4I" firstAttribute="top" secondItem="0ty-7O-5ZF" secondAttribute="top" id="MGu-9D-tty"/>
                             <constraint firstItem="dHG-GB-t4I" firstAttribute="leading" secondItem="jCd-M6-Cey" secondAttribute="leading" id="bfR-5I-xFG"/>
                             <constraint firstItem="dHG-GB-t4I" firstAttribute="bottom" secondItem="jCd-M6-Cey" secondAttribute="bottom" id="cTt-W3-n33"/>
+                            <constraint firstItem="jCd-M6-Cey" firstAttribute="trailing" secondItem="3wT-NW-pwm" secondAttribute="trailing" constant="16" id="npQ-ab-JXE"/>
+                            <constraint firstItem="jCd-M6-Cey" firstAttribute="bottom" secondItem="3wT-NW-pwm" secondAttribute="bottom" constant="20" id="tEc-mh-SiT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jCd-M6-Cey"/>
                     </view>
+                    <connections>
+                        <outlet property="webViewContainerView" destination="3wT-NW-pwm" id="qYA-Re-76X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hL7-o7-Kcm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3045" y="357"/>
+            <point key="canvasLocation" x="3044" y="356.67166416791605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BW8-La-z1t">
@@ -745,6 +759,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>
         <segue reference="Jw0-3F-1HV"/>
+        <segue reference="trr-gK-aKF"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>
 </document>

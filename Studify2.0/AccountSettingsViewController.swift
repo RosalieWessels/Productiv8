@@ -16,6 +16,15 @@ class AccountSettingsViewController: UIViewController {
     @IBOutlet weak var deleteUserAccountButton: UIButton!
     @IBOutlet weak var accountSettingsView: UIView!
     
+    
+    @IBAction func reportBugPressed(_ sender: Any) {
+        performSegue(withIdentifier: "reportBug", sender: self)
+    }
+    
+    @IBAction func provideFeedbackPressed(_ sender: Any) {
+        performSegue(withIdentifier: "provideFeedback", sender: self)
+    }
+    
     @IBAction func deleteUserAccountClicked(_ sender: Any) {
         let alert = UIAlertController(title: "Delete User Account", message: "Are you sure you want to delete your account? Once it is deleted it cannot come back.", preferredStyle: .alert)
         
@@ -69,5 +78,16 @@ class AccountSettingsViewController: UIViewController {
     }
     func userAccountisDeleted(){
         self.performSegue(withIdentifier: "userAccountSettingsToWelcomeScreen", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "reportBug" {
+            let destinationViewController = segue.destination as! WebViewController
+            destinationViewController.reason = "reportBug"
+            
+        }
+        if segue.identifier == "provideFeedback" {
+            let destinationViewController = segue.destination as! WebViewController
+            destinationViewController.reason = "provideFeedback"
+        }
     }
 }
