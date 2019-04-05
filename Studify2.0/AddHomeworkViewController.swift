@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseFirestore
 import GoogleSignIn
+import GradientLoadingBar
 
 class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFieldDelegate
 {
@@ -32,6 +33,18 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
     var hourOfDueDate = 0
     var dayOfDueDate = 0
     var monthOfDueDate = 0
+    
+    let gradientLoadingBar = GradientLoadingBar(
+        height: 4.0,
+        durations: Durations(fadeIn: 1.5,
+                             fadeOut: 2.0,
+                             progress: 2.5),
+        gradientColorList: [
+            .red, .yellow, .green
+        ],
+        isRelativeToSafeArea: true,
+        onView :
+    )
     
     var everythingFilledIn = true
     
@@ -154,7 +167,7 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
         }
     }
     func getResultsFromAddHomework() {
-        
+        gradientLoadingBar.show()
         titleOfHW = titleTextField.text!
         descriptionOfHW = descriptionTextField.text!
         
@@ -218,9 +231,11 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
         appDelegate.courseworkCreate(workTitle: titleOfHW, workDescription: descriptionOfHW, workDueDateDay: dayOfDueDate, workDueDateMonth: monthOfDueDate, workDueDateHour: hourOfDueDate, workDueDateMinute: minuteOfDueDate, courseId: courseId) { (error) in
             if error != nil {
                 print("Error turning in Homework : \(String(describing: error?.localizedDescription))")
+                self.gradientLoadingBar.hide()
                 self.errorDidOccurWhileCreatingAssignment()
             }
             if error == nil {
+                self.self.gradientLoadingBar.hide()
                 self.successfullyCreatedAssignment()
             }
         }

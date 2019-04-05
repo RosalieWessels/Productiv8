@@ -15,4 +15,5 @@ target 'Studify2.0' do
   pod 'TCPickerView'
   pod 'UIEmptyState'
   pod 'IQKeyboardManagerSwift'
+  pod 'GradientLoadingBar'
 end
