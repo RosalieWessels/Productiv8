@@ -217,13 +217,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWE-tc-Xcq">
-                                                <rect key="frame" x="0.0" y="53.5" width="343" height="37.5"/>
+                                                <rect key="frame" x="0.0" y="53.5" width="343" height="74"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7a-fa-Iyi">
-                                                <rect key="frame" x="0.0" y="93" width="343" height="32"/>
+                                                <rect key="frame" x="0.0" y="129.5" width="343" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title="Choose a Google Classroom Class"/>
                                                 <connections>
@@ -231,13 +231,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*You must own this class*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhb-Ee-Kig">
-                                                <rect key="frame" x="0.0" y="127" width="343" height="16"/>
+                                                <rect key="frame" x="0.0" y="163.5" width="343" height="16"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yq0-G0-vqv">
-                                                <rect key="frame" x="0.0" y="145" width="343" height="175"/>
+                                                <rect key="frame" x="0.0" y="181.5" width="343" height="138.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -517,23 +517,48 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="56q-rH-3Fc">
                                 <rect key="frame" x="16" y="77" width="343" height="570"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co1-rh-2o7">
-                                        <rect key="frame" x="33" y="504" width="276" height="46"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                        <state key="normal" title="Delete User Account">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="aiC-GL-xXf"/>
-                                            <action selector="deleteUserAccountClicked:" destination="Tcz-YD-yai" eventType="touchUpInside" id="col-aZ-2Kr"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yy4-rE-TpP">
+                                        <rect key="frame" x="5" y="411" width="333" height="154"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-8a-Wzy">
+                                                <rect key="frame" x="58" y="0.0" width="217" height="44"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <state key="normal" title="Provide Feedback">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="d5H-2c-svb"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuR-Tb-AtX">
+                                                <rect key="frame" x="47" y="54" width="239" height="44"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                                <state key="normal" title="Report a Bug/Crash">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="reportBugPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="KWz-Me-UHi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Co1-rh-2o7">
+                                                <rect key="frame" x="32" y="108" width="269" height="46"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <state key="normal" title="Delete User Account">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="LogOutPressed:" destination="ex2-5b-ZN1" eventType="touchUpInside" id="aiC-GL-xXf"/>
+                                                    <action selector="deleteUserAccountClicked:" destination="Tcz-YD-yai" eventType="touchUpInside" id="col-aZ-2Kr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Co1-rh-2o7" secondAttribute="trailing" constant="34" id="9b4-Tc-i4f"/>
-                                    <constraint firstAttribute="bottom" secondItem="Co1-rh-2o7" secondAttribute="bottom" constant="20" id="Nk2-6e-4v2"/>
-                                    <constraint firstItem="Co1-rh-2o7" firstAttribute="leading" secondItem="56q-rH-3Fc" secondAttribute="leading" constant="33" id="gXx-KI-Zhx"/>
+                                    <constraint firstItem="yy4-rE-TpP" firstAttribute="leading" secondItem="56q-rH-3Fc" secondAttribute="leading" constant="5" id="TCm-pg-sNd"/>
+                                    <constraint firstAttribute="bottom" secondItem="yy4-rE-TpP" secondAttribute="bottom" constant="5" id="YTW-x8-zKI"/>
+                                    <constraint firstAttribute="trailing" secondItem="yy4-rE-TpP" secondAttribute="trailing" constant="5" id="jX7-pT-9iv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -549,11 +574,50 @@
                         <outlet property="accountSettingsView" destination="56q-rH-3Fc" id="uof-Y7-cD5"/>
                         <outlet property="deleteUserAccountButton" destination="Co1-rh-2o7" id="eGH-3F-cEJ"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="userAccountSettingsToWelcomeScreen" id="Jw0-3F-1HV"/>
+                        <segue destination="rgy-yI-cmf" kind="show" identifier="reportBug" id="odg-du-Nuq"/>
+                        <segue destination="rgy-yI-cmf" kind="show" identifier="provideFeedback" id="trr-gK-aKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mR-P0-lYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2308" y="357.57121439280365"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="qJs-0B-7oM">
+            <objects>
+                <viewController id="rgy-yI-cmf" customClass="WebViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0ty-7O-5ZF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dHG-GB-t4I">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wT-NW-pwm">
+                                <rect key="frame" x="16" y="77" width="343" height="570"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3wT-NW-pwm" firstAttribute="top" secondItem="jCd-M6-Cey" secondAttribute="top" constant="57" id="6G4-XT-sy6"/>
+                            <constraint firstItem="dHG-GB-t4I" firstAttribute="trailing" secondItem="jCd-M6-Cey" secondAttribute="trailing" id="A6B-x7-fJy"/>
+                            <constraint firstItem="3wT-NW-pwm" firstAttribute="leading" secondItem="jCd-M6-Cey" secondAttribute="leading" constant="16" id="Dxe-Nf-i8E"/>
+                            <constraint firstItem="dHG-GB-t4I" firstAttribute="top" secondItem="0ty-7O-5ZF" secondAttribute="top" id="MGu-9D-tty"/>
+                            <constraint firstItem="dHG-GB-t4I" firstAttribute="leading" secondItem="jCd-M6-Cey" secondAttribute="leading" id="bfR-5I-xFG"/>
+                            <constraint firstItem="dHG-GB-t4I" firstAttribute="bottom" secondItem="jCd-M6-Cey" secondAttribute="bottom" id="cTt-W3-n33"/>
+                            <constraint firstItem="jCd-M6-Cey" firstAttribute="trailing" secondItem="3wT-NW-pwm" secondAttribute="trailing" constant="16" id="npQ-ab-JXE"/>
+                            <constraint firstItem="jCd-M6-Cey" firstAttribute="bottom" secondItem="3wT-NW-pwm" secondAttribute="bottom" constant="20" id="tEc-mh-SiT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jCd-M6-Cey"/>
+                    </view>
+                    <connections>
+                        <outlet property="webViewContainerView" destination="3wT-NW-pwm" id="qYA-Re-76X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hL7-o7-Kcm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3044" y="356.67166416791605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BW8-La-z1t">
@@ -694,7 +758,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>
-        <segue reference="wyU-fs-8wX"/>
+        <segue reference="Jw0-3F-1HV"/>
+        <segue reference="trr-gK-aKF"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>
 </document>
