@@ -42,8 +42,7 @@ class AddHomeworkViewController : UIViewController, UITextViewDelegate, UITextFi
         gradientColorList: [
             .red, .yellow, .green
         ],
-        isRelativeToSafeArea: true,
-        onView :
+        isRelativeToSafeArea: false
     )
     
     var everythingFilledIn = true

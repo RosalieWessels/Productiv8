@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseDatabase
+import GradientLoadingBar
 
 
 class ExpandHomeworkViewController: UIViewController {
@@ -40,6 +41,17 @@ class ExpandHomeworkViewController: UIViewController {
     
     var score = 0
     
+    let gradientLoadingBar = GradientLoadingBar(
+        height: 4.0,
+        durations: Durations(fadeIn: 1.5,
+                             fadeOut: 2.0,
+                             progress: 2.5),
+        gradientColorList: [
+            .red, .yellow, .green
+        ],
+        isRelativeToSafeArea: false
+    )
+    
     @IBAction func homeworkButtonPressed(_ sender: Any) {
         let alert = UIAlertController(title: "Homework Title", message: "\(homeworkTitle)", preferredStyle: .alert)
         
@@ -66,9 +78,11 @@ class ExpandHomeworkViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
+        self.gradientLoadingBar.show()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.turnInHomeworkAssignment(courseId: courseID, courseWorkId : courseWorkID, studentSubmissionId : studentSubmissionID) { (error) in
             if error != nil {
+                self.gradientLoadingBar.hide()
                 print ("Error turning in Homework: \(String(describing: error?.localizedDescription))")
                 let alert = UIAlertController(title: "An error occured", message: "An error occured while trying to turn in your assignment.", preferredStyle: .alert)
                 
@@ -89,7 +103,7 @@ class ExpandHomeworkViewController: UIViewController {
                 //self.generateScores()
                 //self.addScores()
                 //self.updateFirebase()
-                
+                self.gradientLoadingBar.hide()
                 let alert = UIAlertController(title: "Your assignment was turned in!", message: "Your assignment was successfully turned in!", preferredStyle: .alert)
                 
                 let closeAction = UIAlertAction(title: "Go To Homework Screen", style: .default) { (UIAlertAction) in
