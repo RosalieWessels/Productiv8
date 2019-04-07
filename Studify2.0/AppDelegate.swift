@@ -210,6 +210,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //GIDSignIn.sharedInstance().currentUser
         GIDSignIn.sharedInstance().signInSilently()
         
+        let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user == nil {
+                // prompt user to sign in
+                let navigationController = self.window?.rootViewController as! UINavigationController
+                for controller in navigationController.viewControllers {
+                    if let HomeworkController = controller as? HomeworkViewController {
+                        HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
+                        break
+                    }
+                }
+            } else {
+                // you know the current user
+                print("User is signed in")
+                func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+                    // ...
+                    if let error = error {
+                        // ...
+                        return
+                    }
+                    
+                    guard let authentication = user.authentication else { return }
+                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                                   accessToken: authentication.accessToken)
+                    // ...
+                }
+                let navigationController = self.window?.rootViewController as! UINavigationController
+                for controller in navigationController.viewControllers {
+                    if let HomeworkController = controller as? HomeworkViewController {
+                        HomeworkController.getDataAfterOpening()
+
+                        break
+                    }
+                }
+            }
+        }
+        handle
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

@@ -115,6 +115,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         addConstraintsToAddHomeworkButton()
     }
     
+    func getDataAfterOpening() {
+        homeworkArray.removeAll(keepingCapacity: false)
+        self.homeworkTableView.reloadData()
+        getHomework()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,6 +141,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: self)
         }
+        
+        
         
         
     }
