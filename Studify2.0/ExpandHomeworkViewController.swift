@@ -175,7 +175,10 @@ class ExpandHomeworkViewController: UIViewController {
                     
                     if let userDone = document.get("userDone") as? Int {
                         print(userDone)
-                        self.usersWhoAreDone = userDone
+                        self.usersWhoAreDone = userDone + 1
+                        docRef.updateData([
+                            "userDone" : self.usersWhoAreDone
+                        ])
                         self.addScores()
                         
                     } else {

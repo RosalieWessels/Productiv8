@@ -206,23 +206,15 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
 
                                         let dictionary = document.data() as! [String : Int]
                                         
-                                        let sortedDictionary = dictionary.keys.sorted{dictionary[$1]! < dictionary[$0]!}
-                                        
-                                        print(sortedDictionary)
-                                        
-                                        
-                                        let sortedByValueDictionary = dictionary.sorted { $0.1 < $1.1 }
+                                        let sortedDictionaryFinal = dictionary.sorted{ $0.value > $1.value }
+
                                         var place = 0
-                                        for (name, score) in dictionary {
-                                            for value in sortedDictionary {
-                                                if name == value {
-                                                    place = place + 1
-                                                    self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(name)", numberOfAssignmentsCompleted: "\(score)")]
-                                                    DispatchQueue.main.async { self.competitionTableView.reloadData() }
-                                                    
-                                                    self.reloadData()
-                                                }
-                                            }
+                                        for (key, value) in sortedDictionaryFinal {
+                                            place = place + 1
+                                            self.competitionData += [competitionTableViewCellData(numberPlace: "#\(place)", userName: "\(key)", numberOfAssignmentsCompleted: "\(value)")]
+                                            DispatchQueue.main.async { self.competitionTableView.reloadData() }
+                                            
+                                            self.reloadData()
                                         }
                                     } else {
                                         print("Document does not exist")
