@@ -187,11 +187,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        //..
+        let navigationController = self.window?.rootViewController as! UINavigationController
+        for controller in navigationController.viewControllers {
+            if let HomeworkController = controller as? HomeworkViewController {
+                HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
+                break
+            }
+        }
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        GIDSignIn.sharedInstance().signInSilently()
+        //GIDSignIn.sharedInstance().signInSilently()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -208,44 +214,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         //GIDSignIn.sharedInstance().signInSilently()
         //GIDSignIn.sharedInstance().currentUser
-        GIDSignIn.sharedInstance().signInSilently()
-        
-        let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user == nil {
-                // prompt user to sign in
-                let navigationController = self.window?.rootViewController as! UINavigationController
-                for controller in navigationController.viewControllers {
-                    if let HomeworkController = controller as? HomeworkViewController {
-                        HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
-                        break
-                    }
-                }
-            } else {
-                // you know the current user
-                print("User is signed in")
-                func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-                    // ...
-                    if let error = error {
-                        // ...
-                        return
-                    }
-                    
-                    guard let authentication = user.authentication else { return }
-                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                                   accessToken: authentication.accessToken)
-                    // ...
-                }
-                let navigationController = self.window?.rootViewController as! UINavigationController
-                for controller in navigationController.viewControllers {
-                    if let HomeworkController = controller as? HomeworkViewController {
-                        HomeworkController.getDataAfterOpening()
-
-                        break
-                    }
-                }
-            }
-        }
-        handle
+//        GIDSignIn.sharedInstance().signInSilently()
+//
+//        let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if user == nil {
+//                // prompt user to sign in
+//                let navigationController = self.window?.rootViewController as! UINavigationController
+//                for controller in navigationController.viewControllers {
+//                    if let HomeworkController = controller as? HomeworkViewController {
+//                        HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
+//                        break
+//                    }
+//                }
+//            } else {
+//                // you know the current user
+//                print("User is signed in")
+//                func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+//                    // ...
+//                    if let error = error {
+//                        // ...
+//                        return
+//                    }
+//
+//                    guard let authentication = user.authentication else { return }
+//                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+//                                                                   accessToken: authentication.accessToken)
+//                    // ...
+//                }
+//                let navigationController = self.window?.rootViewController as! UINavigationController
+//                for controller in navigationController.viewControllers {
+//                    if let HomeworkController = controller as? HomeworkViewController {
+//                        HomeworkController.getDataAfterOpening()
+//
+//                        break
+//                    }
+//                }
+//            }
+//        }
+        //handle
         //hello Test
         //kd
         
@@ -257,7 +263,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        
+        try! Auth.auth().signOut()
+        try GIDSignIn.sharedInstance().signOut()
     }
 }
 
