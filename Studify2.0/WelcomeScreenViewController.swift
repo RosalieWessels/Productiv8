@@ -29,6 +29,8 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         for n in 0 ... 15 {
             imagesArray.append("Pexel\(n)")
         }
@@ -38,6 +40,21 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
             print(randomElement)
             imageView.image = UIImage(named: randomElement)
             randomElementForImage = randomElement
+        }
+        
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+        }else{
+            print("Internet Connection not Available!")
+            let alert = UIAlertController(title: "No internet...", message: "Seems like you are not connected to the internet. Unfortunately, Studify won't work without an internet connection. To make it work, connect to the wifi or enable data. Thank you.", preferredStyle: .alert)
+            
+            let closeAction = UIAlertAction(title: "Close", style: .default) { (UIAlertAction) in
+                print("User closed no internet popup")
+            }
+            
+            alert.addAction(closeAction)
+            
+            present(alert, animated: true, completion: nil)
         }
         
 //        let randomIndex = Int(arc4random_uniform(UInt32(imagesArray.count)))
@@ -75,4 +92,6 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     }
     
 }
+
+
 

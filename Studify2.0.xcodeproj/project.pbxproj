@@ -15,6 +15,7 @@
 		89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89450998217BB55D000AA49F /* AccountSettingsViewController.swift */; };
 		8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */; };
 		8945099F217EC4BF000AA49F /* HomeworkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */; };
+		899E4DEB225AC27100887EB7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899E4DEA225AC27100887EB7 /* Reachability.swift */; };
 		89A845152184EA57004482E6 /* ExpandHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A845142184EA57004482E6 /* ExpandHomeworkViewController.swift */; };
 		89AFE65C217272FF00D8F504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */; };
 		89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFE65D2172769E00D8F504 /* LogInViewController.swift */; };
@@ -40,6 +41,7 @@
 		89450998217BB55D000AA49F /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		8945099C217EC4BF000AA49F /* HomeworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTableViewCell.swift; sourceTree = "<group>"; };
 		8945099D217EC4BF000AA49F /* HomeworkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeworkTableViewCell.xib; sourceTree = "<group>"; };
+		899E4DEA225AC27100887EB7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		89A845142184EA57004482E6 /* ExpandHomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandHomeworkViewController.swift; sourceTree = "<group>"; };
 		89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89AFE65D2172769E00D8F504 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
 				892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */,
 				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
+				899E4DEA225AC27100887EB7 /* Reachability.swift */,
 				89AFE65D2172769E00D8F504 /* LogInViewController.swift */,
 				89CFC1B82172525200DCFF7B /* ClassesViewController.swift */,
 				39813C8522552BF800FCC9CD /* WebViewController.swift */,
@@ -337,6 +340,7 @@
 				89E5C83821DF10D200DC212B /* CompetitionViewController.swift in Sources */,
 				89AFE65E2172769E00D8F504 /* LogInViewController.swift in Sources */,
 				8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */,
+				899E4DEB225AC27100887EB7 /* Reachability.swift in Sources */,
 				89FBD0D4221A1EEB00B5D8EE /* CompetitionTableViewCell.swift in Sources */,
 				89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */,
 				8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */,
