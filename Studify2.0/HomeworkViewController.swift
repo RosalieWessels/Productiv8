@@ -51,6 +51,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
     var homeworkIdentifierFromTableViewCell = ""
     
+    var refreshControl = UIRefreshControl()
+    
     var emptyStateTitle: NSAttributedString {
         let attrs = [NSAttributedStringKey.foregroundColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.00),
                      NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)]
@@ -102,17 +104,16 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        homeworkArray.removeAll(keepingCapacity: false)
-        self.homeworkTableView.reloadData()
+//        homeworkArray.removeAll(keepingCapacity: false)
+//        self.homeworkTableView.reloadData()
         self.tabBarController?.navigationItem.hidesBackButton = true
-        getHomework()
+//        getHomework()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.reloadEmptyStateForTableView(homeworkTableView)
-        addConstraintsToAddHomeworkButton()
     }
     
     func getDataAfterOpening() {
@@ -123,6 +124,10 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        homeworkArray.removeAll(keepingCapacity: false)
+        self.homeworkTableView.reloadData()
+        getHomework()
         
         if Reachability.isConnectedToNetwork(){
             print("Internet Connection Available!")
@@ -150,29 +155,30 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
         homeworkTableView.register(HomeworkTableViewCell.self, forCellReuseIdentifier: "HomeworkTableViewCell")
         
+        // Custom color
+        let whiteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        // create the attributed colour
+        let attributedStringColor = [NSAttributedStringKey.foregroundColor : whiteColor];
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes : attributedStringColor )
+        refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        homeworkTableView.refreshControl = refreshControl
+        
         if Auth.auth().currentUser != nil {
             print("User is signed in")
         } else {
             performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: self)
         }
         
-        
-        
-        
     }
     
-    func addConstraintsToAddHomeworkButton() {
-
-//        let height : CGFloat = self.calculateTopDistance()
-//        
-//        addhomeworkButtonOutlet.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            addhomeworkButtonOutlet.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
-//            addhomeworkButtonOutlet.topAnchor.constraint(equalTo: view.topAnchor, constant: height + 10),
-//            addhomeworkButtonOutlet.widthAnchor.constraint(equalToConstant: 45),
-//            addhomeworkButtonOutlet.heightAnchor.constraint(equalToConstant: 75)
-//            ])
-        //addhomeworkButtonOutlet.edgesToSuperview(insets: .top(30) + .left(5) + .horizontal(20) + .vertical(50))
+    @objc func doSomething(refreshControl: UIRefreshControl) {
+        print("refreshing tableview")
+        
+        homeworkArray.removeAll(keepingCapacity: false)
+        self.homeworkTableView.reloadData()
+        getHomework()
         
     }
     
@@ -278,6 +284,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                                 if self.homeworkArray.count > 0 {
                                                     DispatchQueue.main.async { self.homeworkTableView.reloadData()}
                                                     DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+                                                    self.refreshControl.endRefreshing()
                                                 }
                                             }
                                         }
@@ -290,6 +297,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                         if self.homeworkArray.count > 0 {
                             DispatchQueue.main.async { self.homeworkTableView.reloadData() }
                             DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+                            self.self.refreshControl.endRefreshing()
                         }
                         
                     }
