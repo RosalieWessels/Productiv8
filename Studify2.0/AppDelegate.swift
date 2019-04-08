@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import GoogleAPIClientForREST
 import GoogleSignIn
 import IQKeyboardManagerSwift
@@ -251,9 +252,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //                }
 //            }
 //        }
-        //handle
-        //hello Test
-        //kd
         
     }
 
