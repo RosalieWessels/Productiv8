@@ -592,6 +592,40 @@
             </objects>
             <point key="canvasLocation" x="2308" y="357.57121439280365"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="R3I-fW-R8o">
+            <objects>
+                <viewController id="or4-24-peO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9ke-AK-CdO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="rK2-E4-w6n">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBp-KW-tu3">
+                                <rect key="frame" x="16" y="77" width="343" height="570"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rK2-E4-w6n" firstAttribute="top" secondItem="9ke-AK-CdO" secondAttribute="top" id="Hbz-ZJ-zJk"/>
+                            <constraint firstItem="IBp-KW-tu3" firstAttribute="leading" secondItem="W4e-zZ-TPi" secondAttribute="leading" constant="16" id="JMw-kL-WDZ"/>
+                            <constraint firstItem="IBp-KW-tu3" firstAttribute="top" secondItem="W4e-zZ-TPi" secondAttribute="top" constant="57" id="OZb-0B-7Ey"/>
+                            <constraint firstItem="rK2-E4-w6n" firstAttribute="trailing" secondItem="W4e-zZ-TPi" secondAttribute="trailing" id="Oxy-hv-4K5"/>
+                            <constraint firstItem="W4e-zZ-TPi" firstAttribute="trailing" secondItem="IBp-KW-tu3" secondAttribute="trailing" constant="16" id="Yjr-7d-Sxa"/>
+                            <constraint firstItem="rK2-E4-w6n" firstAttribute="bottom" secondItem="W4e-zZ-TPi" secondAttribute="bottom" id="dmU-wg-jzd"/>
+                            <constraint firstItem="W4e-zZ-TPi" firstAttribute="bottom" secondItem="IBp-KW-tu3" secondAttribute="bottom" constant="20" id="ec9-yn-OZP"/>
+                            <constraint firstItem="rK2-E4-w6n" firstAttribute="leading" secondItem="W4e-zZ-TPi" secondAttribute="leading" id="guG-6i-Xhy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="W4e-zZ-TPi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="McX-Z2-o62" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2344.8000000000002" y="-322.48875562218893"/>
+        </scene>
         <!--Web View Controller-->
         <scene sceneID="qJs-0B-7oM">
             <objects>
