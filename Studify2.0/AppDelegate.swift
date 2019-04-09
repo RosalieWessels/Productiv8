@@ -8,8 +8,10 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import GoogleAPIClientForREST
 import GoogleSignIn
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -21,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        IQKeyboardManager.shared.enable = true
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
@@ -87,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if self.service.authorizer != nil {
             let submissonStateQuery = GTLRClassroomQuery_CoursesCourseWorkStudentSubmissionsList.query(withCourseId: courseId, courseWorkId: courseWorkId)
             // filter by
-            submissonStateQuery.states = ["CREATED", "NEW", "RETURNED", "SUBMISSION_STATE_UNSPECIFIED", "RECLAIMED_BY_STUDENT"]
+            submissonStateQuery.states = ["CREATED", "NEW"] //Got rid of "RETURNED" because old assignments that the teacher returned so that you could see your grades were showing up, ,"RECLAIMED_BY_STUDENT", "SUBMISSION_STATE_UNSPECIFIED"
             
             submissonStateQuery.pageSize = 10
             
@@ -108,22 +110,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
-    func courseworkCreate(courseId: String, onCompleted : @escaping(Error?) -> ()) {
+    func courseworkCreate(workTitle : String, workDescription : String, workDueDateDay : Int, workDueDateMonth : Int, workDueDateHour : Int, workDueDateMinute : Int, courseId: String, onCompleted : @escaping(Error?) -> ()) {
         if self.service.authorizer != nil {
             let work = GTLRClassroom_CourseWork.init()
-            work.title = "Titel 3"
-            work.descriptionProperty = "Beschrijving"
+            work.title = workTitle
+            work.descriptionProperty = workDescription
             work.assigneeMode = "ALL_STUDENTS"
             work.state = "PUBLISHED"
             work.workType = "ASSIGNMENT"
             let dueDate = GTLRClassroom_Date.init()
-            dueDate.day = 28
-            dueDate.month = 2
+            dueDate.day = workDueDateDay as NSNumber
+            dueDate.month = workDueDateMonth as NSNumber
             dueDate.year = 2019
             work.dueDate = dueDate
             let dueTime = GTLRClassroom_TimeOfDay.init()
-            dueTime.hours = 12
-            dueTime.minutes = 0
+            dueTime.hours = workDueDateHour as NSNumber
+            dueTime.minutes = workDueDateMinute as NSNumber
             work.dueTime = dueTime
             let create = GTLRClassroomQuery_CoursesCourseWorkCreate.query(withObject: work, courseId: courseId)
 
@@ -186,7 +188,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        //..
+        let navigationController = self.window?.rootViewController as! UINavigationController
+        for controller in navigationController.viewControllers {
+            if let HomeworkController = controller as? HomeworkViewController {
+                HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
+                break
+            }
+        }
+    }
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        //GIDSignIn.sharedInstance().signInSilently()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -203,6 +215,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         //GIDSignIn.sharedInstance().signInSilently()
         //GIDSignIn.sharedInstance().currentUser
+//        GIDSignIn.sharedInstance().signInSilently()
+//
+//        let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if user == nil {
+//                // prompt user to sign in
+//                let navigationController = self.window?.rootViewController as! UINavigationController
+//                for controller in navigationController.viewControllers {
+//                    if let HomeworkController = controller as? HomeworkViewController {
+//                        HomeworkController.performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: nil)
+//                        break
+//                    }
+//                }
+//            } else {
+//                // you know the current user
+//                print("User is signed in")
+//                func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+//                    // ...
+//                    if let error = error {
+//                        // ...
+//                        return
+//                    }
+//
+//                    guard let authentication = user.authentication else { return }
+//                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+//                                                                   accessToken: authentication.accessToken)
+//                    // ...
+//                }
+//                let navigationController = self.window?.rootViewController as! UINavigationController
+//                for controller in navigationController.viewControllers {
+//                    if let HomeworkController = controller as? HomeworkViewController {
+//                        HomeworkController.getDataAfterOpening()
+//
+//                        break
+//                    }
+//                }
+//            }
+//        }
         
     }
 
@@ -212,6 +261,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        try! Auth.auth().signOut()
+        try GIDSignIn.sharedInstance().signOut()
     }
 }
 
