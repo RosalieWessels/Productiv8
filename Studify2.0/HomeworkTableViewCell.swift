@@ -13,23 +13,17 @@ class HomeworkTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var colorImageView: UIImageView!
-    @IBOutlet weak var homeworkButtonView: UIButton!
     @IBOutlet weak var teacherLabelView: UILabel!
     @IBOutlet weak var dateLabelView: UILabel!
     @IBOutlet weak var homeworkLabelView: UILabel!
-    
-    @IBAction func homeworkButtonViewPressed(_ sender: Any) {
-        //let segway = HomeworkViewController()
-        //segway.expandHomework()
-        
-        
-    }
-    
-
-    
+    @IBOutlet weak var homeworkIdentifierLabel: UILabel!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        homeworkIdentifierLabel.isHidden = true
+        teacherLabelView.adjustsFontSizeToFitWidth = true
+        dateLabelView.adjustsFontSizeToFitWidth = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,4 +32,15 @@ class HomeworkTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+//    func afterloadingXibFile(){
+//        print("\(homeworkLabelView.text!) characters : \(homeworkLabelView.text!.count)")
+//        if homeworkLabelView.text!.count < 25 {
+//            homeworkLabelView.adjustsFontSizeToFitWidth = true
+//
+//        }
+//        else {
+//            homeworkLabelView.adjustsFontSizeToFitWidth = false
+//        }
+//    }
+//
 }
