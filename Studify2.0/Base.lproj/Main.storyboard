@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,6 +75,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zps-Va-toR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1480.8" y="-321.58920539730138"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EYz-32-wTn">
+            <objects>
+                <viewController id="9jl-Hm-IAz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UkC-Ps-sNw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="0QV-Mz-uBE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAX-ee-7EC">
+                                <rect key="frame" x="16" y="77" width="343" height="570"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-xQ-Duy">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="74.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rrg-1P-ygA">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <state key="normal" title="Choose a Background">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="Iaj-kc-De9"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your selected background" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2B-P1-6mV">
+                                                <rect key="frame" x="0.0" y="54" width="343" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="u2B-P1-6mV" firstAttribute="leading" secondItem="RAj-xQ-Duy" secondAttribute="leading" id="26R-et-3vS"/>
+                                            <constraint firstAttribute="trailing" secondItem="u2B-P1-6mV" secondAttribute="trailing" id="Mzo-yC-bnj"/>
+                                            <constraint firstAttribute="trailing" secondItem="Rrg-1P-ygA" secondAttribute="trailing" id="Vkl-58-mwG"/>
+                                            <constraint firstItem="Rrg-1P-ygA" firstAttribute="leading" secondItem="RAj-xQ-Duy" secondAttribute="leading" id="lrF-uU-Qsk"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="RAj-xQ-Duy" secondAttribute="trailing" id="CI1-xE-A8M"/>
+                                    <constraint firstItem="RAj-xQ-Duy" firstAttribute="leading" secondItem="HAX-ee-7EC" secondAttribute="leading" id="JQ9-rd-PxZ"/>
+                                    <constraint firstItem="RAj-xQ-Duy" firstAttribute="top" secondItem="HAX-ee-7EC" secondAttribute="top" id="lcz-oC-nrO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1KK-mb-L07" firstAttribute="bottom" secondItem="HAX-ee-7EC" secondAttribute="bottom" constant="20" id="BkC-Ub-PdS"/>
+                            <constraint firstItem="0QV-Mz-uBE" firstAttribute="bottom" secondItem="1KK-mb-L07" secondAttribute="bottom" id="FK4-lv-akF"/>
+                            <constraint firstItem="HAX-ee-7EC" firstAttribute="top" secondItem="1KK-mb-L07" secondAttribute="top" constant="57" id="GaX-r1-71M"/>
+                            <constraint firstItem="1KK-mb-L07" firstAttribute="trailing" secondItem="HAX-ee-7EC" secondAttribute="trailing" constant="16" id="Hud-cg-ImT"/>
+                            <constraint firstItem="0QV-Mz-uBE" firstAttribute="top" secondItem="UkC-Ps-sNw" secondAttribute="top" id="JmO-Bv-TlP"/>
+                            <constraint firstItem="HAX-ee-7EC" firstAttribute="leading" secondItem="1KK-mb-L07" secondAttribute="leading" constant="16" id="N65-o9-cQ3"/>
+                            <constraint firstItem="0QV-Mz-uBE" firstAttribute="trailing" secondItem="1KK-mb-L07" secondAttribute="trailing" id="Q7H-o3-K45"/>
+                            <constraint firstItem="0QV-Mz-uBE" firstAttribute="leading" secondItem="1KK-mb-L07" secondAttribute="leading" id="Qle-1f-4fQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1KK-mb-L07"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xP9-Du-OWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2308" y="-322"/>
         </scene>
         <!--Expand Homework View Controller-->
         <scene sceneID="Scd-To-YfH">
@@ -528,6 +596,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="3fJ-BX-2sf"/>
+                                                    <segue destination="9jl-Hm-IAz" kind="show" id="rdt-2S-Oyk"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-8a-Wzy">

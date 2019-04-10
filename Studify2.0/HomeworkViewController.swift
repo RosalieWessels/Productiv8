@@ -212,25 +212,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                         dateComponents.year = 2019
                                         dateComponents.month = Int(truncating: dueDateMonth)
                                         dateComponents.day = dueDateDayInt
-                                        dateComponents.hour = 12
-                                        dateComponents.minute = 0
-                                        dateComponents.second = 0
-                                        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
-                                        
-                                        if let year = work.dueDate?.year {
-                                            dateComponents.year = Int(truncating: year)
-                                        }
-                                        
-                                        if let hour = work.dueTime?.hours {
-                                            dateComponents.hour = Int(truncating: hour)
-                                        }
-                                        
-                                        if let minute = work.dueTime?.minutes {
-                                            dateComponents.minute = Int(truncating: minute)
-                                        }
-                                        
-                                        let userCalendar = Calendar.current // user calendar
-                                        if let dueDate = userCalendar.date(from: dateComponents) {
+                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, should be fixed
+                                        if case let dateComponents.hour = Int(work.dueTime!.hours!){
                                             
                                             let currentDateTime = Date()
                                             
