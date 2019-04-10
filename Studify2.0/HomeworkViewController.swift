@@ -182,7 +182,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
     func getHomework() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.listCourses() { (courses, error) in
@@ -212,8 +211,25 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
                                         dateComponents.year = 2019
                                         dateComponents.month = Int(truncating: dueDateMonth)
                                         dateComponents.day = dueDateDayInt
-                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, should be fixed
-                                        if case let dateComponents.hour = Int(work.dueTime!.hours!){
+                                        dateComponents.hour = 12
+                                        dateComponents.minute = 0
+                                        dateComponents.second = 0
+                                        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
+                                        
+                                        if let year = work.dueDate?.year {
+                                            dateComponents.year = Int(truncating: year)
+                                        }
+                                        
+                                        if let hour = work.dueTime?.hours {
+                                            dateComponents.hour = Int(truncating: hour)
+                                        }
+                                        
+                                        if let minute = work.dueTime?.minutes {
+                                            dateComponents.minute = Int(truncating: minute)
+                                        }
+                                        
+                                        let userCalendar = Calendar.current // user calendar
+                                        if let dueDate = userCalendar.date(from: dateComponents) {
                                             
                                             let currentDateTime = Date()
                                             
@@ -291,6 +307,116 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
     }
+
+//Not Working?? Gives Errors
+//    func getHomework() {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.listCourses() { (courses, error) in
+//            guard let courseList = courses else {
+//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
+//                return
+//            }
+//            if let list = courseList.courses {
+//                for course in list {
+//
+//                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
+//                        guard let homeworkList = homeworkResponse else {
+//                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
+//                            return
+//                        }
+//                        if let huiswerk = homeworkList.courseWork {
+//                            for work in huiswerk {
+//                                print("associated with developer \(work.associatedWithDeveloper)")
+//                                if work.dueDate == nil {
+//                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
+//                                } else if let dueDateDay = work.dueDate?.day {
+//                                    let dueDateDayInt = Int(truncating: dueDateDay)
+//
+//                                    if let dueDateMonth = work.dueDate?.month {
+//
+//                                        var dateComponents = DateComponents()
+//                                        dateComponents.year = 2019
+//                                        dateComponents.month = Int(truncating: dueDateMonth)
+//                                        dateComponents.day = dueDateDayInt
+//                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, should be fixed
+//                                        if case let dateComponents.hour = Int(work.dueTime!.hours!){
+//
+//                                            let currentDateTime = Date()
+//
+//                                            appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
+//                                                guard let submissionState = studentSubmissionResponse else {
+//                                                    print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
+//                                                    return
+//
+//                                                }
+//                                                if let submissonStateOfHomework = submissionState.studentSubmissions {
+//                                                    print(submissonStateOfHomework)
+//                                                    for submission in submissonStateOfHomework {
+//                                                        print("\(submission.state), \(work.identifier!)")
+//                                                        if submission.state != nil {
+//                                                            let dateformatter = DateFormatter()
+//                                                            dateformatter.dateFormat = "MM/dd/yy"
+//                                                            let dueDateString = dateformatter.string(from: dueDate)
+//
+//                                                            //Setting this for the ExpandHomeworkViewController
+//                                                            self.dueDateFromTableViewCell = dueDateString
+//                                                            let homeworkName : String = work.title!
+//                                                            let homeworkIdentifier : String = work.identifier!
+//
+//                                                            self.HomeworkTitleAndIdentifier[homeworkName] = homeworkIdentifier
+//
+//
+//                                                            let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
+//
+//                                                            let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
+//
+//                                                            if dueDate <= currentDateRed! {
+//                                                                //Red
+//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"), homeworkIdentifier: work.identifier)]
+//                                                            }
+//
+//                                                            else if dueDate < currentDateOrange! {
+//                                                                //Orange
+//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"), homeworkIdentifier: work.identifier)]
+//                                                            }
+//
+//                                                            else{
+//                                                                //Green
+//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
+//                                                            }
+//                                                        }
+//                                                        break
+//                                                    }
+//                                                }
+//
+//                                                //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
+//                                                if self.homeworkArray.count > 0 {
+//                                                    DispatchQueue.main.async { self.homeworkTableView.reloadData()}
+//                                                    DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+//                                                    self.refreshControl.endRefreshing()
+//                                                }
+//                                            }
+//                                        }
+//
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+//                        if self.homeworkArray.count > 0 {
+//                            DispatchQueue.main.async { self.homeworkTableView.reloadData() }
+//                            DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
+//                            self.self.refreshControl.endRefreshing()
+//                        }
+//
+//                    }
+//
+//
+//                }
+//            }
+//
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeworkArray.count

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */; };
 		39813C8622552BF800FCC9CD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39813C8522552BF800FCC9CD /* WebViewController.swift */; };
+		39AB1319225E693C00A67F8E /* CustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB1318225E693C00A67F8E /* CustomizeViewController.swift */; };
 		8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */; };
 		8910D2A721DEFD4300677137 /* ClassesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */; };
 		892CE6C3221C8A43004B4601 /* AddHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		39813C8522552BF800FCC9CD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		39AB1318225E693C00A67F8E /* CustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeViewController.swift; sourceTree = "<group>"; };
 		8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesTableViewCell.swift; sourceTree = "<group>"; };
 		8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassesTableViewCell.xib; sourceTree = "<group>"; };
 		892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHomeworkViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				89CFC1B42172525200DCFF7B /* AppDelegate.swift */,
+				39AB1318225E693C00A67F8E /* CustomizeViewController.swift */,
 				892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */,
 				89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */,
 				899E4DEA225AC27100887EB7 /* Reachability.swift */,
@@ -338,6 +341,7 @@
 				8945099E217EC4BF000AA49F /* HomeworkTableViewCell.swift in Sources */,
 				899E4DEB225AC27100887EB7 /* Reachability.swift in Sources */,
 				89FBD0D4221A1EEB00B5D8EE /* CompetitionTableViewCell.swift in Sources */,
+				39AB1319225E693C00A67F8E /* CustomizeViewController.swift in Sources */,
 				89450999217BB55D000AA49F /* AccountSettingsViewController.swift in Sources */,
 				8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */,
 				39813C8622552BF800FCC9CD /* WebViewController.swift in Sources */,

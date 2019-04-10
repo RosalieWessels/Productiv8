@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -76,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="1480.8" y="-321.58920539730138"/>
         </scene>
-        <!--View Controller-->
+        <!--Customize View Controller-->
         <scene sceneID="EYz-32-wTn">
             <objects>
-                <viewController id="9jl-Hm-IAz" sceneMemberID="viewController">
+                <viewController id="9jl-Hm-IAz" customClass="CustomizeViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UkC-Ps-sNw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,8 +90,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAX-ee-7EC">
                                 <rect key="frame" x="16" y="77" width="343" height="570"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-xQ-Duy">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="74.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-xQ-Duy">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="228"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rrg-1P-ygA">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -100,15 +100,42 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="customizeTitleTapped:" destination="9jl-Hm-IAz" eventType="touchUpInside" id="Pwu-aw-O0F"/>
                                                     <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="Iaj-kc-De9"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your selected background" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2B-P1-6mV">
-                                                <rect key="frame" x="0.0" y="54" width="343" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="59" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="NK7-TS-p25">
+                                                <rect key="frame" x="29" y="94.5" width="285" height="133.5"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="hME-Nj-ZOt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="133.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="133.5" id="mku-WC-gsn"/>
+                                                            <constraint firstAttribute="width" constant="75" id="zCb-SH-Th7"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackgroundLightBlue&amp;Orange" translatesAutoresizingMaskIntoConstraints="NO" id="cqX-Qt-kMc">
+                                                        <rect key="frame" x="105" y="0.0" width="75" height="133.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="133.5" id="Rug-Nw-X17"/>
+                                                            <constraint firstAttribute="width" constant="75" id="tf3-vh-aVx"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackgroundLightBlue&amp;Pink" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-Yc-lWA">
+                                                        <rect key="frame" x="210" y="0.0" width="75" height="133.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="133.5" id="SXp-BU-Qkl"/>
+                                                            <constraint firstAttribute="width" constant="75" id="fHp-wy-ZI9"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="u2B-P1-6mV" firstAttribute="leading" secondItem="RAj-xQ-Duy" secondAttribute="leading" id="26R-et-3vS"/>
@@ -139,10 +166,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1KK-mb-L07"/>
                     </view>
+                    <connections>
+                        <outlet property="blueAndyellowImage" destination="hME-Nj-ZOt" id="Uha-KU-C1b"/>
+                        <outlet property="lightBlueAndOrange" destination="cqX-Qt-kMc" id="LGh-Rd-XsY"/>
+                        <outlet property="lightBlueAndPink" destination="x9O-Yc-lWA" id="i0G-NN-nOw"/>
+                        <outlet property="selectedBackgroundLabel" destination="u2B-P1-6mV" id="JCd-kC-095"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xP9-Du-OWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2308" y="-322"/>
+            <point key="canvasLocation" x="2308" y="-322.48875562218893"/>
         </scene>
         <!--Expand Homework View Controller-->
         <scene sceneID="Scd-To-YfH">
@@ -595,8 +628,8 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="customizeButtonPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="1EI-iy-fmd"/>
                                                     <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="3fJ-BX-2sf"/>
-                                                    <segue destination="9jl-Hm-IAz" kind="show" id="rdt-2S-Oyk"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-8a-Wzy">
@@ -652,48 +685,16 @@
                     <connections>
                         <outlet property="accountSettingsView" destination="56q-rH-3Fc" id="uof-Y7-cD5"/>
                         <outlet property="deleteUserAccountButton" destination="Co1-rh-2o7" id="eGH-3F-cEJ"/>
+                        <outlet property="provideFeedbackButton" destination="xHO-8a-Wzy" id="Uei-dx-KWa"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="userAccountSettingsToWelcomeScreen" id="Jw0-3F-1HV"/>
                         <segue destination="rgy-yI-cmf" kind="show" identifier="reportBug" id="odg-du-Nuq"/>
                         <segue destination="rgy-yI-cmf" kind="show" identifier="provideFeedback" id="trr-gK-aKF"/>
+                        <segue destination="9jl-Hm-IAz" kind="show" identifier="accountSettingsToCustomize" id="i1f-23-XrE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8mR-P0-lYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2308" y="357.57121439280365"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="R3I-fW-R8o">
-            <objects>
-                <viewController id="or4-24-peO" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9ke-AK-CdO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StudifyBackground" translatesAutoresizingMaskIntoConstraints="NO" id="rK2-E4-w6n">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBp-KW-tu3">
-                                <rect key="frame" x="16" y="77" width="343" height="570"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="rK2-E4-w6n" firstAttribute="top" secondItem="9ke-AK-CdO" secondAttribute="top" id="Hbz-ZJ-zJk"/>
-                            <constraint firstItem="IBp-KW-tu3" firstAttribute="leading" secondItem="W4e-zZ-TPi" secondAttribute="leading" constant="16" id="JMw-kL-WDZ"/>
-                            <constraint firstItem="IBp-KW-tu3" firstAttribute="top" secondItem="W4e-zZ-TPi" secondAttribute="top" constant="57" id="OZb-0B-7Ey"/>
-                            <constraint firstItem="rK2-E4-w6n" firstAttribute="trailing" secondItem="W4e-zZ-TPi" secondAttribute="trailing" id="Oxy-hv-4K5"/>
-                            <constraint firstItem="W4e-zZ-TPi" firstAttribute="trailing" secondItem="IBp-KW-tu3" secondAttribute="trailing" constant="16" id="Yjr-7d-Sxa"/>
-                            <constraint firstItem="rK2-E4-w6n" firstAttribute="bottom" secondItem="W4e-zZ-TPi" secondAttribute="bottom" id="dmU-wg-jzd"/>
-                            <constraint firstItem="W4e-zZ-TPi" firstAttribute="bottom" secondItem="IBp-KW-tu3" secondAttribute="bottom" constant="20" id="ec9-yn-OZP"/>
-                            <constraint firstItem="rK2-E4-w6n" firstAttribute="leading" secondItem="W4e-zZ-TPi" secondAttribute="leading" id="guG-6i-Xhy"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="W4e-zZ-TPi"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="McX-Z2-o62" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2344.8000000000002" y="-322.48875562218893"/>
+            <point key="canvasLocation" x="2308" y="349"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="qJs-0B-7oM">
@@ -868,6 +869,8 @@
         <image name="ManHiking" width="2251" height="1500"/>
         <image name="SettingsIcon" width="720" height="720"/>
         <image name="StudifyBackground" width="750" height="1332"/>
+        <image name="StudifyBackgroundLightBlue&amp;Orange" width="750" height="1332"/>
+        <image name="StudifyBackgroundLightBlue&amp;Pink" width="750" height="1332"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>

@@ -16,13 +16,22 @@ class AccountSettingsViewController: UIViewController {
     @IBOutlet weak var deleteUserAccountButton: UIButton!
     @IBOutlet weak var accountSettingsView: UIView!
     
+    @IBOutlet weak var provideFeedbackButton: UIButton!
     
     @IBAction func reportBugPressed(_ sender: Any) {
         performSegue(withIdentifier: "reportBug", sender: self)
     }
     
     @IBAction func provideFeedbackPressed(_ sender: Any) {
+        print("provideFeedback pressed")
         performSegue(withIdentifier: "provideFeedback", sender: self)
+        
+    }
+    @IBAction func customizeButtonPressed(_ sender: Any) {
+        print("customizeButton pressed")
+        provideFeedbackButton.isEnabled = false
+        performSegue(withIdentifier: "accountSettingsToCustomize", sender: self)
+        
     }
     
     @IBAction func deleteUserAccountClicked(_ sender: Any) {
@@ -43,6 +52,7 @@ class AccountSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        provideFeedbackButton.isEnabled = true
         deleteUserAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view, typically from a nib.
         accountSettingsView.layer.cornerRadius = 10
@@ -80,12 +90,15 @@ class AccountSettingsViewController: UIViewController {
         self.performSegue(withIdentifier: "userAccountSettingsToWelcomeScreen", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "reportBug" {
+        if segue.identifier == "accountSettingsToCustomize" {
+            print("Going to Customize Viewcontroller")
+        }
+        else if segue.identifier == "reportBug" {
             let destinationViewController = segue.destination as! WebViewController
             destinationViewController.reason = "reportBug"
             
         }
-        if segue.identifier == "provideFeedback" {
+        else if segue.identifier == "provideFeedback" {
             let destinationViewController = segue.destination as! WebViewController
             destinationViewController.reason = "provideFeedback"
         }
