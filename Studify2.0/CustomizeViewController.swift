@@ -93,7 +93,7 @@ class CustomizeViewController : UIViewController, UIGestureRecognizerDelegate {
                 let newDocument = self.db.collection("customizeDatabase").document("\()")
                 
                 newDocument.setData([
-                    "\(username)": 0
+                    "background": 0
                     ])
                 print("Document with CourseID created")
                 self.generateScores()
