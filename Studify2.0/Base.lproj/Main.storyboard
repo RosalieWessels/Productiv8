@@ -167,6 +167,7 @@
                         <viewLayoutGuide key="safeArea" id="1KK-mb-L07"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundImageView" destination="0QV-Mz-uBE" id="I4F-iB-YWS"/>
                         <outlet property="blueAndyellowImage" destination="hME-Nj-ZOt" id="Uha-KU-C1b"/>
                         <outlet property="lightBlueAndOrange" destination="cqX-Qt-kMc" id="LGh-Rd-XsY"/>
                         <outlet property="lightBlueAndPink" destination="x9O-Yc-lWA" id="i0G-NN-nOw"/>
