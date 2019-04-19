@@ -111,6 +111,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
 //        homeworkArray.removeAll(keepingCapacity: false)
 //        self.homeworkTableView.reloadData()
         self.tabBarController?.navigationItem.hidesBackButton = true
+        self.tabBarController?.navigationItem.title = "Productiv8"
 //        getHomework()
         
     }
@@ -144,7 +145,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             print("Internet Connection Available!")
         }else{
             print("Internet Connection not Available!")
-            let alert = UIAlertController(title: "No internet...", message: "Seems like you are not connected to the internet. Unfortunately, Studify won't work without an internet connection. To make it work, connect to the wifi or enable data. Thank you.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "No internet...", message: "Seems like you are not connected to the internet. Unfortunately, Productiv8 won't work without an internet connection. To make it work, connect to the wifi or enable data. Thank you.", preferredStyle: .alert)
             
             let closeAction = UIAlertAction(title: "Close", style: .default) { (UIAlertAction) in
                 print("User closed no internet popup")

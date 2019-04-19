@@ -23,7 +23,7 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
-        self.navigationItem.title = "Welcome To Studify"
+        self.navigationItem.title = "Welcome To Productiv8"
     }
     
     override func viewDidLoad() {
@@ -36,7 +36,11 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         }
         
         //Commented because it doesn't work on older swift version
-
+        if let randomElement = imagesArray.randomElement() {
+            print(randomElement)
+            imageView.image = UIImage(named: randomElement)
+            randomElementForImage = randomElement
+        }
         
         if Reachability.isConnectedToNetwork(){
             print("Internet Connection Available!")
