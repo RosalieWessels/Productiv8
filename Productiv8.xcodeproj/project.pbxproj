@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */; };
 		39813C8622552BF800FCC9CD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39813C8522552BF800FCC9CD /* WebViewController.swift */; };
 		39AB1319225E693C00A67F8E /* CustomizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB1318225E693C00A67F8E /* CustomizeViewController.swift */; };
+		4EE13FE405166771BE2D1C31 /* Pods_Productiv8.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148C4557383FD8A444BB4318 /* Pods_Productiv8.framework */; };
 		8910D2A621DEFD4300677137 /* ClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */; };
 		8910D2A721DEFD4300677137 /* ClassesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */; };
 		892CE6C3221C8A43004B4601 /* AddHomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */; };
@@ -35,8 +35,10 @@
 
 /* Begin PBXFileReference section */
 		11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		148C4557383FD8A444BB4318 /* Pods_Productiv8.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Productiv8.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39813C8522552BF800FCC9CD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		39AB1318225E693C00A67F8E /* CustomizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeViewController.swift; sourceTree = "<group>"; };
+		51AC1DACDC7F536B190E3A7B /* Pods-Productiv8.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productiv8.release.xcconfig"; path = "Pods/Target Support Files/Pods-Productiv8/Pods-Productiv8.release.xcconfig"; sourceTree = "<group>"; };
 		8910D2A421DEFD4300677137 /* ClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesTableViewCell.swift; sourceTree = "<group>"; };
 		8910D2A521DEFD4300677137 /* ClassesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassesTableViewCell.xib; sourceTree = "<group>"; };
 		892CE6C2221C8A43004B4601 /* AddHomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHomeworkViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89AFE65D2172769E00D8F504 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		89AFE65F2174142700D8F504 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		89CFC1B12172525200DCFF7B /* Studify2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studify2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89CFC1B12172525200DCFF7B /* Productiv8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Productiv8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89CFC1B42172525200DCFF7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89CFC1B62172525200DCFF7B /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		89CFC1B82172525200DCFF7B /* ClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
@@ -56,12 +58,13 @@
 		89CFC1BD2172525400DCFF7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89CFC1C02172525400DCFF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89CFC1C22172525400DCFF7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Studify2.0.entitlements; sourceTree = "<group>"; };
-		89D6BDE72199E65E009BB0AC /* Studify2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Studify2.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		89D6BDE62199E38E009BB0AC /* Productiv8.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Productiv8.entitlements; sourceTree = "<group>"; };
+		89D6BDE72199E65E009BB0AC /* Productiv8-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Productiv8-Bridging-Header.h"; sourceTree = "<group>"; };
 		89E5C83721DF10D200DC212B /* CompetitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionViewController.swift; sourceTree = "<group>"; };
 		89EA20D2218F60140029D512 /* WelcomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreenViewController.swift; sourceTree = "<group>"; };
 		89FBD0D2221A1EEB00B5D8EE /* CompetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableViewCell.swift; sourceTree = "<group>"; };
 		89FBD0D3221A1EEB00B5D8EE /* CompetitionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompetitionTableViewCell.xib; sourceTree = "<group>"; };
+		BB1FD7C186BB81C5B33BDDE3 /* Pods-Productiv8.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Productiv8.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Productiv8/Pods-Productiv8.debug.xcconfig"; sourceTree = "<group>"; };
 		EED2E54C4C269098CB9306E3 /* Pods-Studify2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studify2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0.release.xcconfig"; sourceTree = "<group>"; };
 		F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Studify2_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -71,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F794E978F389C8CEFF03BD2 /* Pods_Studify2_0.framework in Frameworks */,
+				4EE13FE405166771BE2D1C31 /* Pods_Productiv8.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				F45AAFCB09792B9B3BEDD8E8 /* Pods_Studify2_0.framework */,
+				148C4557383FD8A444BB4318 /* Pods_Productiv8.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -91,6 +95,8 @@
 			children = (
 				11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */,
 				EED2E54C4C269098CB9306E3 /* Pods-Studify2.0.release.xcconfig */,
+				BB1FD7C186BB81C5B33BDDE3 /* Pods-Productiv8.debug.xcconfig */,
+				51AC1DACDC7F536B190E3A7B /* Pods-Productiv8.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -98,7 +104,7 @@
 		89CFC1A82172525100DCFF7B = {
 			isa = PBXGroup;
 			children = (
-				89CFC1B32172525200DCFF7B /* Studify2.0 */,
+				89CFC1B32172525200DCFF7B /* Productiv8 */,
 				89CFC1B22172525200DCFF7B /* Products */,
 				4729D7E70B16AAF1E7843AD0 /* Pods */,
 				2077DA4ECA2E3497121A1DD4 /* Frameworks */,
@@ -108,23 +114,23 @@
 		89CFC1B22172525200DCFF7B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				89CFC1B12172525200DCFF7B /* Studify2.0.app */,
+				89CFC1B12172525200DCFF7B /* Productiv8.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		89CFC1B32172525200DCFF7B /* Studify2.0 */ = {
+		89CFC1B32172525200DCFF7B /* Productiv8 */ = {
 			isa = PBXGroup;
 			children = (
 				89FBD0D8221B55CD00B5D8EE /* Code Files */,
 				89FBD0D9221B562200B5D8EE /* Design Files */,
 				89CFC1BD2172525400DCFF7B /* Assets.xcassets */,
-				89D6BDE62199E38E009BB0AC /* Studify2.0.entitlements */,
+				89D6BDE62199E38E009BB0AC /* Productiv8.entitlements */,
 				89CFC1C22172525400DCFF7B /* Info.plist */,
 				89AFE65B217272FF00D8F504 /* GoogleService-Info.plist */,
-				89D6BDE72199E65E009BB0AC /* Studify2.0-Bridging-Header.h */,
+				89D6BDE72199E65E009BB0AC /* Productiv8-Bridging-Header.h */,
 			);
-			path = Studify2.0;
+			path = Productiv8;
 			sourceTree = "<group>";
 		};
 		89FBD0D8221B55CD00B5D8EE /* Code Files */ = {
@@ -165,9 +171,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		89CFC1B02172525100DCFF7B /* Studify2.0 */ = {
+		89CFC1B02172525100DCFF7B /* Productiv8 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89CFC1C52172525400DCFF7B /* Build configuration list for PBXNativeTarget "Studify2.0" */;
+			buildConfigurationList = 89CFC1C52172525400DCFF7B /* Build configuration list for PBXNativeTarget "Productiv8" */;
 			buildPhases = (
 				E18A0C40B6D137C61E0F15EC /* [CP] Check Pods Manifest.lock */,
 				89CFC1AD2172525100DCFF7B /* Sources */,
@@ -180,9 +186,9 @@
 			);
 			dependencies = (
 			);
-			name = Studify2.0;
+			name = Productiv8;
 			productName = Studify2.0;
-			productReference = 89CFC1B12172525200DCFF7B /* Studify2.0.app */;
+			productReference = 89CFC1B12172525200DCFF7B /* Productiv8.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +212,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 89CFC1AC2172525100DCFF7B /* Build configuration list for PBXProject "Studify2.0" */;
+			buildConfigurationList = 89CFC1AC2172525100DCFF7B /* Build configuration list for PBXProject "Productiv8" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,7 +225,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				89CFC1B02172525100DCFF7B /* Studify2.0 */,
+				89CFC1B02172525100DCFF7B /* Productiv8 */,
 			);
 		};
 /* End PBXProject section */
@@ -248,8 +254,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Productiv8/Pods-Productiv8-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -267,7 +273,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -285,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Productiv8/Pods-Productiv8-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		404AB47AF5A56CE60F46410F /* [CP] Copy Pods Resources */ = {
@@ -294,16 +300,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Productiv8/Pods-Productiv8-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Studify2.0/Pods-Studify2.0-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Productiv8/Pods-Productiv8-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E18A0C40B6D137C61E0F15EC /* [CP] Check Pods Manifest.lock */ = {
@@ -317,7 +325,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Studify2.0-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Productiv8-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -488,15 +496,15 @@
 		};
 		89CFC1C62172525400DCFF7B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11AA28D48A6C0BCEC6C26E51 /* Pods-Studify2.0.debug.xcconfig */;
+			baseConfigurationReference = BB1FD7C186BB81C5B33BDDE3 /* Pods-Productiv8.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Studify2.0/Studify2.0.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Productiv8/Productiv8.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2J7W74MKY;
-				INFOPLIST_FILE = Studify2.0/Info.plist;
+				INFOPLIST_FILE = Productiv8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,7 +512,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.RosalieWessels.Studify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Studify2.0/Studify2.0-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Productiv8/Productiv8-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -513,15 +521,15 @@
 		};
 		89CFC1C72172525400DCFF7B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EED2E54C4C269098CB9306E3 /* Pods-Studify2.0.release.xcconfig */;
+			baseConfigurationReference = 51AC1DACDC7F536B190E3A7B /* Pods-Productiv8.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Studify2.0/Studify2.0.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Productiv8/Productiv8.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2J7W74MKY;
-				INFOPLIST_FILE = Studify2.0/Info.plist;
+				INFOPLIST_FILE = Productiv8/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,7 +537,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.RosalieWessels.Studify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Studify2.0/Studify2.0-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Productiv8/Productiv8-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -538,7 +546,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		89CFC1AC2172525100DCFF7B /* Build configuration list for PBXProject "Studify2.0" */ = {
+		89CFC1AC2172525100DCFF7B /* Build configuration list for PBXProject "Productiv8" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89CFC1C32172525400DCFF7B /* Debug */,
@@ -547,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89CFC1C52172525400DCFF7B /* Build configuration list for PBXNativeTarget "Studify2.0" */ = {
+		89CFC1C52172525400DCFF7B /* Build configuration list for PBXNativeTarget "Productiv8" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89CFC1C62172525400DCFF7B /* Debug */,

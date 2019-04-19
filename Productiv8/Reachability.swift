@@ -1,6 +1,5 @@
 //
 //  Reachability.swift
-//  Studify2.0
 //
 //  Created by Rosalie Wessels on 07/04/2019.
 //  Copyright © 2019 RosalieW. All rights reserved.

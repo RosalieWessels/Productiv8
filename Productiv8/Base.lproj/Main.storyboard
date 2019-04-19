@@ -13,7 +13,7 @@
         <!--Competition-->
         <scene sceneID="pMd-o4-qVO">
             <objects>
-                <viewController id="A7T-5r-Ofv" customClass="CompetitionViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A7T-5r-Ofv" customClass="CompetitionViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0Z-tp-wkS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +80,7 @@
         <!--Customize View Controller-->
         <scene sceneID="EYz-32-wTn">
             <objects>
-                <viewController id="9jl-Hm-IAz" customClass="CustomizeViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9jl-Hm-IAz" customClass="CustomizeViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UkC-Ps-sNw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,7 +182,7 @@
         <!--Expand Homework View Controller-->
         <scene sceneID="Scd-To-YfH">
             <objects>
-                <viewController id="X3y-Gc-f90" customClass="ExpandHomeworkViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="X3y-Gc-f90" customClass="ExpandHomeworkViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hc6-BK-DLn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,7 +293,7 @@
         <!--Input Homework To GC-->
         <scene sceneID="ugB-eQ-Ecg">
             <objects>
-                <viewController title="Input Homework To GC" id="Yt8-ti-1ec" customClass="AddHomeworkViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Input Homework To GC" id="Yt8-ti-1ec" customClass="AddHomeworkViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oj9-GX-c5P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -401,7 +401,7 @@
         <!--Homework-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="HomeworkViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="HomeworkViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -458,7 +458,7 @@
         <!--Classes-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="ClassesViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="ClassesViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -497,7 +497,7 @@
         <!--Account-->
         <scene sceneID="8z9-2r-jHf">
             <objects>
-                <viewController id="ex2-5b-ZN1" customClass="AccountViewContoller" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ex2-5b-ZN1" customClass="AccountViewContoller" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t5g-PK-Zwp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -611,7 +611,7 @@
         <!--Account Settings View Controller-->
         <scene sceneID="Wwf-dW-Qcc">
             <objects>
-                <viewController id="Tcz-YD-yai" customClass="AccountSettingsViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Tcz-YD-yai" customClass="AccountSettingsViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fB9-mp-3nB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -627,9 +627,9 @@
                                         <rect key="frame" x="5" y="357" width="333" height="208"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPO-bS-PVS">
-                                                <rect key="frame" x="54.5" y="0.0" width="224" height="44"/>
+                                                <rect key="frame" x="31.5" y="0.0" width="270" height="44"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                                <state key="normal" title="Customize Studify">
+                                                <state key="normal" title="Customize Productiv8">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
@@ -704,7 +704,7 @@
         <!--Web View Controller-->
         <scene sceneID="qJs-0B-7oM">
             <objects>
-                <viewController id="rgy-yI-cmf" customClass="WebViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rgy-yI-cmf" customClass="WebViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0ty-7O-5ZF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -757,7 +757,7 @@
         <!--Welcome-->
         <scene sceneID="Oy8-8g-cZW">
             <objects>
-                <viewController id="kfJ-sj-h1u" customClass="WelcomeScreenViewController" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kfJ-sj-h1u" customClass="WelcomeScreenViewController" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEy-8p-1kH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -807,7 +807,7 @@
         <!--Log In-->
         <scene sceneID="EEq-pf-Mp8">
             <objects>
-                <viewController title="Log In" id="H61-Bc-GoE" customClass="LogInViewContoller" customModule="Studify2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log In" id="H61-Bc-GoE" customClass="LogInViewContoller" customModule="Productiv8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AFP-Fo-szJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

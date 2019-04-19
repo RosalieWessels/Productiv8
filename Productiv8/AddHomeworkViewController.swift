@@ -1,6 +1,5 @@
 //
 //  AddHomeworkViewController.swift
-//  Studify2.0
 //
 //  Created by Rosalie Wessels on 19/02/2019.
 //  Copyright © 2019 RosalieW. All rights reserved.

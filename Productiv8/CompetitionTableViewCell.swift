@@ -1,6 +1,5 @@
 //
 //  CompetitionTableViewCell.swift
-//  Studify2.0
 //
 //  Created by Rosalie Wessels on 17/02/2019.
 //  Copyright © 2019 RosalieW. All rights reserved.

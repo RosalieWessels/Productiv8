@@ -1,6 +1,5 @@
 //
 //  CustomizeViewController.swift
-//  Studify2.0
 //
 //  Created by Rosalie Wessels on 4/10/19.
 //  Copyright © 2019 RosalieW. All rights reserved.
@@ -26,7 +25,7 @@ class CustomizeViewController : UIViewController, UIGestureRecognizerDelegate {
     var chosenBackground = ""
     
     @IBAction func customizeTitleTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Customize Studify", message: "To make Studify extra cool, we have added a customization feature! Choose a background by clicking on one of the images and the app will automatically change every background to that one! The background is linked to your account (email address), so you can log in on any device with your account and you will still have your favorite background! More customization features coming soon!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Customize Productiv8", message: "To make Productiv8 extra cool, we have added a customization feature! Choose a background by clicking on one of the images and the app will automatically change every background to that one! The background is linked to your account (email address), so you can log in on any device with your account and you will still have your favorite background! More customization features coming soon!", preferredStyle: .alert)
         
         let closeAction = UIAlertAction(title: "Close", style: .default) { (UIAlertAction) in
             print("popupisclosed")

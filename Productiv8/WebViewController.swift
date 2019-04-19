@@ -1,6 +1,5 @@
 //
 //  WebViewController.swift
-//  Studify2.0
 //
 //  Created by Rosalie Wessels on 4/3/19.
 //  Copyright © 2019 RosalieW. All rights reserved.

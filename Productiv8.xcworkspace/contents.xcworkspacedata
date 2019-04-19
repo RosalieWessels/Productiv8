@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Studify2.0.xcodeproj">
+      location = "group:/Users/rosaliew/Desktop/Studify2.0/Productiv8.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Productiv8.xcodeproj">
    </FileRef>
 </Workspace>
