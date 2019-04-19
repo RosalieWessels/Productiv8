@@ -9,6 +9,10 @@
 import UIKit
 import GoogleAPIClientForREST
 import UIEmptyState
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseFirestore
 
 struct classesTableViewCellData {
     let className : String!
@@ -19,6 +23,12 @@ struct classesTableViewCellData {
 class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIEmptyStateDataSource, UIEmptyStateDelegate{
     
     @IBOutlet weak var classesTableView: UITableView!
+    
+    var db : Firestore!
+    
+    var refreshControl = UIRefreshControl()
+    
+    @IBOutlet weak var studifyBackground: UIImageView!
     
     var classesArray = [classesTableViewCellData]()
     
@@ -74,6 +84,7 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateBackground()
         self.reloadEmptyStateForTableView(classesTableView)
     }
 
@@ -82,6 +93,10 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view, typically from a nib.
         
         //For the TableView
+        
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
         
         classesTableView.delegate = self
         classesTableView.dataSource = self
@@ -95,9 +110,63 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.emptyStateDataSource = self
         self.emptyStateDelegate = self
         
+        // Custom color
+        let whiteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        // create the attributed colour
+        let attributedStringColor = [NSAttributedStringKey.foregroundColor : whiteColor];
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes : attributedStringColor )
+        refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        classesTableView.refreshControl = refreshControl
+        
         getClasses()
         
         
+    }
+    
+    @objc func doSomething(refreshControl: UIRefreshControl) {
+        print("refreshing tableview")
+        
+        classesArray.removeAll(keepingCapacity: false)
+        self.classesTableView.reloadData()
+        getClasses()
+        
+    }
+    
+    
+    func updateBackground() {
+        if let userEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("customizeDatabase").document("\(userEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    let dictionary = document.data() as! [String : String]
+                    
+                    for (key, value) in dictionary {
+                        print("\(key) -> \(value)")
+                        if key == "background" {
+                            if value == "blueAndYellow" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackground")
+                            }
+                            else if value == "lightBlueAndPink" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Pink")
+                            }
+                            else if value == "lightBlueAndOrange" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Orange")
+                            }
+                        }
+                    }
+                } else {
+                    print("Document does not exist... ERROR?")
+                    
+                }
+            }
+            
+        }
     }
     
     func cleanPeriod (period : String) -> String {
@@ -151,6 +220,7 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 break
                             }
                         }
+                        self.refreshControl.endRefreshing()
                         DispatchQueue.main.async { self.classesTableView.reloadData() }
                         DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.classesTableView) }
                     }

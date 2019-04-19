@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GPp-YG-L5y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,6 +70,7 @@
                     <connections>
                         <outlet property="classesLabel" destination="1vc-5h-kxa" id="gnv-Ub-eYi"/>
                         <outlet property="competitionTableView" destination="qFg-Ny-ukN" id="Cvc-WH-CZn"/>
+                        <outlet property="studifyBackground" destination="Slp-Pb-khc" id="lmt-Eu-Ufb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zps-Va-toR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -171,6 +172,7 @@
                         <outlet property="lightBlueAndOrange" destination="cqX-Qt-kMc" id="LGh-Rd-XsY"/>
                         <outlet property="lightBlueAndPink" destination="x9O-Yc-lWA" id="i0G-NN-nOw"/>
                         <outlet property="selectedBackgroundLabel" destination="u2B-P1-6mV" id="JCd-kC-095"/>
+                        <outlet property="studifyBackground" destination="0QV-Mz-uBE" id="OcT-ag-ftL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xP9-Du-OWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -443,6 +445,7 @@
                     <connections>
                         <outlet property="addhomeworkButtonOutlet" destination="ghh-ze-EXC" id="fbo-m8-F8b"/>
                         <outlet property="homeworkTableView" destination="jbg-jh-Ync" id="S2G-br-e1v"/>
+                        <outlet property="studifyBackground" destination="ukB-xG-cAH" id="DV7-5V-uzj"/>
                         <segue destination="X3y-Gc-f90" kind="show" identifier="homeworktoExpandHomework" id="Sfk-53-Ka9"/>
                         <segue destination="Yt8-ti-1ec" kind="show" identifier="homeworkScreenToInputHomework" id="2xn-ga-gcy"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="homeworkScreenToWelcomeScreen" id="wyU-fs-8wX"/>
@@ -484,6 +487,7 @@
                     <tabBarItem key="tabBarItem" title="Classes" image="ClassesIcon" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="classesTableView" destination="TCH-07-lrC" id="fDh-Ks-ISJ"/>
+                        <outlet property="studifyBackground" destination="pvd-rP-2eD" id="T0r-B8-cwL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -595,6 +599,7 @@
                         <outlet property="accountView" destination="h5l-RC-ONC" id="IlX-5M-pc6"/>
                         <outlet property="emailLabel" destination="JpE-bQ-5Qp" id="eXb-0h-a08"/>
                         <outlet property="logOutButton" destination="kx0-9P-ylJ" id="Y5S-m5-Wbx"/>
+                        <outlet property="studifyBackground" destination="rgA-ZG-s5P" id="7Xc-bd-zFq"/>
                         <outlet property="usernameLabel" destination="BXS-P3-8IT" id="Ff1-Hx-Czq"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="logOutToWelcomeScreen" id="NJf-Ub-Ww4"/>
                     </connections>
@@ -629,7 +634,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="customizeButtonPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="1EI-iy-fmd"/>
-                                                    <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="3fJ-BX-2sf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHO-8a-Wzy">
@@ -639,7 +643,7 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="provideFeedbackPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="d5H-2c-svb"/>
+                                                    <action selector="feedbackButtonPressed:" destination="Tcz-YD-yai" eventType="touchUpInside" id="dst-e8-no1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuR-Tb-AtX">
@@ -686,6 +690,7 @@
                         <outlet property="accountSettingsView" destination="56q-rH-3Fc" id="uof-Y7-cD5"/>
                         <outlet property="deleteUserAccountButton" destination="Co1-rh-2o7" id="eGH-3F-cEJ"/>
                         <outlet property="provideFeedbackButton" destination="xHO-8a-Wzy" id="Uei-dx-KWa"/>
+                        <outlet property="studifyBackground" destination="jft-sm-hTG" id="Zb6-l5-gh7"/>
                         <segue destination="kfJ-sj-h1u" kind="show" identifier="userAccountSettingsToWelcomeScreen" id="Jw0-3F-1HV"/>
                         <segue destination="rgy-yI-cmf" kind="show" identifier="reportBug" id="odg-du-Nuq"/>
                         <segue destination="rgy-yI-cmf" kind="show" identifier="provideFeedback" id="trr-gK-aKF"/>
@@ -875,7 +880,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="IKN-jq-d9N"/>
         <segue reference="Jw0-3F-1HV"/>
-        <segue reference="trr-gK-aKF"/>
+        <segue reference="odg-du-Nuq"/>
         <segue reference="LG7-qO-L8G"/>
     </inferredMetricsTieBreakers>
 </document>

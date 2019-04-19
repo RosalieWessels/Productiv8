@@ -12,6 +12,7 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabase
 import UIEmptyState
+import FirebaseFirestore
 
 struct homeworkTableViewCellData : Equatable {
     let homeworkName : String!
@@ -42,6 +43,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBOutlet weak var addhomeworkButtonOutlet: UIButton!
+    @IBOutlet weak var studifyBackground: UIImageView!
     
     
     var homeworkArray = [homeworkTableViewCellData]()
@@ -50,6 +52,8 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     var dueDateFromTableViewCell = ""
     var HomeworkTitleAndIdentifier : [String : String] = ["" : ""]
     var homeworkIdentifierFromTableViewCell = ""
+    
+    var db : Firestore!
     
     var refreshControl = UIRefreshControl()
     
@@ -113,6 +117,7 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateBackground()
         self.reloadEmptyStateForTableView(homeworkTableView)
     }
     
@@ -124,6 +129,12 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let settings = FirestoreSettings()
+        
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+
         
         homeworkArray.removeAll(keepingCapacity: false)
         self.homeworkTableView.reloadData()
@@ -171,6 +182,40 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "homeworkScreenToWelcomeScreen", sender: self)
         }
         
+    }
+    
+    func updateBackground() {
+        if let userEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("customizeDatabase").document("\(userEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    let dictionary = document.data() as! [String : String]
+                    
+                    for (key, value) in dictionary {
+                        print("\(key) -> \(value)")
+                        if key == "background" {
+                            if value == "blueAndYellow" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackground")
+                            }
+                            else if value == "lightBlueAndPink" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Pink")
+                            }
+                            else if value == "lightBlueAndOrange" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Orange")
+                            }
+                        }
+                    }
+                } else {
+                    print("Document does not exist... ERROR?")
+                    
+                }
+            }
+            
+        }
     }
     
     @objc func doSomething(refreshControl: UIRefreshControl) {
@@ -308,115 +353,6 @@ class HomeworkViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-//Not Working?? Gives Errors
-//    func getHomework() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.listCourses() { (courses, error) in
-//            guard let courseList = courses else {
-//                print("Error listing courses: \(String(describing: error?.localizedDescription))")
-//                return
-//            }
-//            if let list = courseList.courses {
-//                for course in list {
-//
-//                    appDelegate.listHomework(courseId: course.identifier!) { (homeworkResponse, error) in
-//                        guard let homeworkList = homeworkResponse else {
-//                            print("Error listing homework: \(String(describing: error?.localizedDescription))")
-//                            return
-//                        }
-//                        if let huiswerk = homeworkList.courseWork {
-//                            for work in huiswerk {
-//                                print("associated with developer \(work.associatedWithDeveloper)")
-//                                if work.dueDate == nil {
-//                                    self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: "", colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
-//                                } else if let dueDateDay = work.dueDate?.day {
-//                                    let dueDateDayInt = Int(truncating: dueDateDay)
-//
-//                                    if let dueDateMonth = work.dueDate?.month {
-//
-//                                        var dateComponents = DateComponents()
-//                                        dateComponents.year = 2019
-//                                        dateComponents.month = Int(truncating: dueDateMonth)
-//                                        dateComponents.day = dueDateDayInt
-//                                        //CRASHES WHEN THERE IS NO HOUR AND MINUTE SET, should be fixed
-//                                        if case let dateComponents.hour = Int(work.dueTime!.hours!){
-//
-//                                            let currentDateTime = Date()
-//
-//                                            appDelegate.listHomeworkState(courseId: course.identifier!, courseWorkId: work.identifier!) { (studentSubmissionResponse, error) in
-//                                                guard let submissionState = studentSubmissionResponse else {
-//                                                    print("Error listing submissionState: \(String(describing: error?.localizedDescription))")
-//                                                    return
-//
-//                                                }
-//                                                if let submissonStateOfHomework = submissionState.studentSubmissions {
-//                                                    print(submissonStateOfHomework)
-//                                                    for submission in submissonStateOfHomework {
-//                                                        print("\(submission.state), \(work.identifier!)")
-//                                                        if submission.state != nil {
-//                                                            let dateformatter = DateFormatter()
-//                                                            dateformatter.dateFormat = "MM/dd/yy"
-//                                                            let dueDateString = dateformatter.string(from: dueDate)
-//
-//                                                            //Setting this for the ExpandHomeworkViewController
-//                                                            self.dueDateFromTableViewCell = dueDateString
-//                                                            let homeworkName : String = work.title!
-//                                                            let homeworkIdentifier : String = work.identifier!
-//
-//                                                            self.HomeworkTitleAndIdentifier[homeworkName] = homeworkIdentifier
-//
-//
-//                                                            let currentDateRed = Calendar.current.date(byAdding: .day, value: 1, to: currentDateTime)
-//
-//                                                            let currentDateOrange = Calendar.current.date(byAdding: .day, value: 2, to: currentDateRed!)
-//
-//                                                            if dueDate <= currentDateRed! {
-//                                                                //Red
-//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "RedImage"), homeworkIdentifier: work.identifier)]
-//                                                            }
-//
-//                                                            else if dueDate < currentDateOrange! {
-//                                                                //Orange
-//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "OrangeImage"), homeworkIdentifier: work.identifier)]
-//                                                            }
-//
-//                                                            else{
-//                                                                //Green
-//                                                                self.homeworkArray += [homeworkTableViewCellData(homeworkName: work.title, className: course.name, dateName: dueDateString, colorImage: #imageLiteral(resourceName: "GreenImage"), homeworkIdentifier: work.identifier)]
-//                                                            }
-//                                                        }
-//                                                        break
-//                                                    }
-//                                                }
-//
-//                                                //Spot of putting the Homework Assignments in the TableView BEFORE the submissionState was created
-//                                                if self.homeworkArray.count > 0 {
-//                                                    DispatchQueue.main.async { self.homeworkTableView.reloadData()}
-//                                                    DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
-//                                                    self.refreshControl.endRefreshing()
-//                                                }
-//                                            }
-//                                        }
-//
-//                                    }
-//                                }
-//                            }
-//
-//                        }
-//                        if self.homeworkArray.count > 0 {
-//                            DispatchQueue.main.async { self.homeworkTableView.reloadData() }
-//                            DispatchQueue.main.async { self.reloadEmptyStateForTableView(self.homeworkTableView) }
-//                            self.self.refreshControl.endRefreshing()
-//                        }
-//
-//                    }
-//
-//
-//                }
-//            }
-//
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeworkArray.count

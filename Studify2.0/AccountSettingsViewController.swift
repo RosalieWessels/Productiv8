@@ -10,23 +10,27 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 
 class AccountSettingsViewController: UIViewController {
     
     @IBOutlet weak var deleteUserAccountButton: UIButton!
     @IBOutlet weak var accountSettingsView: UIView!
+    @IBOutlet weak var studifyBackground: UIImageView!
     
     @IBOutlet weak var provideFeedbackButton: UIButton!
+    
+    var db : Firestore!
     
     @IBAction func reportBugPressed(_ sender: Any) {
         performSegue(withIdentifier: "reportBug", sender: self)
     }
     
-    @IBAction func provideFeedbackPressed(_ sender: Any) {
-        print("provideFeedback pressed")
+    @IBAction func feedbackButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "provideFeedback", sender: self)
-        
     }
+    
+    
     @IBAction func customizeButtonPressed(_ sender: Any) {
         print("customizeButton pressed")
         provideFeedbackButton.isEnabled = false
@@ -50,8 +54,17 @@ class AccountSettingsViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        updateBackground()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let settings = FirestoreSettings()
+        Firestore.firestore().settings = settings
+        db = Firestore.firestore()
+        
         provideFeedbackButton.isEnabled = true
         deleteUserAccountButton.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view, typically from a nib.
@@ -80,6 +93,40 @@ class AccountSettingsViewController: UIViewController {
                 
                 // Account deleted.
             }
+        }
+    }
+    
+    func updateBackground() {
+        if let userEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("customizeDatabase").document("\(userEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    let dictionary = document.data() as! [String : String]
+                    
+                    for (key, value) in dictionary {
+                        print("\(key) -> \(value)")
+                        if key == "background" {
+                            if value == "blueAndYellow" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackground")
+                            }
+                            else if value == "lightBlueAndPink" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Pink")
+                            }
+                            else if value == "lightBlueAndOrange" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Orange")
+                            }
+                        }
+                    }
+                } else {
+                    print("Document does not exist... ERROR?")
+                    
+                }
+            }
+            
         }
     }
     

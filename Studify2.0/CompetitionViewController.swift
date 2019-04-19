@@ -27,6 +27,7 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var competitionTableView: UITableView!
     @IBOutlet weak var classesLabel: UILabel!
+    @IBOutlet weak var studifyBackground: UIImageView!
     
     var db : Firestore!
     
@@ -34,6 +35,8 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     var courseID = ""
     var courseName = ""
     var timeTurnedIn = Date()
+    
+    var refreshControl = UIRefreshControl()
     
     var fastestTime = Date()
     var fastestPerson = ""
@@ -143,10 +146,30 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         
+        
+        let whiteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        // create the attributed colour
+        let attributedStringColor = [NSAttributedStringKey.foregroundColor : whiteColor];
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes : attributedStringColor )
+        refreshControl.addTarget(self, action: #selector(doSomething), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        competitionTableView.refreshControl = refreshControl
+        
+    }
+    
+    @objc func doSomething(refreshControl: UIRefreshControl) {
+        print("refreshing tableview")
+        
+        competitionData.removeAll(keepingCapacity: false)
+        self.competitionTableView.reloadData()
+        getDataFromFirebase()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateBackground()
         self.reloadEmptyStateForTableView(competitionTableView)
     }
     
@@ -183,6 +206,40 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
+    }
+    
+    func updateBackground() {
+        if let userEmail = Auth.auth().currentUser?.email {
+            let docRef = db.collection("customizeDatabase").document("\(userEmail)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    
+                    let dictionary = document.data() as! [String : String]
+                    
+                    for (key, value) in dictionary {
+                        print("\(key) -> \(value)")
+                        if key == "background" {
+                            if value == "blueAndYellow" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackground")
+                            }
+                            else if value == "lightBlueAndPink" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Pink")
+                            }
+                            else if value == "lightBlueAndOrange" {
+                                self.studifyBackground.image = #imageLiteral(resourceName: "StudifyBackgroundLightBlue&Orange")
+                            }
+                        }
+                    }
+                } else {
+                    print("Document does not exist... ERROR?")
+                    
+                }
+            }
+            
+        }
     }
     
     func getDataFromFirebase() {
@@ -228,7 +285,9 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                     }
                 }
     }
+    
     func reloadData() {
+        self.refreshControl.endRefreshing()
         self.emptyStateTitleToChange = "We were unable to get the data"
         self.reloadEmptyStateForTableView(self.competitionTableView)
         // Reload empty view as well
