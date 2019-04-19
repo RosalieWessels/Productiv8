@@ -36,11 +36,7 @@ class WelcomeScreenViewController: UIViewController, GIDSignInUIDelegate {
         }
         
         //Commented because it doesn't work on older swift version
-//        if let randomElement = imagesArray.randomElement() {
-//            print(randomElement)
-//            imageView.image = UIImage(named: randomElement)
-//            randomElementForImage = randomElement
-//        }
+
         
         if Reachability.isConnectedToNetwork(){
             print("Internet Connection Available!")
