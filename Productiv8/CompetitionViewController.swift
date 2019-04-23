@@ -82,7 +82,6 @@ class CompetitionViewController: UIViewController, UITableViewDelegate, UITableV
                         self.competitionData.removeAll()
                         DispatchQueue.main.async { self.competitionTableView.reloadData() }
                         self.courseName = classForLeaderboard
-                        self.classesLabel.text = "\(classForLeaderboard) Leaderboard"
                         if self.courseName != "" {
                             self.getDataFromFirebase()
                         }
